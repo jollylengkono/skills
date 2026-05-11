@@ -50,7 +50,7 @@ db/
 | SQLAlchemy, Django, Pandas, Spring JPA, MyBatis, TypeORM, Sequelize, Dapper, GORM | `db/frameworks/` |
 | Migrations from PostgreSQL, MySQL, SQL Server, MongoDB, Snowflake, and more | `db/migrations/` |
 | Alert log, ADR, health monitor, space management, top SQL | `db/monitoring/` |
-| ORDS architecture, installation, REST design, authentication, monitoring | `db/ords/` |
+| ORDS architecture, installation, REST design, authentication, monitoring, ORDS Concert Sample App | `db/ords/` |
 | AWR, ASH, explain plan, indexes, optimizer stats, wait events, memory | `db/performance/` |
 | Package design, error handling, performance, collections, cursors, debugging | `db/plsql/` |
 | Privileges, VPD, masking, auditing, encryption, network security | `db/security/` |
