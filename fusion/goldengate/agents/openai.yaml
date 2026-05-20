@@ -1,0 +1,4 @@
+interface:
+  display_name: "GoldenGate Replication Guide"
+  short_description: "Plan Oracle GoldenGate replication and migrations"
+  default_prompt: "Use this skill to design Oracle GoldenGate topology, validate prerequisites, map version support, and produce implementation or upgrade checklists."
