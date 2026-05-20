@@ -20,19 +20,15 @@ fusion/
 ├── SKILL.md
 ├── goldengate/
 │   ├── SKILL.md
-│   ├── agents/
 │   └── references/
 ├── java/
 │   ├── SKILL.md
-│   ├── agents/
 │   └── references/
 ├── soa/
 │   ├── SKILL.md
-│   ├── agents/
 │   └── references/
 └── weblogic/
     ├── SKILL.md
-    ├── agents/
     └── references/
 ```
 
