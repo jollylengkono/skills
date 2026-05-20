@@ -25,7 +25,7 @@ npx skills add oracle/skills/graal
 
 - `db/` is the active Oracle Database domain and includes database, ORDS, SQLcl, framework, container, and agent workflow skills.
 - `oci/` is the root for future Oracle Cloud Infrastructure skills.
-- `fusion/` contains Oracle Fusion Middleware skills, currently including WebLogic and GoldenGate guidance.
+- `fusion/` contains Oracle Fusion Middleware skills, currently including WebLogic, GoldenGate, SOA, and Java guidance.
 - `apex/` is the root for future Oracle APEX skills.
 - `graal/` contains GraalVM skills, starting with Native Image.
 
@@ -61,6 +61,14 @@ npx skills add oracle/skills/graal
 ├── fusion/
 │   ├── SKILL.md
 │   ├── goldengate/
+│   │   ├── SKILL.md
+│   │   ├── agents/
+│   │   └── references/
+│   ├── java/
+│   │   ├── SKILL.md
+│   │   ├── agents/
+│   │   └── references/
+│   ├── soa/
 │   │   ├── SKILL.md
 │   │   ├── agents/
 │   │   └── references/

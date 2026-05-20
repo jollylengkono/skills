@@ -1,0 +1,4 @@
+interface:
+  display_name: "Oracle SOA Product Guide"
+  short_description: "Map SOA versions and Oracle SOA product coverage"
+  default_prompt: "Use this skill to map Oracle SOA versions from 11g to latest, identify product availability by release, and build migration planning checklists."
