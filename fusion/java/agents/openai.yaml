@@ -1,4 +1,0 @@
-interface:
-  display_name: "Fusion Java Operations Guide"
-  short_description: "Guide Java GC, troubleshooting, and version planning"
-  default_prompt: "Use this skill for Java runtime planning, GC diagnostics, and JVM troubleshooting across Java 6 through the latest release in Fusion environments."

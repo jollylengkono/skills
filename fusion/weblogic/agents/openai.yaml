@@ -1,4 +1,0 @@
-interface:
-  display_name: "WebLogic Version Guide"
-  short_description: "Guide WebLogic version mapping and upgrade paths"
-  default_prompt: "Use this skill to map Oracle WebLogic versions from 11g through 15.x, compare support baselines, and plan migration paths."
