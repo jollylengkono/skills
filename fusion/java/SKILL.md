@@ -61,6 +61,11 @@ Response pattern:
 - Do not carry legacy JVM flags forward without revalidation.
 - Do not assume behavior from Java 8 applies unchanged in Java 9+ modular runtimes.
 
+## Troubleshooting and Performance Tuning
+
+- `troubleshooting.md` — middleware-specific startup failures, OOM classification, stuck threads, classloading/module issues across WebLogic, SOA, and GoldenGate
+- `performance-tuning.md` — heap sizing, GC selection for middleware workloads, JVM flag hygiene across JDK upgrades, JFR profiling, Metaspace tuning
+
 ## References
 
 - Use `references/java-version-matrix.md` for Java 6 to latest mapping and LTS planning.

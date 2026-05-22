@@ -75,6 +75,11 @@ When the request combines WebLogic and database planning:
 - Flag `26ai` features as database-layer changes that are separate from WebLogic major-version mapping.
 - Keep WebLogic pathing decisions based on WebLogic documentation, then layer database compatibility checks separately.
 
+## Troubleshooting and Performance Tuning
+
+- `troubleshooting.md` — startup failures, deployment errors, JDBC pool issues, stuck threads, OOM diagnosis
+- `performance-tuning.md` — JVM heap/GC, Work Manager thread tuning, connection pool sizing, JTA timeouts
+
 ## Sources
 
 - `references/weblogic-version-matrix.md`

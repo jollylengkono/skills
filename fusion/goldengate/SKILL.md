@@ -93,6 +93,11 @@ This section refers to Oracle Database versions often involved in GoldenGate pro
 - If release-specific feature parity is unclear, provide a 19c-compatible operational fallback and cite uncertainty.
 - If source systems are still on database `12c`, treat that as a legacy migration path and require explicit compatibility checks before finalizing GoldenGate release selection.
 
+## Troubleshooting and Performance Tuning
+
+- `troubleshooting.md` — Extract ABENDs, Replicat lag spikes, trail file issues, discard file triage, GGSCI diagnostic commands
+- `performance-tuning.md` — Integrated Extract tuning, Parallel Replicat parallelism, trail sizing, TCP buffer tuning, supplemental logging impact
+
 ## Sources
 
 - `references/goldengate-source-map.md`

@@ -67,6 +67,11 @@ This section applies when SOA projects also involve Oracle Database planning.
 - For targets that include database `26ai`, require explicit compatibility/certification checks in addition to SOA release mapping.
 - Keep SOA release planning and database version planning as separate decision tracks, then reconcile them at cutover design.
 
+## Troubleshooting and Performance Tuning
+
+- `troubleshooting.md` — BPEL instance failures, Mediator routing errors, OSB issues, JMS/adapter faults, MDS metadata problems
+- `performance-tuning.md` — BPEL dehydration tuning, Mediator threading, OSB pipeline optimization, SOAINFRA JDBC tuning, instance purging
+
 ## Sources
 
 - `references/soa-version-product-matrix.md`
