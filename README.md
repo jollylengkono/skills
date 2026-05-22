@@ -27,6 +27,7 @@ npx skills add oracle/skills/graal
 - `oci/` contains Oracle Cloud Infrastructure skills for landing-zone architecture, IAM/security guardrails, and networking operations.
 - `fusion/` contains Oracle Fusion Middleware skills, currently including WebLogic, GoldenGate, SOA, and Java guidance.
 - `apex/` contains Oracle APEX skills, including the APEXLang sub-domain for structured APEX application generation.
+- `oem/` contains Oracle Enterprise Manager 13c skills covering installation, patching, troubleshooting, performance tuning, and certification matrix.
 - `graal/` contains GraalVM skills, starting with Native Image.
 
 ## Start Here
@@ -93,12 +94,20 @@ npx skills add oracle/skills/graal
 │       ├── native-build-tools.md
 │       ├── reachability-metadata.md
 │       └── troubleshooting.md
-└── oci/
+├── oci/
+│   ├── SKILL.md
+│   └── references/
+│       ├── landing-zone-core.md
+│       ├── iam-security-guardrails.md
+│       └── networking-operations.md
+└── oem/
     ├── SKILL.md
+    ├── installation-and-configuration.md
+    ├── patching.md
+    ├── troubleshooting.md
+    ├── performance-tuning.md
     └── references/
-        ├── landing-zone-core.md
-        ├── iam-security-guardrails.md
-        └── networking-operations.md
+        └── certification-matrix.md
 ```
 
 Each domain has its own `SKILL.md` and any supporting index files it needs.
