@@ -75,6 +75,11 @@ When the request combines WebLogic and database planning:
 - Flag `26ai` features as database-layer changes that are separate from WebLogic major-version mapping.
 - Keep WebLogic pathing decisions based on WebLogic documentation, then layer database compatibility checks separately.
 
+## Installation, Configuration, Patching, and Upgrade
+
+- `installation-and-configuration.md` — silent install, domain creation (GUI and WLST), JDBC data sources, JMS, Node Manager setup, post-install validation
+- `patching-and-upgrade.md` — OPatch/BSU differences, Bundle Patch and PSU application, rolling patch for clusters, in-place vs out-of-place upgrade (12c → 14c), pre/post patch checklists
+
 ## Troubleshooting and Performance Tuning
 
 - `troubleshooting.md` — startup failures, deployment errors, JDBC pool issues, stuck threads, OOM diagnosis

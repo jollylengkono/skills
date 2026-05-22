@@ -93,6 +93,11 @@ This section refers to Oracle Database versions often involved in GoldenGate pro
 - If release-specific feature parity is unclear, provide a 19c-compatible operational fallback and cite uncertainty.
 - If source systems are still on database `12c`, treat that as a legacy migration path and require explicit compatibility checks before finalizing GoldenGate release selection.
 
+## Installation, Configuration, Patching, and Upgrade
+
+- `installation-and-configuration.md` — classic vs microservices architecture install, GGSCI vs Service Manager, supplemental logging setup, Extract/Replicat creation, trail file config, initial load, connectivity validation
+- `patching-and-upgrade.md` — OPatch for classic GoldenGate, upgrade from 12c to 21c, rolling upgrade for zero-downtime, microservices deployment upgrade, pre/post upgrade checklists
+
 ## Troubleshooting and Performance Tuning
 
 - `troubleshooting.md` — Extract ABENDs, Replicat lag spikes, trail file issues, discard file triage, GGSCI diagnostic commands

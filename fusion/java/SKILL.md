@@ -61,6 +61,11 @@ Response pattern:
 - Do not carry legacy JVM flags forward without revalidation.
 - Do not assume behavior from Java 8 applies unchanged in Java 9+ modular runtimes.
 
+## Installation, Configuration, Patching, and Upgrade
+
+- `installation-and-configuration.md` — Oracle JDK vs OpenJDK for middleware, silent install, JAVA_HOME configuration, JVM flag baseline for WebLogic/SOA/GoldenGate, Java version requirements per product
+- `patching-and-upgrade.md` — Oracle JDK CPU patch application, in-place vs parallel install approach, LTS-to-LTS upgrade planning (8→11→17→21→25), module system impact past Java 8/9, middleware stack re-validation, rollback procedures
+
 ## Troubleshooting and Performance Tuning
 
 - `troubleshooting.md` — middleware-specific startup failures, OOM classification, stuck threads, classloading/module issues across WebLogic, SOA, and GoldenGate

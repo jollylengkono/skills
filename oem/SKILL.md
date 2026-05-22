@@ -1,6 +1,6 @@
 ---
 name: oem
-description: Oracle Enterprise Manager (OEM) 13c skill for installation, configuration, patching, troubleshooting, performance tuning, and certification matrix. Use when tasks involve OEM OMS setup, agent deployment, target management, plug-in patching, repository tuning, emctl/emcli operations, or diagnosing OEM console and agent issues.
+description: Oracle Enterprise Manager (OEM) 13c skill for installation, configuration, patching and upgrade, troubleshooting, performance tuning, and certification matrix. Use when tasks involve OEM OMS setup, agent deployment, target management, plug-in patching, OEM version upgrades, repository tuning, emctl/emcli operations, or diagnosing OEM console and agent issues.
 ---
 
 # Oracle Enterprise Manager (OEM)
@@ -24,7 +24,7 @@ Load the relevant skill file for the task at hand. All major claims must be veri
 oem/
 ├── SKILL.md
 ├── installation-and-configuration.md
-├── patching.md
+├── patching-and-upgrade.md
 ├── troubleshooting.md
 ├── performance-tuning.md
 └── references/
@@ -36,7 +36,7 @@ oem/
 | Topic | File |
 |-------|------|
 | OEM 13c installation (Simple, Advanced, Software Only), post-install config, agent deployment, HA setup | `installation-and-configuration.md` |
-| OEM patching — Bundle Patch, Release Update, one-off patches, plug-in and agent mass upgrade | `patching.md` |
+| OEM patching (Bundle Patch, RU, one-off, plug-in, agent mass patch) and version upgrade (13.4 → 13.5) | `patching-and-upgrade.md` |
 | OMS startup failures, agent unreachable, OMR connectivity, console errors, job failures, log locations | `troubleshooting.md` |
 | OMS JVM tuning, OMR database tuning, agent collection tuning, WebLogic thread pool, data retention | `performance-tuning.md` |
 | Supported OS, DB target versions, JDK, plug-in versions, browser compatibility | `references/certification-matrix.md` |
@@ -44,7 +44,7 @@ oem/
 ## Key Starting Points
 
 - New OEM deployment → `installation-and-configuration.md`
-- Applying patches or upgrades → `patching.md`
+- Applying patches or upgrading OEM → `patching-and-upgrade.md`
 - OEM not working / agent down / console error → `troubleshooting.md`
 - OEM slow / OMR bloated / agent overloading DB → `performance-tuning.md`
 - Version/platform support question → `references/certification-matrix.md`
@@ -54,7 +54,8 @@ oem/
 | Task | Recommended Sequence |
 |------|----------------------|
 | Fresh OEM 13c deployment | `certification-matrix.md` (verify platform) → `installation-and-configuration.md` |
-| Apply OEM Bundle Patch | `patching.md` pre-patch checks → patch OMS → patch agents → verify |
+| Apply OEM Bundle Patch | `patching-and-upgrade.md` (Part 1: Patching) → pre-patch checks → patch OMS → patch agents → verify |
+| Upgrade OEM 13.4 to 13.5 | `patching-and-upgrade.md` (Part 2: Upgrade) → pre-upgrade checklist → upgrade OMS → mass upgrade agents → verify |
 | Diagnose OEM agent unreachable | `troubleshooting.md` triage → log review → `emctl` commands |
 | OEM console is slow | `troubleshooting.md` (rule out OMS/OMR issue) → `performance-tuning.md` |
 | Add new database target | `installation-and-configuration.md` (agent deploy + target discovery) |
