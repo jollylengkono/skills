@@ -21,7 +21,7 @@ Load the relevant skill file for the task at hand. All major claims must be veri
 ## Directory Structure
 
 ```text
-ohs/
+fusion/ohs/
 ├── SKILL.md
 ├── installation-and-configuration.md
 ├── patching-and-upgrade.md

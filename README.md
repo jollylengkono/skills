@@ -25,10 +25,9 @@ npx skills add oracle/skills/graal
 
 - `db/` is the active Oracle Database domain and includes database, ORDS, SQLcl, framework, container, and agent workflow skills.
 - `oci/` contains Oracle Cloud Infrastructure skills for landing-zone architecture, IAM/security guardrails, and networking operations.
-- `fusion/` contains Oracle Fusion Middleware skills — WebLogic, GoldenGate, SOA, and Java — each with installation, patching/upgrade, troubleshooting, and performance tuning files.
+- `fusion/` contains Oracle Fusion Middleware skills — WebLogic, GoldenGate, SOA, Java, and Oracle HTTP Server (OHS) — each sub-domain has installation, patching/upgrade, troubleshooting, and performance tuning files.
 - `apex/` contains Oracle APEX skills, including the APEXLang sub-domain for structured APEX application generation.
 - `oem/` contains Oracle Enterprise Manager 13c skills covering installation, patching and upgrade, troubleshooting, performance tuning, and certification matrix.
-- `ohs/` contains Oracle HTTP Server 12c skills covering installation, patching/upgrade, troubleshooting, performance tuning, and certification matrix.
 - `graal/` contains GraalVM skills, starting with Native Image.
 
 ## Start Here
@@ -76,6 +75,14 @@ npx skills add oracle/skills/graal
 │   │   ├── troubleshooting.md
 │   │   ├── performance-tuning.md
 │   │   └── references/
+│   ├── ohs/
+│   │   ├── SKILL.md
+│   │   ├── installation-and-configuration.md
+│   │   ├── patching-and-upgrade.md
+│   │   ├── troubleshooting.md
+│   │   ├── performance-tuning.md
+│   │   └── references/
+│   │       └── certification-matrix.md
 │   ├── soa/
 │   │   ├── SKILL.md
 │   │   ├── installation-and-configuration.md
@@ -109,15 +116,7 @@ npx skills add oracle/skills/graal
 │       ├── landing-zone-core.md
 │       ├── iam-security-guardrails.md
 │       └── networking-operations.md
-├── oem/
-│   ├── SKILL.md
-│   ├── installation-and-configuration.md
-│   ├── patching-and-upgrade.md
-│   ├── troubleshooting.md
-│   ├── performance-tuning.md
-│   └── references/
-│       └── certification-matrix.md
-└── ohs/
+└── oem/
     ├── SKILL.md
     ├── installation-and-configuration.md
     ├── patching-and-upgrade.md

@@ -1,6 +1,6 @@
 ---
 name: fusion
-description: Oracle Fusion Middleware skill routing and domain navigation. Use when tasks involve Fusion-domain technologies and you need to route to the correct Fusion skill, including WebLogic version planning, Oracle GoldenGate replication guidance, Oracle SOA product/version mapping, and Java runtime GC/troubleshooting playbooks.
+description: Oracle Fusion Middleware skill routing and domain navigation. Use when tasks involve Fusion-domain technologies and you need to route to the correct Fusion skill, including WebLogic version planning, Oracle GoldenGate replication guidance, Oracle SOA product/version mapping, Java runtime GC/troubleshooting playbooks, and Oracle HTTP Server (OHS) proxy and web-tier configuration.
 ---
 
 # Oracle Fusion Skills
@@ -32,6 +32,14 @@ fusion/
 │   ├── troubleshooting.md
 │   ├── performance-tuning.md
 │   └── references/
+├── ohs/
+│   ├── SKILL.md
+│   ├── installation-and-configuration.md
+│   ├── patching-and-upgrade.md
+│   ├── troubleshooting.md
+│   ├── performance-tuning.md
+│   └── references/
+│       └── certification-matrix.md
 ├── soa/
 │   ├── SKILL.md
 │   ├── installation-and-configuration.md
@@ -72,6 +80,11 @@ fusion/
 | Java CPU patching, LTS-to-LTS upgrade (8→11→17→21→25), module system impact, middleware re-validation | `fusion/java/patching-and-upgrade.md` |
 | Java startup failures, OOM classification, classloading issues in middleware context | `fusion/java/troubleshooting.md` |
 | Java heap sizing, GC selection, JVM flag hygiene, JFR profiling for middleware workloads | `fusion/java/performance-tuning.md` |
+| OHS installation, standalone vs collocated domain, SSL/TLS, mod_weblogic proxy, virtual hosts | `fusion/ohs/installation-and-configuration.md` |
+| OHS patching, Bundle Patch application, upgrade path, rolling patch for HA | `fusion/ohs/patching-and-upgrade.md` |
+| OHS process failures, opmnctl status, startup errors, SSL handshake failures, 502/503 proxy errors | `fusion/ohs/troubleshooting.md` |
+| OHS MPM tuning, KeepAlive settings, mod_weblogic connection pool, SSL session cache | `fusion/ohs/performance-tuning.md` |
+| OHS supported OS, version line, JDK requirements, WebLogic integration compatibility | `fusion/ohs/references/certification-matrix.md` |
 
 ## Key Starting Points
 
@@ -101,6 +114,12 @@ fusion/
 - `fusion/java/references/java-version-matrix.md`
 - `fusion/java/references/java-gc-reference.md`
 - `fusion/java/references/java-troubleshooting-reference.md`
+- `fusion/ohs/SKILL.md`
+- `fusion/ohs/installation-and-configuration.md`
+- `fusion/ohs/patching-and-upgrade.md`
+- `fusion/ohs/troubleshooting.md`
+- `fusion/ohs/performance-tuning.md`
+- `fusion/ohs/references/certification-matrix.md`
 
 ## Common Multi-Step Flows
 
@@ -122,3 +141,7 @@ fusion/
 | Upgrade Java for middleware | `java/patching-and-upgrade.md` → `java/references/java-version-matrix.md` for LTS path |
 | Triage Java runtime incidents | `java/troubleshooting.md` middleware routing → `java/references/java-troubleshooting-reference.md` commands |
 | Tune Java for middleware workloads | `java/performance-tuning.md` → `java/references/java-gc-reference.md` for GC selection |
+| Deploy OHS as WebLogic front-end proxy | `ohs/installation-and-configuration.md` → `weblogic/installation-and-configuration.md` for WLS domain pairing |
+| Diagnose OHS 502 Bad Gateway | `ohs/troubleshooting.md` triage → mod_weblogic log review → `ohs/installation-and-configuration.md` proxy config check |
+| Apply OHS Bundle Patch | `ohs/patching-and-upgrade.md` pre-patch checks → patch → restart → validate |
+| Tune OHS for high-traffic proxy workload | `ohs/troubleshooting.md` → `ohs/performance-tuning.md` |
