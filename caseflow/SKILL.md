@@ -12,7 +12,7 @@ Caseflow is the intake and memory workflow for Oracle Advanced Services engageme
 1. Use Caseflow before creating or continuing an Oracle customer work case.
 2. Complete the required intake fields before creating folders or memory files.
 3. Create case-local memory from `templates/case.md`.
-4. Create or update central memory under `<root_workspace_path>/.codex/memories/`.
+4. Create or update central memory under `<root_workspace_path>/.caseflow/memories/`.
 5. Route to the product skill listed in `Product Routing`; if no product skill exists, follow the missing-skill fallback.
 6. Update local and central memory when the case changes or closes.
 
@@ -35,7 +35,7 @@ caseflow/
 
 Ask the engineer for these values before creating files:
 
-1. Full root workspace path.
+1. Full root workspace path, unless Caseflow can discover it by walking upward from the current directory to `.caseflow/memories/workspace-index.md`.
 2. Customer name.
 3. Project name.
 4. Task category: `installation-configuration`, `troubleshooting`, `performance-tuning`, `patching`, or `upgrade`.
@@ -75,19 +75,28 @@ For `db`, `oci`, `apex`, and `graal`, open the domain `SKILL.md` first and follo
 
 ## Directory Resolution
 
-1. Confirm the root workspace path exists.
-2. Search one level below root for a matching customer directory.
-3. If exactly one likely customer match exists, use it.
-4. If multiple likely customer matches exist, ask the engineer to choose.
-5. If no customer match exists, ask before creating a new customer directory.
-6. Repeat the same resolution under the customer directory for the project directory.
+1. Resolve the root workspace path first.
+2. Before asking for the root path, walk upward from the current directory until `.caseflow/memories/workspace-index.md` is found.
+3. If found, use the parent directory containing `.caseflow/` as the root workspace path.
+4. If not found, ask the engineer for the full root workspace path.
+5. Confirm the selected root workspace path exists.
+6. Search one level below root for a matching customer directory.
+7. If exactly one likely customer match exists, use it.
+8. If multiple likely customer matches exist, ask the engineer to choose.
+9. If no customer match exists, ask before creating a new customer directory.
+10. Repeat the same resolution under the customer directory for the project directory.
+
+## New vs Continuing Case
+
+- New case: resolve root, resolve or create customer and project, collect remaining required inputs, create case structure, and seed or update central memory.
+- Continuing case: resolve root by upward discovery, identify the existing case directory, read local `case.md`, load relevant central memory, and update existing records instead of creating a new case folder or asking for a short case name.
 
 ## Case Structure
 
 Create the case folder as:
 
 ```text
-<root_workspace_path>/<customer>/<project>/<product_abbrev>_<short_case_name>_<yyyymmdd>/
+<root_workspace_path>/<customer>/<project>/<yyyymmdd>_<product_abbrev>_<short_case_name>/
 ```
 
 Create these entries inside it:
@@ -102,14 +111,14 @@ Scripts/
 Output/
 ```
 
-Use underscores in generated case folder names. Lowercase product abbreviation and short case name. Preserve existing customer and project directory spelling.
+Use the local current date in `yyyymmdd` format. Use underscores in generated case folder names. Lowercase product abbreviation and short case name. Preserve existing customer and project directory spelling.
 
 ## Central Memory
 
-Maintain central memory under the engineer-specified root workspace path. Do not write central memory relative to the current shell directory unless it is the selected root workspace.
+Maintain central memory under the resolved root workspace path. Do not write central memory relative to the current shell directory unless it is the selected root workspace.
 
 ```text
-<root_workspace_path>/.codex/memories/
+<root_workspace_path>/.caseflow/memories/
   workspace-index.md
   active-cases.md
   customers/<customer>.md
@@ -117,6 +126,12 @@ Maintain central memory under the engineer-specified root workspace path. Do not
   products/<product>.md
   patterns/<task_category>.md
 ```
+
+Persist root-relative paths in central memory case links whenever possible, for example `Mandiri/New MCM/20260523_jvm_heap_full_gc`. Use this relative format consistently across `active-cases.md`, customer, project, product, and pattern memory files.
+
+Use absolute paths for runtime filesystem operations, but do not make absolute workstation-specific paths the primary link format in reusable central memory.
+
+If `<root_workspace_path>/.codex/memories/` exists but `<root_workspace_path>/.caseflow/memories/` does not, do not silently migrate existing memory. Ask whether to create `.caseflow/memories/` for new Caseflow memory or whether the engineer wants a separate migration step before reading or copying old memory.
 
 Case-local memory records what happened. Central memory records reusable knowledge.
 
@@ -175,7 +190,7 @@ If no matching local product skill exists:
    - Planning: `writing-plans`.
    - Implementation: `test-driven-development`.
    - Verification: `verification-before-completion`.
-4. Record the missing product skill under a `Skill Gaps` section in `<root_workspace_path>/.codex/memories/workspace-index.md`.
+4. Record the missing product skill under a `Skill Gaps` section in `<root_workspace_path>/.caseflow/memories/workspace-index.md`.
 5. Suggest creating or installing a new skill later, but do not block case intake.
 
 Task category behavior:
@@ -208,7 +223,7 @@ After intake and case creation, report:
 
 ## Common Mistakes
 
-- Writing central memory under the shell's current directory instead of `<root_workspace_path>/.codex/memories/`.
+- Writing central memory under the shell's current directory instead of `<root_workspace_path>/.caseflow/memories/`.
 - Creating a case directly under the customer directory and skipping the project layer.
 - Routing directly to a nested Fusion skill without first checking `fusion/SKILL.md`.
 - Linking every same-product case instead of adding only high-signal related cases.
@@ -219,11 +234,11 @@ After intake and case creation, report:
 When the engineer says the case is closed, update:
 
 - Local `case.md`.
-- `<root_workspace_path>/.codex/memories/customers/<customer>.md`.
-- `<root_workspace_path>/.codex/memories/projects/<customer>/<project>.md`.
-- `<root_workspace_path>/.codex/memories/products/<product>.md`.
-- `<root_workspace_path>/.codex/memories/patterns/<task_category>.md`.
-- `<root_workspace_path>/.codex/memories/active-cases.md`.
+- `<root_workspace_path>/.caseflow/memories/customers/<customer>.md`.
+- `<root_workspace_path>/.caseflow/memories/projects/<customer>/<project>.md`.
+- `<root_workspace_path>/.caseflow/memories/products/<product>.md`.
+- `<root_workspace_path>/.caseflow/memories/patterns/<task_category>.md`.
+- `<root_workspace_path>/.caseflow/memories/active-cases.md`.
 
 Closure summaries must capture symptoms, root cause, fix, validation, reusable commands, risks, related cases, and follow-up actions. Do not store secrets.
 

@@ -7,6 +7,7 @@
 - Project:
 - Case Name:
 - Case Path:
+- Case Relative Path:
 - Task Category:
 - Oracle Product:
 - Product Abbreviation:
