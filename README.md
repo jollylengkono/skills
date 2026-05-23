@@ -11,6 +11,7 @@ Install a domain by appending the root-level domain directory to the repository 
 ```bash
 npx skills add oracle/skills/db
 npx skills add oracle/skills/graal
+npx skills add oracle/skills/caseflow
 ...
 ```
 
@@ -29,6 +30,7 @@ npx skills add oracle/skills/graal
 - `apex/` contains Oracle APEX skills, including the APEXLang sub-domain for structured APEX application generation.
 - `oem/` contains Oracle Enterprise Manager 13c skills covering installation, patching and upgrade, troubleshooting, performance tuning, and certification matrix.
 - `graal/` contains GraalVM skills, starting with Native Image.
+- `caseflow/` contains the Oracle work-case intake workflow for customer/project/case structure, persistent memory, product skill routing, and cross-case links.
 
 ## Start Here
 
@@ -110,6 +112,16 @@ npx skills add oracle/skills/graal
 │       ├── native-build-tools.md
 │       ├── reachability-metadata.md
 │       └── troubleshooting.md
+├── caseflow/
+│   ├── SKILL.md
+│   └── templates/
+│       ├── active-cases.md
+│       ├── case.md
+│       ├── customer.md
+│       ├── pattern.md
+│       ├── product.md
+│       ├── project.md
+│       └── workspace-index.md
 ├── oci/
 │   ├── SKILL.md
 │   └── references/
