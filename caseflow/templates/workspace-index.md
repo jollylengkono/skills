@@ -28,3 +28,10 @@
 ## Standardization Notes
 
 - Record directory standardization plans, skipped conflicts, and unresolved migration decisions here when they affect the workspace.
+
+## Closed Case Lifecycle Rules
+
+- Keep closed case directories in place unless an archive migration is explicitly approved.
+- Track active, blocked, recently closed, reopened, and follow-up-created cases in `active-cases.md`.
+- Older closed cases remain discoverable through customer, project, product, and pattern memory.
+- Reopen only when the same issue and scope resumes; create a follow-up case for different scope, product, window, or risk.

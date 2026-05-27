@@ -273,7 +273,7 @@ After intake and case creation, report:
 - Memory setup: use `Central Memory` and the templates under `caseflow/templates/`.
 - Existing directory cleanup: use `Standardize Existing Directories`.
 - Similar prior work: use `Related Cases` and scan customer, project, product, and pattern memory.
-- Closure: use `Closure` and update both local case memory and central memory.
+- Closure: use `Closed Case Lifecycle` and update both local case memory and central memory.
 
 ## Common Mistakes
 
@@ -297,6 +297,88 @@ When the engineer says the case is closed, update:
 - `<root_workspace_path>/Caseflow/memories/active-cases.md`.
 
 Closure summaries must capture symptoms, root cause, fix, validation, reusable commands, risks, related cases, and follow-up actions. Do not store secrets.
+
+## Closed Case Lifecycle
+
+Keep closed case directories in place. Do not move closed cases to an archive directory unless the engineer explicitly asks for an archive migration and approves the link rewrite plan. Stable case paths are more important than a visually clean workspace.
+
+Allowed case statuses:
+
+| Status | Meaning |
+| --- | --- |
+| `Active` | Work is ongoing. |
+| `Blocked` | Work is paused on missing input, access, approval, or external action. |
+| `Closed` | Work is complete, validated, and summarized. |
+| `Reopened` | A closed case resumed because the same scope or issue returned. |
+| `Follow-up Created` | A new related case was opened because the new work has different scope, timing, product, or risk. |
+
+### Closing a Case
+
+When closing a case:
+
+1. Confirm the engineer explicitly says the case is closed or approves closure.
+2. Update local `<case_directory_name>.md`:
+   - Set `Status: Closed`.
+   - Record `Closed Date`.
+   - Complete `Closure Summary`.
+   - Complete `Closure Checklist`.
+3. Move the case entry from `## Active` to `## Recently Closed` in `Caseflow/memories/active-cases.md`.
+4. Add or update closure notes in customer, project, product, and pattern memory.
+5. Capture reusable commands, validated fixes, risks, and follow-up actions.
+6. Verify touched Markdown links are relative and include `.md` filenames.
+7. Do not store secrets, credentials, private keys, wallets, or production connection strings.
+
+### Recently Closed Retention
+
+Keep recently closed cases in `active-cases.md` for the last 10 entries or the last 30 days, whichever is more useful for the workspace. Older closed cases remain discoverable through customer, project, product, and pattern memory.
+
+When pruning `## Recently Closed`, remove only the index entry. Do not delete or move the case directory or case Markdown file.
+
+### Reopening a Case
+
+Reopen a case only when the same issue, customer, project, product, and work scope resumes. When reopening:
+
+1. Preserve the existing closure summary.
+2. Set status to `Reopened`.
+3. Add the case back under `## Active` in `active-cases.md`.
+4. Add a `Reopen History` entry with date, reason, symptoms, and who requested reopening.
+5. Add links from the reopened entry to the original closure section using relative Markdown links when useful.
+
+If the new work has different scope, different product, a new maintenance window, or separate risk, create a follow-up case instead of reopening.
+
+### Follow-up Cases
+
+Create a follow-up case when new work is related but should be tracked separately. Common reasons:
+
+- New scope or objective.
+- Different Oracle product or component.
+- New maintenance window or approval chain.
+- Different risk profile.
+- Post-closure enhancement, hardening, or preventive action.
+
+When creating a follow-up:
+
+1. Create a new case using normal Caseflow intake.
+2. Set the original case status to `Follow-up Created` if no more work remains in that case.
+3. Link old and new case files both ways with relative Markdown links.
+4. Add a short reason in both `Related Cases` sections.
+5. Update customer, project, product, pattern, and active-case memory.
+
+### Blocked Cases
+
+Use `Blocked` when a case is not closed but cannot progress. Record blocker, owner, requested input, requested date, and next review date. Keep blocked cases under `## Active` with a visible blocked note.
+
+### Closure Quality Gate
+
+Before reporting that a case is closed, verify:
+
+- Local case file status and closure date are updated.
+- Active case index moved or updated the entry correctly.
+- Customer, project, product, and pattern memory have reusable closure notes where relevant.
+- Related cases are linked selectively with reasons.
+- Follow-up actions are either recorded or converted into follow-up cases.
+- All touched Markdown references are relative links.
+- No secrets or sensitive connection details were added.
 
 ## Sources
 

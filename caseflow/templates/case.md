@@ -13,6 +13,8 @@
 - Oracle Product:
 - Product Abbreviation:
 - Created Date:
+- Closed Date:
+- Reopened Date:
 - Status: Active
 
 ## Environment
@@ -31,6 +33,10 @@
 - Scope:
 
 ## Related Cases
+
+- None recorded yet.
+
+## Follow-up Cases
 
 - None recorded yet.
 
@@ -58,6 +64,8 @@ Use relative Markdown links for related memory and case files. Do not store abso
 ## Timeline
 
 - Created:
+- Closed:
+- Reopened:
 
 ## Actions Taken
 
@@ -86,3 +94,19 @@ Use relative Markdown links for related memory and case files. Do not store abso
 - Reusable Commands:
 - Risks:
 - Follow-up:
+
+## Closure Checklist
+
+- [ ] Engineer approved closure.
+- [ ] Status and closed date updated.
+- [ ] Symptoms, root cause, fix, and validation recorded.
+- [ ] Reusable commands and risks captured.
+- [ ] Customer, project, product, and pattern memory updated where relevant.
+- [ ] Entry moved from `## Active` to `## Recently Closed`.
+- [ ] Related Markdown links are relative and include `.md` filenames.
+- [ ] Follow-up actions recorded or converted into follow-up cases.
+- [ ] No secrets or sensitive connection details stored.
+
+## Reopen History
+
+- None recorded yet.
