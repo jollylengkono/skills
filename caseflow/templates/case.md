@@ -8,6 +8,7 @@
 - Case Name:
 - Case Path:
 - Case Relative Path:
+- Case Markdown File:
 - Task Category:
 - Oracle Product:
 - Product Abbreviation:
@@ -32,6 +33,15 @@
 ## Related Cases
 
 - None recorded yet.
+
+## Related Memory
+
+- Customer Memory:
+- Project Memory:
+- Product Memory:
+- Pattern Memory:
+
+Use relative Markdown links for related memory and case files. Do not store absolute workstation paths for related Markdown files.
 
 ## Evidence
 
