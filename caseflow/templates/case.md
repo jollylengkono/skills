@@ -102,7 +102,8 @@ Use relative Markdown links for related memory and case files. Do not store abso
 - [ ] Symptoms, root cause, fix, and validation recorded.
 - [ ] Reusable commands and risks captured.
 - [ ] Customer, project, product, and pattern memory updated where relevant.
-- [ ] Entry moved from `## Active` to `## Recently Closed`.
+- [ ] Entry removed from `active-cases.md`.
+- [ ] Permanent closure entry added or updated in `closed-cases.md`.
 - [ ] Related Markdown links are relative and include `.md` filenames.
 - [ ] Follow-up actions recorded or converted into follow-up cases.
 - [ ] No secrets or sensitive connection details stored.

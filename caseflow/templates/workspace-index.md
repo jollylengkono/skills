@@ -32,6 +32,7 @@
 ## Closed Case Lifecycle Rules
 
 - Keep closed case directories in place unless an archive migration is explicitly approved.
-- Track active, blocked, recently closed, reopened, and follow-up-created cases in `active-cases.md`.
-- Older closed cases remain discoverable through customer, project, product, and pattern memory.
+- Track active, blocked, and reopened cases in `active-cases.md`.
+- Track closed and follow-up-created closure records permanently in `closed-cases.md`.
+- Closed cases remain permanently discoverable through `closed-cases.md` and may also be linked from customer, project, product, and pattern memory.
 - Reopen only when the same issue and scope resumes; create a follow-up case for different scope, product, window, or risk.
