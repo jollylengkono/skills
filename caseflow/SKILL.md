@@ -24,6 +24,7 @@ caseflow/
 └── templates/
     ├── active-cases.md
     ├── case.md
+    ├── closed-cases.md
     ├── customer.md
     ├── pattern.md
     ├── product.md
@@ -134,6 +135,7 @@ Maintain central memory under the resolved root workspace path. Do not write cen
 <root_workspace_path>/Caseflow/memories/
   workspace-index.md
   active-cases.md
+  closed-cases.md
   customers/<customer>.md
   projects/<customer>/<project>.md
   products/<product>.md
@@ -154,6 +156,7 @@ When a case starts, create missing central memory directories and seed missing f
 
 - `workspace-index.md` with the root workspace, customer, project, and product coverage.
 - `active-cases.md` with the new case status and relative Markdown link to the case file.
+- `closed-cases.md` from template when missing; do not add new active cases to this file.
 - `customers/<customer>.md` with the project and relative Markdown link to the case file.
 - `projects/<customer>/<project>.md` with product, environment if known, and relative Markdown link to the case file.
 - `products/<product>.md` with the relative Markdown link to the case file and reusable product context.
@@ -177,6 +180,8 @@ Examples:
 [Case](../../<customer>/<project>/<case_directory>/<case_directory>.md)
 [Customer Memory](../../../Caseflow/memories/customers/<customer>.md)
 ```
+
+`active-cases.md` must not link to cases whose current status is `Closed` or `Follow-up Created`. Closed-case links belong in `closed-cases.md`, customer memory, project memory, product memory, pattern memory, or case-local related-case sections.
 
 Before closing a case or standardizing a directory, scan touched Markdown files for absolute links and convert them to relative links.
 
@@ -273,7 +278,7 @@ After intake and case creation, report:
 - Memory setup: use `Central Memory` and the templates under `caseflow/templates/`.
 - Existing directory cleanup: use `Standardize Existing Directories`.
 - Similar prior work: use `Related Cases` and scan customer, project, product, and pattern memory.
-- Closure: use `Closed Case Lifecycle` and update both local case memory and central memory.
+- Closure: use `Closed Case Lifecycle`, remove closed entries from `active-cases.md`, and update `closed-cases.md` plus reusable central memory.
 
 ## Common Mistakes
 
@@ -283,6 +288,7 @@ After intake and case creation, report:
 - Persisting absolute Markdown links instead of relative Markdown links.
 - Routing directly to a nested Fusion skill without first checking `fusion/SKILL.md`.
 - Linking every same-product case instead of adding only high-signal related cases.
+- Keeping closed-case links in `active-cases.md` instead of moving closure history to `closed-cases.md`.
 - Storing secrets, passwords, wallets, certificates, or production connection strings in central memory.
 
 ## Closure
@@ -295,6 +301,7 @@ When the engineer says the case is closed, update:
 - `<root_workspace_path>/Caseflow/memories/products/<product>.md`.
 - `<root_workspace_path>/Caseflow/memories/patterns/<task_category>.md`.
 - `<root_workspace_path>/Caseflow/memories/active-cases.md`.
+- `<root_workspace_path>/Caseflow/memories/closed-cases.md`.
 
 Closure summaries must capture symptoms, root cause, fix, validation, reusable commands, risks, related cases, and follow-up actions. Do not store secrets.
 
@@ -322,17 +329,18 @@ When closing a case:
    - Record `Closed Date`.
    - Complete `Closure Summary`.
    - Complete `Closure Checklist`.
-3. Move the case entry from `## Active` to `## Recently Closed` in `Caseflow/memories/active-cases.md`.
-4. Add or update closure notes in customer, project, product, and pattern memory.
-5. Capture reusable commands, validated fixes, risks, and follow-up actions.
-6. Verify touched Markdown links are relative and include `.md` filenames.
-7. Do not store secrets, credentials, private keys, wallets, or production connection strings.
+3. Remove the case entry from `Caseflow/memories/active-cases.md`.
+4. Add or update a permanent entry in `Caseflow/memories/closed-cases.md`.
+5. Add or update closure notes in customer, project, product, and pattern memory.
+6. Capture reusable commands, validated fixes, risks, and follow-up actions.
+7. Verify touched Markdown links are relative and include `.md` filenames.
+8. Do not store secrets, credentials, private keys, wallets, or production connection strings.
 
-### Recently Closed Retention
+### Closed Case Index
 
-Keep recently closed cases in `active-cases.md` for the last 10 entries or the last 30 days, whichever is more useful for the workspace. Older closed cases remain discoverable through customer, project, product, and pattern memory.
+Keep closed cases in `closed-cases.md` permanently. This file is the complete central index for closed cases and follow-up-created closure records.
 
-When pruning `## Recently Closed`, remove only the index entry. Do not delete or move the case directory or case Markdown file.
+When updating closed-case history, add or update the entry in `closed-cases.md`. Do not keep already closed cases in `active-cases.md`. Do not delete or move the case directory or case Markdown file during routine closure indexing.
 
 ### Reopening a Case
 
@@ -340,9 +348,11 @@ Reopen a case only when the same issue, customer, project, product, and work sco
 
 1. Preserve the existing closure summary.
 2. Set status to `Reopened`.
-3. Add the case back under `## Active` in `active-cases.md`.
+3. Add the case back under `## Reopened` in `active-cases.md`.
 4. Add a `Reopen History` entry with date, reason, symptoms, and who requested reopening.
-5. Add links from the reopened entry to the original closure section using relative Markdown links when useful.
+5. Add or update a note in `closed-cases.md` showing that the case was reopened and when.
+
+Keep the original closure entry in `closed-cases.md`. A reopened case may appear in both indexes only while it is reopened: `active-cases.md` tracks the current reopened work, and `closed-cases.md` preserves closure history.
 
 If the new work has different scope, different product, a new maintenance window, or separate risk, create a follow-up case instead of reopening.
 
@@ -360,20 +370,24 @@ When creating a follow-up:
 
 1. Create a new case using normal Caseflow intake.
 2. Set the original case status to `Follow-up Created` if no more work remains in that case.
-3. Link old and new case files both ways with relative Markdown links.
-4. Add a short reason in both `Related Cases` sections.
-5. Update customer, project, product, pattern, and active-case memory.
+3. Keep the original closed or follow-up-created case out of `active-cases.md`.
+4. Add or update the original case in `closed-cases.md` under `## Follow-up Created`.
+5. Link old and new case files both ways with relative Markdown links.
+6. Add a short reason in both `Related Cases` sections.
+7. Add the new case to `active-cases.md` only if the new follow-up case is active, blocked, or reopened.
+8. Update customer, project, product, pattern, and closed-case memory.
 
 ### Blocked Cases
 
-Use `Blocked` when a case is not closed but cannot progress. Record blocker, owner, requested input, requested date, and next review date. Keep blocked cases under `## Active` with a visible blocked note.
+Use `Blocked` when a case is not closed but cannot progress. Record blocker, owner, requested input, requested date, and next review date. Keep blocked cases under `## Blocked` with a visible blocked note.
 
 ### Closure Quality Gate
 
 Before reporting that a case is closed, verify:
 
 - Local case file status and closure date are updated.
-- Active case index moved or updated the entry correctly.
+- Active case index no longer links to the closed case.
+- Closed case index has a permanent closure entry.
 - Customer, project, product, and pattern memory have reusable closure notes where relevant.
 - Related cases are linked selectively with reasons.
 - Follow-up actions are either recorded or converted into follow-up cases.
