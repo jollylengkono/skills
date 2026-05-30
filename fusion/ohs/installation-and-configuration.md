@@ -136,23 +136,44 @@ Wizard steps for a new standalone domain:
 4. **OHS Server** — set HTTP and HTTPS listen ports.
 5. **Configuration Summary** — review and click Create.
 
-### Standalone Domain Silent Configuration
+### Standalone Domain Silent Configuration with WLST
 
-Use a WLST offline script to create a standalone domain silently:
+Use a WLST offline script to create a standalone domain silently. This pattern
+matches the OHS 14.1.2 standalone configuration flow and is safer for repeatable
+builds than capturing manual Configuration Wizard screens.
 
 ```python
-# create_ohs_domain.py — run with wlst.sh offline
-selectTemplate('Oracle HTTP Server (Standalone)')
+# create_ohs_domain.py - run with wlst.sh offline
+domain_name = 'ohs_domain'
+domain_home = '/u01/oracle/config/domains/ohs_domain'
+jdk_home = '/u01/oracle/jdk-17'
+nm_user = 'nodemanager'
+nm_password = 'change_me_before_use'
+
+# Use the installed OHS standalone template for the target release.
+# Examples: '12.2.1.4.0' or '14.1.2.0.0'.
+selectTemplate('Oracle HTTP Server (Standalone)', '14.1.2.0.0')
 loadTemplates()
 
-cd('/SystemComponent/ohs1')
-set('ListenPort', 7777)
-set('ListenPortEnabled', True)
-set('SSLListenPort', 4443)
+cd('/')
+setOption('JavaHome', jdk_home)
+create(domain_name, 'SecurityConfiguration')
 
-setOption('DomainName', 'ohs_domain')
-writeDomain('/u01/oracle/config/domains/ohs_domain')
+cd('/SecurityConfiguration/' + domain_name)
+set('NodeManagerUsername', nm_user)
+set('NodeManagerPasswordEncrypted', nm_password)
+setOption('NodeManagerType', 'PerDomainNodeManager')
+
+cd('/OHS/ohs1')
+cmo.setAdminHost('127.0.0.1')
+cmo.setAdminPort('7779')
+cmo.setListenAddress('ohs1.example.com')
+cmo.setListenPort('7777')
+cmo.setSSLListenPort('4443')
+
+writeDomain(domain_home)
 closeTemplate()
+exit()
 ```
 
 Run it:
@@ -160,6 +181,21 @@ Run it:
 ```bash
 $ORACLE_HOME/oracle_common/common/bin/wlst.sh create_ohs_domain.py
 ```
+
+Keep these values environment-specific:
+
+- `selectTemplate` version must match the installed OHS release. Use
+  `14.1.2.0.0` for OHS 14.1.2 and `12.2.1.4.0` for OHS 12.2.1.4.
+- `JavaHome` must point to a certified JDK for the target OHS/FMW release.
+  OHS 14.1.2 supports Java 17 and Java 21; OHS 12.2.1.4 uses the certified
+  Java 8 baseline unless the certification matrix for the installed patch level
+  says otherwise.
+- `AdminHost` should normally stay on `127.0.0.1`; the OHS administration
+  channel is used by Node Manager and should not be exposed unless a documented
+  remote administration design requires it.
+- `NodeManagerPasswordEncrypted` is intentionally shown as a placeholder. Do not
+  store real Node Manager credentials in reusable scripts, case memory, or shared
+  skill examples.
 
 ### Collocated Domain Configuration
 

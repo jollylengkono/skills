@@ -1,13 +1,13 @@
 ---
 name: ohs
-description: Oracle HTTP Server (OHS) 12c skill for installation, configuration, patching, troubleshooting, performance tuning, and certification matrix. Use when tasks involve OHS standalone or collocated domain setup, mod_weblogic proxy configuration, SSL/TLS certificate management, opmnctl/opmn operations, virtual host configuration, or diagnosing OHS startup and proxy errors.
+description: Oracle HTTP Server (OHS) 12c and 14c skill for installation, configuration, patching, troubleshooting, performance tuning, and certification matrix. Use when tasks involve OHS standalone or collocated domain setup, WLST silent configuration, mod_weblogic proxy configuration, SSL/TLS certificate management, opmnctl/opmn operations, or diagnosing OHS startup and proxy errors.
 ---
 
 # Oracle HTTP Server (OHS)
 
 ## Overview
 
-Use this skill for guidance on Oracle HTTP Server 12c — Oracle's web server based on Apache HTTP Server, used as a front-end proxy for Oracle Fusion Middleware (WebLogic, SOA Suite, Oracle Forms, Oracle Reports).
+Use this skill for guidance on Oracle HTTP Server 12c and 14c — Oracle's web server based on Apache HTTP Server, used as a front-end proxy for Oracle Fusion Middleware (WebLogic, SOA Suite, Oracle Forms, Oracle Reports).
 
 Load the relevant skill file for the task at hand. All major claims must be verified against official Oracle documentation before applying to production.
 
@@ -35,7 +35,7 @@ fusion/ohs/
 
 | Topic | File |
 |-------|------|
-| OHS 12c installation (standalone domain, collocated with WebLogic), silent install, SSL/TLS, mod_weblogic, virtual hosts | `installation-and-configuration.md` |
+| OHS 12c/14c installation (standalone domain, collocated with WebLogic), silent install, WLST configuration scripts, SSL/TLS, mod_weblogic, virtual hosts | `installation-and-configuration.md` |
 | OHS patching — OPatch / Bundle Patch application, upgrade path, rolling patch for HA, post-patch validation | `patching-and-upgrade.md` |
 | OHS process failures, opmnctl status, startup errors, SSL handshake failures, 502/503 proxy errors, log locations | `troubleshooting.md` |
 | MPM tuning, KeepAlive settings, mod_weblogic connection pool, SSL session cache, access log buffering | `performance-tuning.md` |
@@ -61,8 +61,8 @@ fusion/ohs/
 
 ## Oracle Version Notes
 
-- OHS 12.2.1.4 is the current release line as of 2026.
-- OHS 12c is built on Apache HTTP Server 2.4.x; configuration directives follow Apache 2.4 semantics.
+- OHS 14.1.2 is the current 14c release line as of 2026; OHS 12.2.1.4 remains the common long-term 12c baseline in many estates.
+- OHS 12c and 14c are built on Apache HTTP Server 2.4.x; configuration directives follow Apache 2.4 semantics.
 - OHS is managed via OPMN (Oracle Process Manager and Notification Server); use `opmnctl` for start/stop/status operations.
 - OHS can be deployed as a standalone Oracle home or collocated within a WebLogic domain.
 
