@@ -17,7 +17,7 @@ one brief per decision. Regenerate or add new briefs as the case evolves.
    e.g. `patch-vs-upgrade`).
 2. Read the existing case file `<case_directory>.md` and pull relevant Context,
    Findings, and Decisions.
-3. Copy `caseflow/templates/decision-brief.md` and populate every branch:
+3. Copy `templates/decision-brief.md` and populate every branch:
    Context, Options & Trade-offs, Diagnostic Decision Tree, Risk & Rollback
    Gates, Recommendation & Rationale.
 4. Run the Sanitization Gate (below) before saving.
