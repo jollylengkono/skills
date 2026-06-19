@@ -41,8 +41,8 @@ Never do this
 - Do not leave the translated scope without `&APP_TEXT$...` substitutions.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
 - assets/domains/shared-components/translations/languages.json (language definitions)
 - assets/domains/shared-components/translations/prompts.json (placeholder guidance)
 - templates/shared-components/translations/translations._index.md

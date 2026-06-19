@@ -30,13 +30,13 @@
   - Canonical template families and scenario docs.
 - `applications/app_###/`
   - Final output root for generated application artifacts.
-- `the temp-runtime logs directory under `APEXLANG_OUTPUT_ROOT/logs/``
-  - Compact runtime reports, transcripts, validation outputs, and workflow-specific audit artifacts.
+- `artifacts/`
+  - Optional output root for compact runtime reports, transcripts, validation outputs, workflow-specific audit artifacts, and export backups. It is created only when a workflow writes outputs.
 
 ## Execution Model
 - APEX artifact runs:
   - enter through a direct-entrypoint skill documented in `SKILL.md`
-  - resolve prerequisite metadata source through `references/policies/db/index.json` plus `references/ops/sqlcl-agents/00-connection-gate.md`
+  - resolve prerequisite metadata source through `assets/workspace-intelligence.json` plus `references/ops/sqlcl-agents/00-connection-gate.md`
   - load only the minimal rule set required for the request
   - run one internal generate -> review -> fix loop, then runtime gates when applicable
 
@@ -58,7 +58,7 @@
 
 ## Logging Model
 - Canonical log root:
-  - `the temp-runtime logs directory under `APEXLANG_OUTPUT_ROOT/logs/``
+  - `the temp-runtime logs directory under `APEXLANG_OUTPUT_ROOT/logs/`` when logs are written
 - Common artifacts:
   - `runtime-run.json`
   - `runtime-run.log`

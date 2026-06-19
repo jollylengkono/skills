@@ -13,7 +13,7 @@ Standardize the variable contract, guardrails, and template skeleton for static 
 
 # Generation Rules (MANDATORY)
 
-1. Load `memory-bank/30-pages/apex.page.md` and other relevant section rules before emitting static content regions.
+1. Load `references/policies/memory-bank/30-pages/apex.page.md` and other relevant section rules before emitting static content regions.
 2. Default content-bearing static content regions to `appearance.template: @/standard` and keep `templateOptions` limited to the documented `static_id` values in `static-content._template_options.md`.
 3. Add server-side conditions only when necessary; remove unused permutations.
 4. When the source family is `Navigation`, call out that the current generator maps it here as a fallback.

@@ -26,4 +26,4 @@ Use this index as the canonical dispatcher for button templates. Load `buttons._
 ## Rules
 - Do not load all button variants for a single request.
 - Choose one primary action variant first; overlays are optional and additive.
-- Keep all generated button attributes consistent with `memory-bank/40-components/apex.buttons.md` and `component-policies.json`.
+- Keep all generated button attributes consistent with `references/policies/memory-bank/40-components/apex.buttons.md` and `assets/component-policies.json`.

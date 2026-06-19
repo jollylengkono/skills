@@ -15,9 +15,9 @@ Required inputs
 - Optional: `conditions`: server-side condition tokens per item (if required), `comments` for change log.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/20-data/apex.logic.md (section 9 guardrails)
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/20-data/apex.logic.md (section 9 guardrails)
 - Template directory: `templates/business-logic/computations`
 
 Execution model

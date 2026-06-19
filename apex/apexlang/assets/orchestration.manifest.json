@@ -8,11 +8,11 @@
     },
     {
       "id": "plsql",
-      "workflow": "not-bundled/plsql"
+      "workflow": "external:oracle-db/plsql"
     },
     {
       "id": "schema-modeling",
-      "workflow": "not-bundled/schema-modeling"
+      "workflow": "external:oracle-db/schema-modeling"
     }
   ]
 }

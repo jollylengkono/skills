@@ -10,14 +10,14 @@ Required inputs
 Clarify — progressive prompts
 - Are any report components, buttons, or related items expected to use a server-side condition? (Answer "none" to skip.)
 - If yes, note the component scope (region, button, item, dynamic action, or process) and identifier.
-- Provide the desired condition type or business rule; the canonical list resides in memory-bank/20-data/apex.logic.md.
+- Provide the desired condition type or business rule; the canonical list resides in references/policies/memory-bank/20-data/apex.logic.md.
 - Gather required attributes per type (item, value/list, request value, plsqlExpression, sqlQuery, etc.). Missing answers block the workflow.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/30-pages/apex.interactive-report.md
-- memory-bank/20-data/apex.sql.md
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/30-pages/apex.interactive-report.md
+- references/policies/memory-bank/20-data/apex.sql.md
 - When the Interactive Report includes user-entered text filters, generate `LOWER()`-normalized predicates for `=` / `!=` / `LIKE`.
 
 Options
@@ -30,7 +30,7 @@ Templates
 
 References
 - references/policies/governance/00-governance.md
-- memory-bank/rules-mapping.json
+- assets/rules-mapping.json
 
 Completion
 - After Revision, confirm or prompt for ``db_connection_name`, `app_path`, and `application_id`, run `references/ops/runtime-gates/02-direct-sqlcl-validate-gate.md`, then invoke `references/ops/runtime-gates/01-direct-sqlcl-import.md`.

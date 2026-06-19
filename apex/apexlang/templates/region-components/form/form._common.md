@@ -13,7 +13,7 @@ Standardize the variable contract, guardrails, and template skeleton for form re
 
 # Generation Rules (MANDATORY)
 
-1. Load `memory-bank/30-pages/apex.form.md` and related logic/SQL rules before drafting form regions.
+1. Load `references/policies/memory-bank/30-pages/apex.form.md` and related logic/SQL rules before drafting form regions.
 2. Use the dedicated `region-form` template.
 3. Keep edit operations explicit in the `edit` block.
 4. Map items to table columns or REST attributes consistently; keep form region sources aligned with processes.
@@ -40,10 +40,7 @@ Standardize the variable contract, guardrails, and template skeleton for form re
 | layout.slot | yes | enum | Slot the region occupies (e.g., `BODY`). |
 | appearance.template | yes | string | Region template reference; default to `@/standard`. |
 | appearance.templateOptions | optional | array | Additional modifiers (`#DEFAULT#` default); use the documented accepted values in `form._template_options.md`, keep `#DEFAULT#` standalone, and do not substitute emitted CSS class strings. |
-| edit.enabled | optional | boolean | Enables automatic DML. |
-| edit.add | conditional | boolean | Allow insert/create behavior for the form region. |
-| edit.update | conditional | boolean | Allow update behavior for the form region. |
-| edit.delete | conditional | boolean | Allow delete behavior for the form region. |
+| edit.enabled | optional | boolean | Enables automatic DML for the form region; when emitted, use `true`. |
 | serverSideCondition.* | optional | condition | Visibility gating. |
 | security.authorizationScheme | optional | string | Authorization scheme alias. |
 
@@ -78,9 +75,6 @@ region {{regionStaticId}} (
   }
   edit {
     enabled: {{edit.enabled}}
-    add: {{edit.add}}
-    update: {{edit.update}}
-    delete: {{edit.delete}}
   }
   serverSideCondition {
     type: {{serverSideCondition.type}}
@@ -105,7 +99,7 @@ region {{regionStaticId}} (
 - Pair form regions with `form-initialization` and `form-automatic-row-processing` when using table or REST DML.
 - For item colon-list membership conditions, render `comparisonAttribute` as `list`; keep `value` for other comparison types.
 - Keep dialog buttons outside the form region itself.
-- Use direct `edit.add`, `edit.update`, and `edit.delete` flags; do not emit legacy `edit.allowedOperations`.
+- For form regions, emit only `edit.enabled`; do not emit `edit.add`, `edit.update`, `edit.delete`, or `edit.allowedOperations`.
 
 ---
 
@@ -114,4 +108,5 @@ region {{regionStaticId}} (
 - Keep form region SQL lightweight; prefer views or packaged APIs for complex logic.
 - Validate REST sources support required operations before enabling automatic DML.
 - Ensure session state protection is configured via item templates and processes.
+- Treat `edit.add`, `edit.update`, and `edit.delete` as interactive-grid borrowing errors when the region type is `form`.
 - Metadata export lookup: search for `Form`, `NATIVE_FORM`, and form edit-operation properties.

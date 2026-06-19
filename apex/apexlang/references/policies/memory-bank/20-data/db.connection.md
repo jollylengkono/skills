@@ -12,14 +12,16 @@ Startup and precedence
   - `40-components/`
 
 Connection contract
-- Use `db_connection_name` as the canonical saved SQLcl connection input and the corresponding APEX workspace name as required live APEXLang context.
+- Use `db_connection_name` as the canonical saved SQLcl connection input and the corresponding APEX workspace name as required live APEXlang context.
 - For DB-backed workflows, resolve prerequisite metadata source first:
-  - inspect `references/policies/db/index.json`
+  - inspect `assets/workspace-intelligence.json`
   - auto-select a single eligible schema dictionary
   - prompt the user to choose when multiple eligible schema dictionaries exist
   - scan saved SQLcl connections before any DB-mode prompt
   - use discovered saved connections as candidates, not as automatic approval for live work
+  - use discovered saved connections as candidates, not as automatic approval for live work
   - prompt the user to choose when multiple saved SQLcl connections exist
+  - require the user to specify `db_connection_name` and the corresponding APEX workspace name before live metadata validation, `apex validate`, `apex import`, runtime diagnostics, or new-app materialization
   - require the user to specify `db_connection_name` and the corresponding APEX workspace name before live metadata validation, `apex validate`, `apex import`, runtime diagnostics, or new-app materialization
   - treat `offline` as an explicit override when the user asks for offline-only behavior
 - Record one machine-readable prerequisite state:

@@ -31,7 +31,7 @@ This skill executes the page-patterns playbook defined in this repository. It en
 ### Progressive Prompts (Server-Side Conditions)
 1. “Do any components on this page require a server-side condition? (Reply ‘none’ to skip.)”
 2. If yes, capture `scope` (button, region, item, dynamic action, or process) and `identifier`.
-3. Request the catalog `type` or SSC token from `memory-bank/20-data/apex.logic.md`.
+3. Request the catalog `type` or SSC token from `references/policies/memory-bank/20-data/apex.logic.md`.
 4. Collect required attributes (`item`, `value/list`, `requestValue`, `plsqlExpression`, `sqlQuery`, etc.). Missing answers halt the workflow.
 
 ---
@@ -84,8 +84,9 @@ This skill executes the page-patterns playbook defined in this repository. It en
 - When `add_navigation: true` and the navigation entry emits `isCurrent { type: pages }`, set `pages` to the new entry's own page id only.
 - If a related page also needs navigation, create a separate list entry for that page instead of appending its page id to another entry's `isCurrent.pages` value.
 - When `add_breadcrumb: true`: append breadcrumb entry to `shared-components/breadcrumbs.apx`.
+- When `add_breadcrumb: true`: add a visible page breadcrumb region with `type: breadcrumb` and `source.breadcrumb: @breadcrumb`.
 - When `page_group` provided: set `pageGroup` at the page root (not inside appearance/nav/css/security).
-- Fail if non-modal page lacks required nav or breadcrumb entries when flags are true.
+- Fail if a non-modal user page lacks required nav, a matching breadcrumb entry, or a visible breadcrumb region when flags are true.
 - Fail if a requested server-side condition is missing catalog type or required attributes.
 
 ---
@@ -105,7 +106,7 @@ This skill executes the page-patterns playbook defined in this repository. It en
 2. The internal review loop records PASS/CONFIDENCE in the compact runtime report when the workflow reaches runtime gates.
 3. Final page artifact updates `applications/app_###/pages/` unless the calling master passes a resolved application path.
 4. Execute the import runtime gate for import-ready runs.
-5. Run Import Changes Gate after the live APEXLang check succeeds.
+5. Run Import Changes Gate after the live APEXlang check succeeds.
 
 ---
 

@@ -21,7 +21,7 @@
       "theme": "universal-theme",
       "requestedName": "actions",
       "resolvedName": "actions-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/actions-theme-universal-theme",
+      "sourceDir": "actions-theme-universal-theme",
       "plugin": {
         "identifier": "actions",
         "name": "Actions",
@@ -176,7 +176,7 @@
       "theme": "universal-theme",
       "requestedName": "avatar",
       "resolvedName": "avatar-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/avatar-theme-universal-theme",
+      "sourceDir": "avatar-theme-universal-theme",
       "plugin": {
         "identifier": "avatar",
         "name": "Avatar",
@@ -540,7 +540,7 @@
       "theme": "universal-theme",
       "requestedName": "badge",
       "resolvedName": "badge-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/badge-theme-universal-theme",
+      "sourceDir": "badge-theme-universal-theme",
       "plugin": {
         "identifier": "badge",
         "name": "Badge",
@@ -770,7 +770,7 @@
       "theme": "universal-theme",
       "requestedName": "button",
       "resolvedName": "button-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/button-theme-universal-theme",
+      "sourceDir": "button-theme-universal-theme",
       "plugin": {
         "identifier": "button",
         "name": "Button",
@@ -956,7 +956,7 @@
       "theme": "universal-theme",
       "requestedName": "comments",
       "resolvedName": "comments-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/comments-theme-universal-theme",
+      "sourceDir": "comments-theme-universal-theme",
       "plugin": {
         "identifier": "comments",
         "name": "Comments",
@@ -1406,7 +1406,7 @@
       "theme": "universal-theme",
       "requestedName": "contentRow",
       "resolvedName": "contentRow-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/contentRow-theme-universal-theme",
+      "sourceDir": "contentRow-theme-universal-theme",
       "plugin": {
         "identifier": "contentRow",
         "name": "Content Row",
@@ -2297,7 +2297,7 @@
       "theme": "universal-theme",
       "requestedName": "flexboxContainer",
       "resolvedName": "flexboxContainer-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/flexboxContainer-theme-universal-theme",
+      "sourceDir": "flexboxContainer-theme-universal-theme",
       "plugin": {
         "identifier": "flexboxContainer",
         "name": "Flexbox Container",
@@ -2726,7 +2726,7 @@
       "theme": "universal-theme",
       "requestedName": "mediaList",
       "resolvedName": "mediaList-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/mediaList-theme-universal-theme",
+      "sourceDir": "mediaList-theme-universal-theme",
       "plugin": {
         "identifier": "mediaList",
         "name": "Media List",
@@ -3290,7 +3290,7 @@
       "theme": "universal-theme",
       "requestedName": "metricCard",
       "resolvedName": "metricCard-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/metricCard-theme-universal-theme",
+      "sourceDir": "metricCard-theme-universal-theme",
       "plugin": {
         "identifier": "metricCard",
         "name": "Metric Card",
@@ -4068,7 +4068,7 @@
       "theme": "universal-theme",
       "requestedName": "timeline",
       "resolvedName": "timeline-theme-universal-theme",
-      "sourceDir": "/Users/gjarmiolowski/apex/apex-app-gen/apex-app-gen/references/policies/apexlang/compiler-prop-map/template-components/universal-theme/timeline-theme-universal-theme",
+      "sourceDir": "timeline-theme-universal-theme",
       "plugin": {
         "identifier": "timeline",
         "name": "Timeline",

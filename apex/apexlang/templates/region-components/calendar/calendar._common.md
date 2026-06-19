@@ -3,7 +3,7 @@ templateId: region.calendar.common
 componentType: region
 version: 1.0
 imports:
-  - ../../../../memory-bank/30-pages/apex.calendar.md
+  - references/policies/memory-bank/30-pages/apex.calendar.md
 description: Shared contract and guardrails for calendar regions.
 ---
 
@@ -17,7 +17,7 @@ templates in this folder as the canonical calendar pattern source.
 
 # Generation Rules (MANDATORY)
 
-1. Load `memory-bank/30-pages/apex.calendar.md` and this `_common` file before
+1. Load `references/policies/memory-bank/30-pages/apex.calendar.md` and this `_common` file before
    generating or editing calendar regions.
 2. Mirror attribute names and structure from the calendar template; do not
    invent new settings keys or template options.
@@ -37,7 +37,12 @@ templates in this folder as the canonical calendar pattern source.
    or a new report page, and ask for report type every time a new report page
    is requested. Never infer target page numbers, report types, or target item
    names from existing pages, SQL aliases, or conventions; ask once and stop
-   with `Missing Inputs` if the user has not provided them.
+   with `Missing Inputs` if the user has not provided them. For calendar create
+   flows, `createLink.items` may pass the selected start timestamp with
+   `&APEX$NEW_START_DATE.` when the target form should open prefilled from the
+   selected calendar slot. Keep that create-link mapping distinct from drag/drop
+   persistence, which uses bind variables such as `:APEX$NEW_START_DATE` and
+   `:APEX$NEW_END_DATE` inside `dragAndDropPlsqlCode`.
 8. When enabling drag and drop, supply `pkColumn` and persistence logic that
    always updates the start timestamp using `:APEX$PK_VALUE` and
    `:APEX$NEW_START_DATE`. Update the end timestamp with `:APEX$NEW_END_DATE`
@@ -85,7 +90,7 @@ templates in this folder as the canonical calendar pattern source.
 | settings.pkColumn | yes | column alias | Required for every calendar; map it to the source table primary key column. |
 | settings.timeFormat | optional | enum | `12Hour` or `24Hour`; pair with user toggles. |
 | settings.additionalCalendarViews | optional | array/enum | Values: `list`, `navigation`. Use only for supplemental list/navigation controls (e.g., `[list, navigation]`). |
-| settings.createLink | optional | object | Preferred shape: `{ page: <number>, items?: { <target_item>: <substitution_value> } }`. `page` is required when emitted. Existing-form vs new-form resolution is user intent and must be asked explicitly. |
+| settings.createLink | optional | object | Preferred shape: `{ page: <number>, items?: { <target_item>: <substitution_value> } }`. `page` is required when emitted. Existing-form vs new-form resolution is user intent and must be asked explicitly. Calendar create flows may map the selected start timestamp with `&APEX$NEW_START_DATE.` when the target page needs date/time prefill. Treat that token as a create-link contract value, separate from drag/drop bind variables. |
 | settings.viewEditLink | optional | object | Preferred shape: `{ page: <number>, items?: { <target_item>: <substitution_value> } }`. `page` is required when emitted. Existing-report vs new-report resolution, report type, and PK filter contract are user intent and must be asked explicitly. |
 | settings.maxEventsDay | optional | number | Daily cap; use to keep timelines legible. |
 | settings.cssClass | optional | column alias | Apply UT calendar color classes per event. |
@@ -108,6 +113,10 @@ templates in this folder as the canonical calendar pattern source.
   resolve existing-form vs new-form first. If a new form page is chosen, route
   to the modal form workflow and keep the target on the same base table/view as
   the calendar source.
+- When `createLink.items` needs the selected start timestamp for a create flow,
+  use `&APEX$NEW_START_DATE.`. Keep that substitution separate from drag/drop
+  persistence, which uses `:APEX$NEW_START_DATE` / `:APEX$NEW_END_DATE` bind
+  variables inside `dragAndDropPlsqlCode`.
 - If `viewEditLink` is requested, resolve existing-report vs new-report first.
 - If a new report page is chosen, require an explicit report type and create a
   dedicated PK-holding page item that is used in the report SQL filter.

@@ -13,9 +13,9 @@ Define the shared variable contract, guardrails, and base skeleton used by all b
 
 # Generation Rules (MANDATORY)
 
-1. Load `memory-bank/40-components/apex.buttons.md` before drafting buttons.
+1. Load `references/policies/memory-bank/40-components/apex.buttons.md` before drafting buttons.
 2. Validate action-specific requirements before rendering (`target`, `databaseAction`, `confirmation`, nested structures).
-3. Use only server-side condition types from `memory-bank/20-data/apex.logic.md`.
+3. Use only server-side condition types from `references/policies/memory-bank/20-data/apex.logic.md`.
 4. Resolve button template-option IDs from the inventory in this file whenever `appearance.templateOptions` is present.
 5. Do not invent CSS classes; keep button presentation within documented templates and template options.
 6. Keep `layout.slot` valid for the referenced region template.

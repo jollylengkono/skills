@@ -16,7 +16,7 @@ Standard interactive report with SQL source, link settings, and saved report def
 
 # Generation Rules (MANDATORY)
 
-1. Load `interactive-report._common.md`, `interactive-report._columns._common.md`, and `memory-bank/30-pages/apex.interactive-report.md` before use.
+1. Load `interactive-report._common.md`, `interactive-report._columns._common.md`, and `references/policies/memory-bank/30-pages/apex.interactive-report.md` before use.
 2. Validate SQL against the target schema or mark Validation Pending.
 3. Remove optional blocks that are not required by the page design.
 4. For Interactive Report search or filter binds in `source.sqlQuery`, use case-insensitive `LOWER()` normalization on both sides of `=` / `!=` / `LIKE`.

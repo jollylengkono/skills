@@ -103,7 +103,7 @@ Summary: Permit approval when user owns the order
 
 ## 7. PL/SQL Expression Conditions (section 8 guardrails)
 - **Use when:** Condition type is `plsqlExpression` and boolean logic extends beyond catalog shortcuts.
-- **Mandatory guardrails:** bind syntax, explicit null handling, no DML/dynamic SQL, datatype alignment (see memory-bank/20-data/apex.logic.md §8).
+- **Mandatory guardrails:** bind syntax, explicit null handling, no DML/dynamic SQL, datatype alignment (see references/policies/memory-bank/20-data/apex.logic.md §8).
 - **Prompt scaffold:**
   - “Draft plsqlExpression with one-line intent + expression; enforce section 8 guardrails and block on violations.”
 - **Example draft summary:**
@@ -138,4 +138,4 @@ Summary: Proposed predicate rejected (missing bind and null safety)
 
 **Usage tips**
 - Pair these snippets with the SSC batch workflow to capture intent, condition, and notes in run summaries before applying direct app-file changes.
-- Reference memory-bank/20-data/apex.logic.md §8 for enforcement details and reviewer checklist.
+- Reference references/policies/memory-bank/20-data/apex.logic.md §8 for enforcement details and reviewer checklist.

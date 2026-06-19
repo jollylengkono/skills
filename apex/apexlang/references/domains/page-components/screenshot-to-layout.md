@@ -41,7 +41,7 @@ This package converts a screenshot-driven page concept into one APEXlang page dr
 - Keep region topology, order, nesting, and width/span intent intact while mapping regions to native APEX primitive regions.
 - Primitive-first mapping is mandatory: try cards, reports, charts, lists, form regions, page items, buttons, and other native APEX primitives before considering `staticContent`.
 - If a region does not map confidently to a primitive region, preserve it as a `staticContent` region with brief placeholder text describing the expected content or behavior.
-- Do not perform the live APEXLang check, SQLcl roundtrip, or import by default.
+- Do not perform the live APEXlang check, SQLcl roundtrip, or import by default.
 - Do not generate non-page artifacts from this package.
 
 ## Authoritative Reuse
@@ -100,7 +100,8 @@ This package converts a screenshot-driven page concept into one APEXlang page dr
 - Do not let component substitution collapse, merge, reorder, resize, or omit screenshot regions once the layout tree is established.
 - Treat component mapping as a second-phase decision that chooses a region type only after the layout is fixed.
 - Treat component mapping as a primitive-first decision: use native APEX primitive regions only to represent screenshot regions whenever a safe match exists.
-- When several nearby metrics or cards clearly belong to one visual strip or one grouped block, treat that strip as one preserved region and map it to a single `cards` region backed by one SQL query before considering any one-region-per-metric fallback.
+- When several nearby aggregate metrics clearly belong to one visual KPI strip, treat that strip as one preserved region and map it to a single `themeTemplateComponent/metricCard` region backed by one normalized SQL query unless the user explicitly specifies native Cards.
+- When several nearby entity, media, or navigation cards clearly belong to one grouped block, treat that block as one preserved region and map it to a single native `cards` region backed by one SQL query before considering any one-region-per-card fallback.
 - Do not emit one region per metric for KPI strips unless the screenshot clearly shows separate region containers with meaningful spacing, framing, or headings between metrics.
 - When a utility panel is primarily a vertical set of navigational or task links labeled with headings such as `Actions`, `Links`, `Resources`, or `Quick Links`, first map it to a shared list plus a `list` region rather than a `staticContent` region.
 - When a screenshot is primarily a search or filter form, prefer real page items and real buttons over `staticContent` placeholders for the visible controls and actions.
@@ -122,8 +123,8 @@ This package converts a screenshot-driven page concept into one APEXlang page dr
 - Do not use `staticContent` to visually recreate cards, reports, charts, forms, timelines, or composite widgets; use native APEX primitive regions for those whenever a safe mapping exists.
 - Prefer under-specifying behavior over inventing SQL, LOVs, validations, processes, unsupported controls, or fake interactivity.
 - Never drop a visible screenshot region because it lacks a confident APEX component mapping.
-- Do not over-fragment nearby metrics into multiple cards regions or multiple static regions when the screenshot shows them as one grouped cards strip.
-- For KPI strips, grouped `cards` is the default mapping, not an optional enhancement.
+- Do not over-fragment nearby metrics into multiple regions or multiple static regions when the screenshot shows them as one grouped KPI strip.
+- For KPI strips, a grouped Metric Card region is the default mapping, not an optional enhancement. Use native Cards only when the user explicitly asks for Cards/native cards or when the visible content is an entity/media/navigation card grid.
 - Do not leave obvious navigational link panels as raw static text when a native shared list plus list region is a plausible mapping.
 - Do not invent synthetic parent regions for whole page sections unless the screenshot clearly shows a framed parent container around those child regions.
 - Do not solve an anchored side rail as `main region + sidebar wrapper with nested children` when the screenshot shows individually framed right-rail cards.
@@ -159,15 +160,16 @@ This package converts a screenshot-driven page concept into one APEXlang page dr
    - when a parent lane contains recurring inner columns, use nested structural placeholder regions for those child lanes
    - keep lower summary rows separate from the main workspace row when the screenshot does
 6. Map each preserved visible region to the closest native APEX primitive region using `references/domains/page-components/screenshot-to-layout/component-mapping.md`.
-7. When a preserved region contains several nearby cards or metrics that read as one grouped strip, emit one `cards` region with one SQL query returning multiple rows as the default outcome.
-8. Only split that grouped strip into multiple peer regions when the screenshot clearly indicates each metric is its own region through separate framing, spacing, or headings.
-9. When a preserved region is clearly a task or navigation link panel, create a shared list with the visible entries and map the region to a native `list` region before considering `staticContent`.
-10. When a preserved region is clearly a search or filter form, emit real page items for the visible controls and real buttons for the visible actions before considering `staticContent`.
-11. If no native APEX primitive region maps confidently, keep the region in the same place and emit it as `staticContent` with brief placeholder text such as "Placeholder for shipment status timeline."
-12. Do not use HTML, custom markup, or styled static content to mimic the original screenshot region when falling back to `staticContent`.
-13. Generate visible labels and buttons only after the structural scaffold and visible region placement are settled.
-14. Inspect the target app's shared breadcrumb and navigation menu definitions and add one entry for the new page by reusing the existing shared-component containers and concrete target format already present in that app.
-15. Do not invent SQL, item validations, process logic, dynamic actions, or shared-component dependencies unless the user supplied them in notes, except for the shared navigation and breadcrumb entries required to integrate the new page into an app that already uses them.
+7. When a preserved region contains several nearby aggregate metrics that read as one grouped KPI strip, emit one `themeTemplateComponent/metricCard` region with one normalized SQL query returning multiple rows as the default outcome.
+8. When a preserved region contains several nearby entity, media, or navigation cards, emit one native `cards` region with one SQL query returning multiple rows as the default outcome.
+9. Only split a grouped KPI strip or card block into multiple peer regions when the screenshot clearly indicates each metric or card is its own region through separate framing, spacing, or headings.
+10. When a preserved region is clearly a task or navigation link panel, create a shared list with the visible entries and map the region to a native `list` region before considering `staticContent`.
+11. When a preserved region is clearly a search or filter form, emit real page items for the visible controls and real buttons for the visible actions before considering `staticContent`.
+12. If no native APEX primitive region maps confidently, keep the region in the same place and emit it as `staticContent` with brief placeholder text such as "Placeholder for shipment status timeline."
+13. Do not use HTML, custom markup, or styled static content to mimic the original screenshot region when falling back to `staticContent`.
+14. Generate visible labels and buttons only after the structural scaffold and visible region placement are settled.
+15. Inspect the target app's shared breadcrumb and navigation menu definitions and add one entry for the new page by reusing the existing shared-component containers and concrete target format already present in that app.
+16. Do not invent SQL, item validations, process logic, dynamic actions, or shared-component dependencies unless the user supplied them in notes, except for the shared navigation and breadcrumb entries required to integrate the new page into an app that already uses them.
 
 ## Acceptance Checklist
 - Exactly one page draft path is resolved.
@@ -183,8 +185,8 @@ This package converts a screenshot-driven page concept into one APEXlang page dr
 - Nested child lane regions use the same structural-placeholder contract when a parent lane contains recurring inner columns.
 - The pattern supports more than just `LEFT` and `RIGHT`; use as many structural placeholder regions as the screenshot layout needs.
 - Stable outer columns and stable inner child columns are preserved with shared structural parents rather than recomputed row by row.
-- Nearby metrics that visually belong together are emitted as one cards region with one SQL source unless the screenshot clearly separates them into distinct regions.
-- A screenshot metric strip must not degrade into one staticContent region per metric when a grouped `cards` region is a plausible native APEX mapping.
+- Nearby aggregate metrics that visually belong together are emitted as one Metric Card region with one normalized SQL source unless the screenshot clearly separates them into distinct regions.
+- A screenshot metric strip must not degrade into one staticContent region per metric when a grouped Metric Card region is a plausible native APEX mapping.
 - Visible utility panels made of actionable or navigational links prefer shared lists plus `list` regions over `staticContent`.
 - Screenshot-derived search or filter pages use real page items and real buttons for obvious controls and actions.
 - Centered hero + feature strip + form + action row compositions preserve that row order explicitly.

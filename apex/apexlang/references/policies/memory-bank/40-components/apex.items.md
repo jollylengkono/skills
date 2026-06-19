@@ -3,7 +3,7 @@
 ## Purpose
 - Define deterministic, template-driven guidance for adding items to pages while honoring governance:
 - When generating items, load the matching template under `templates/items/` or `template-components/` first.
-  - Follow memory-bank/00-guard/ai.guard.md and 10-global/apex.global.md.
+  - Follow references/policies/memory-bank/00-guard/ai.guard.md and 10-global/apex.global.md.
   - Never invent attributes or UT classes; use only what exists in templates/items/*.
   - Prefer declarative behavior; push heavy logic to DB packages/views; guard DML by button/process.
   - SQL must be in triple backticks.
@@ -12,7 +12,7 @@
 - Item categories:
   - Form items: placed on data-entry/detail regions (e.g., page/form). Participate in DML guarded by button/process.
   - Filter items: placed on list/report regions (e.g., interactive report) to filter/query; do not perform DML.
-- Router/NLU uses assets/apex-generation/components.registry.json and memory-bank/rules-mapping.json item keywords to select these rules.
+- Router/NLU uses assets/apex-generation/components.registry.json and assets/rules-mapping.json item keywords to select these rules.
 
 ## Templates Index (authoritative)
 - Use only existing templates from templates/items/:
@@ -50,7 +50,7 @@
 ## General Rules (non-negotiable)
 - Always start from the template file under templates/items/* and adapt only allowed properties present in that template.
 - Also validate against `assets/component-attributes.json` when a schema entry exists for the item type. Schema is authoritative over template prose/examples.
-- Builder visibility is not a complete validity test. Some item properties may be hidden in specific Builder states yet still remain compiler-valid DSL properties; prefer compiler-backed metadata and `component-attributes.json` over Builder UI visibility when those disagree.
+- Builder visibility is not a complete validity test. Some item properties may be hidden in specific Builder states yet still remain compiler-valid DSL properties; prefer compiler-backed metadata and `assets/component-attributes.json` over Builder UI visibility when those disagree.
 - Do not introduce properties or attributes that do not exist in the chosen template.
 - Visible item-template defaults, label treatment defaults, and other template-driven presentation choices are composition policy. Resolve those defaults from `references/policies/memory-bank/40-components/apex.templates.md` before applying item-family specifics here.
 - Do not invent CSS classes. Resolve visible template, label, spacing, and framing choices through `references/policies/memory-bank/40-components/apex.templates.md`.
@@ -149,5 +149,5 @@ order by dname
 ## Artifacts and Orchestration
 - Draft → Critique → Revision pipeline:
   - Agent 2 validates that selected item templates exist and flags any missing inputs (e.g., LOV mapping) and emits PASS/CONFIDENCE headers.
-  - Agent 3 applies only accepted notes and writes finals to references/policies/apexlang/pages/ (or app_###/pages/ for whole app runs).
+  - Agent 3 applies only accepted notes and writes finals to generated application pages/ (or app_###/pages/ for whole app runs).
 - Critical pages and shared components are enforced by the master workflow; items must not bypass those gates.

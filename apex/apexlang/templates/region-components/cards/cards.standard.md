@@ -118,7 +118,7 @@ media {
 
 ## Non-Default Media Presentation
 
-Default media presentation is represented by omission: do not emit any APEXLang-side `position`, `appearance`, or `sizing` property for default Cards media. Emit these properties only when the user or spec explicitly asks for a non-default media presentation. Never emit `position: first`, `appearance: square`, or `sizing: cover` just to mirror APEX defaults.
+Default media presentation is represented by omission: do not emit any APEXlang-side `position`, `appearance`, or `sizing` property for default Cards media. Emit these properties only when the user or spec explicitly asks for a non-default media presentation. Never emit `position: first`, `appearance: square`, or `sizing: cover` just to mirror APEX defaults.
 
 When a non-default presentation is required, add only the needed supported properties inside the same `media` block:
 
@@ -145,7 +145,7 @@ sizing: cover
 - If the Cards region displays images from a URL column, project that URL alias in SQL and emit `media { source: urlColumn urlColumn: <URL_COLUMN_ALIAS> }`.
 - If the Cards region displays a static image URL or column substitution URL, emit `media { source: imageUrl url: <STATIC_IMAGE_URL_OR_COLUMN_SUBSTITUTION> }`; substitution values use APEX syntax such as `&IMAGE_URL_COLUMN.`.
 - In any Cards `media` block, emit at most one source-specific value property: `blobColumn` with `source: blobColumn`, `urlColumn` with `source: urlColumn`, or `url` with `source: imageUrl`.
-- Default media presentation emits no APEXLang-side `position`, `appearance`, or `sizing` property.
+- Default media presentation emits no APEXlang-side `position`, `appearance`, or `sizing` property.
 - Emit `position`, `appearance`, and `sizing` only for explicit non-default media presentation requirements. Accepted values are `position: first | background`, `appearance: square | widescreen`, and `sizing: cover`.
 - Never emit `position: first`, `appearance: square`, or `sizing: cover` just to mirror APEX defaults.
 - Do not emit additional `media` or `blobAttributes` properties unless compiler-backed truth proves them.

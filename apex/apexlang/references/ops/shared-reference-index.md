@@ -7,7 +7,7 @@
 
 ## Operational References
 - `references/ops/one-message-router-contract.md`
-- `references/ops/reusable-prompts/prompt-normalization.md`
+- `references/policies/governance/prompt-normalization.md`
 - `references/workflows/apexlang/apexlang-execution-model.md`
 - `references/ops/reusable-prompts/orchestration-master-generic.md`
 - `references/ops/reusable-prompts/server-side-conditions.md`

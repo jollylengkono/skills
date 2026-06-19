@@ -17,5 +17,5 @@ Core defaults
 
 See domain masters for runtime contracts:
 - `SKILL.md`
-- `not-bundled/plsql`
-- `not-bundled/schema-modeling`
+- `external:oracle-db/plsql`
+- `external:oracle-db/schema-modeling`

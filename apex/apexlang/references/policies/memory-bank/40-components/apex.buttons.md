@@ -11,8 +11,8 @@
   - `templates/buttons/buttons._index.md`
   - Action-specific templates: `templates/buttons/buttons.*.md`
 - Canonical behavior compatibility contract: assets/component-policies.json
-- Guard and Global rules: memory-bank/00-guard/ai.guard.md, memory-bank/10-global/apex.global.md
-- Template positions: memory-bank/40-components/apex.templates.md
+- Guard and Global rules: references/policies/memory-bank/00-guard/ai.guard.md, references/policies/memory-bank/10-global/apex.global.md
+- Template positions: references/policies/memory-bank/40-components/apex.templates.md
 - Do not invent attributes or values; follow template examples and referenced Memory Bank rules.
 
 ## General Structure
@@ -69,7 +69,7 @@ button STATIC_ID_OR_NAME (
 - slot: required. Must use a valid Button Position for the chosen region template.
   - For Standard region template, allowed examples include: EDIT, COPY, PREVIOUS, NEXT, SORT_ORDER, REGION_BODY, CLOSE, HELP, DELETE, CHANGE, CREATE, RIGHT_OF_IR_SEARCH_BAR
   - For Interactive Report template, allowed examples include: PREVIOUS, NEXT, SORT_ORDER, REGION_BODY, RIGHT_OF_IR_SEARCH_BAR
-  - See memory-bank/40-components/apex.templates.md for authoritative positions per template. Do not invent new slot names.
+  - See references/policies/memory-bank/40-components/apex.templates.md for authoritative positions per template. Do not invent new slot names.
 - Do NOT use REGION_POSITION_01 directly for buttons; it is reserved for placing regions (for example, the Hero/Breadcrumb container). When a prompt says “breadcrumb” or “title bar”, resolve it to the actual region static ID occupying REGION_POSITION_01 (commonly the hero/breadcrumb region created by page templates, e.g., `@test-application`). Point layout.region to that component and keep slot: NEXT (or the documented title-bar slot).
 - Buttons use a local 12-column grid inside their parent region and slot, grouped by `layout.region + layout.slot`.
 - The total explicit `columnSpan` of sibling buttons in one row must not exceed 12 within that button scope.
@@ -99,7 +99,7 @@ button STATIC_ID_OR_NAME (
 - databaseAction: optional; typically used with submitPage. Allowed values: insert, update, delete. Omit or set null when not applicable.
 - requiresConfirmation: required. Boolean. Defaults to false in examples. If true, a confirmation block must be present.
 - warnOnUnsavedChanges: allowed values: doNotCheck, false
-- warnOnUnsavedChanges is action-conditional: allowed only for redirect actions and prohibited for `definedByDynamicAction` (see BTN_RULE_001 in component-policies.json).
+- warnOnUnsavedChanges is action-conditional: allowed only for redirect actions and prohibited for `definedByDynamicAction` (see BTN_RULE_001 in assets/component-policies.json).
 
 5) confirmation block
 - Only include when behavior.requiresConfirmation is true.
@@ -107,12 +107,12 @@ button STATIC_ID_OR_NAME (
 - style: required. Allowed values: danger, info, success, warning
 
 6) serverSideCondition block (optional, situational)
-- type: required when block present. Use only the values listed in memory-bank/20-data/apex.logic.md (e.g., `itemIsNotNull`, `rowsReturned`, `request=Value`, `never`).
+- type: required when block present. Use only the values listed in references/policies/memory-bank/20-data/apex.logic.md (e.g., `itemIsNotNull`, `rowsReturned`, `request=Value`, `never`).
 - Attribute requirements by type:
   - `item`: required for all `item*` predicates and `textIsContainedInItem`.
   - `value`: required for equality/containment predicates (e.g., `item=value`, `request=Value`, `text=value`).
   - `plsqlExpression`, `plsqlFunctionBody`, `sqlQuery`: required for `expression`, `functionBody`, `rowsReturned`/`noRowsReturned` respectively. Wrap the body in the correct fenced code block (` ```plsql ```, ` ```sql ```).
-- Do not invent attributes; consult the syntax examples in memory-bank/20-data/apex.logic.md when uncertain.
+- Do not invent attributes; consult the syntax examples in references/policies/memory-bank/20-data/apex.logic.md when uncertain.
 
 7) security block (optional)
 - authorizationScheme: required when block present. Must be one of the authorization schemes defined in the application shared components. Do not invent scheme names.
@@ -135,9 +135,10 @@ button STATIC_ID_OR_NAME (
 ### Icon usage
 - If buttonTemplate ∈ {@/text-with-icon, @/icon} then icon may be set.
 - If buttonTemplate = @/text then icon must be omitted.
+- Button icons must be Font APEX `fa-*` classes only; do not use Material, JET, image, custom CSS, or alias icon values.
 
 ### Server-side condition
-- Validate against the canonical catalog (memory-bank/20-data/apex.logic.md).
+- Validate against the canonical catalog (references/policies/memory-bank/20-data/apex.logic.md).
 - Ensure required attributes for the chosen type are present; omit attributes that are not supported.
 
 ### Template Options
@@ -302,7 +303,7 @@ button CANCEL_MODAL (
 
 ## Breadcrumb/Title Bar Co-location Constraint
 - When a page contains a breadcrumb region (type: breadcrumb), do not generate a standalone Buttons container region (e.g., a staticContent region using @/buttons-container) in the breadcrumb/title bar area or immediately after the breadcrumb in the same slot/area.
-- Preferred pattern: Add page-level action button(s) associated to the breadcrumb/title bar by referencing the breadcrumb region in layout.region (e.g., layout.region: @breadcrumb) and using a title-bar slot defined by the template positions (e.g., slot: NEXT). See memory-bank/40-components/apex.templates.md for valid positions.
+- Preferred pattern: Add page-level action button(s) associated to the breadcrumb/title bar by referencing the breadcrumb region in layout.region (e.g., layout.region: @breadcrumb) and using a title-bar slot defined by the template positions (e.g., slot: NEXT). See references/policies/memory-bank/40-components/apex.templates.md for valid positions.
 - Rationale: Keep the title/breadcrumb bar uncluttered, avoid redundant containers; single primary actions belong next to the title.
 - Scope: Always apply. This constraint is strict for the PL/SQL Maintenance and Support workflow; other flows should follow the same guidance unless a template explicitly requires a separate container.
 

@@ -13,20 +13,22 @@ Document the native metric-card region emitted as `themeTemplateComponent/metric
 
 1. Use the dedicated `region-metric-card` template.
 2. Always emit a region `appearance {}` block for Metric Card.
-3. Use a valid region template such as `@/standard` or `@/blank-with-attributes`.
-4. Prefer `appearance.template: @/blank-with-attributes` only when the requested scenario specifically needs extra region wrapper attributes or a deliberately chosen region container shell.
-5. Emit `advanced { htmlDomId: ... }` only when external client code, dynamic actions, or other page logic must target a known region DOM id.
-6. Keep `display: report` in `componentAppearance`.
-7. Use `column-metric-card` for source-column mappings.
-8. Keep plugin attribute names and enumerated values aligned with `metric-card._template_options.md`, `../avatar._template_options.md`, and `../badge._template_options.md`.
-9. In report mode, treat child `column (...)` metadata as part of the emitted Metric Card source contract, not as an optional compiler appeasement detail.
-10. Emit explicit child `column (...)` metadata for every delivered source projection before finals. Do not satisfy the compiler by adding only one placeholder column when the source projects multiple columns.
-11. A single Metric Card region can render multiple cards. When the prompt asks for several independent metrics in one region, prefer a multi-row SQL source that normalizes the projections for each card, commonly by `UNION ALL`-ing one row per metric into a shared column shape.
-12. Metric Card `settings`, `plugin-avatar`, `plugin-badge`, and `rowSelection` expose more value hooks than just `title` and `metric`. Use the accepted property surface from `metric-card._template_options.md`, `../avatar._template_options.md`, and `../badge._template_options.md` when those behaviors are needed.
-13. Do not require settings property names to match child-column names one-for-one. Those properties may bind to literals, `&COLUMN_NAME.` substitutions, or other accepted placeholders; the child `column (...)` blocks still describe the delivered source projection.
-14. Metric Card avatar support is export-backed in this runtime through `plugin-avatar {}`. Use `plugin-avatar.displayAvatar` for visibility and keep avatar configuration in that block.
-15. Metric Card badge support is export-backed in this runtime through `plugin-badge {}`. Use `plugin-badge.displayBadge` for visibility and keep badge configuration in that block.
-16. When `rowSelection` is emitted with any non-null mode, at least one child `column (...)` must mark the row identity with `source.primaryKey: true`.
+3. Use a valid region template such as `@/blank-with-attributes` or `@/standard`.
+4. For dashboard KPI strips, default `appearance.template` to `@/blank-with-attributes` so the Metric Card renders without visible standard region chrome.
+5. Use `@/standard` for Metric Card only when the requested design explicitly needs a titled or landmarked visible region wrapper.
+6. Emit `advanced { htmlDomId: ... }` only when external client code, dynamic actions, or other page logic must target a known region DOM id.
+7. Keep `display: report` in `componentAppearance`.
+8. Use `column-metric-card` for source-column mappings.
+9. Keep plugin attribute names and enumerated values aligned with `metric-card._template_options.md`, `../avatar._template_options.md`, and `../badge._template_options.md`.
+10. In report mode, treat child `column (...)` metadata as part of the emitted Metric Card source contract, not as an optional compiler appeasement detail.
+11. Emit explicit child `column (...)` metadata for every delivered source projection before finals. Do not satisfy the compiler by adding only one placeholder column when the source projects multiple columns.
+12. A single Metric Card region can render multiple cards. When the prompt asks for several independent metrics in one region, prefer a multi-row SQL source that normalizes the projections for each card, commonly by `UNION ALL`-ing one row per metric into a shared column shape.
+13. Metric Card `settings`, `plugin-avatar`, `plugin-badge`, and `rowSelection` expose more value hooks than just `title` and `metric`. Use the accepted property surface from `metric-card._template_options.md`, `../avatar._template_options.md`, and `../badge._template_options.md` when those behaviors are needed.
+14. Do not require settings property names to match child-column names one-for-one. Those properties may bind to literals, `&COLUMN_NAME.` substitutions, or other accepted placeholders; the child `column (...)` blocks still describe the delivered source projection.
+15. Metric Card avatar support is export-backed in this runtime through `plugin-avatar {}`. Use `plugin-avatar.displayAvatar` for visibility and keep avatar configuration in that block.
+16. Metric Card badge support is export-backed in this runtime through `plugin-badge {}`. Use `plugin-badge.displayBadge` for visibility and keep badge configuration in that block.
+17. When `rowSelection` is emitted with any non-null mode, at least one child `column (...)` must mark the row identity with `source.primaryKey: true`.
+18. For every emitted child column, set `source.dataType` to one exact token from the Metric Card Column Data Types inventory below.
 
 # Variable Contract
 
@@ -71,9 +73,28 @@ Document the native metric-card region emitted as `themeTemplateComponent/metric
 | column.name | conditional | string | Required for each explicit child column emitted in report mode. |
 | column.layout.sequence | conditional | number | Required for each emitted child column. |
 | column.source.databaseColumn | conditional | string | Required for each emitted child column. |
-| column.source.dataType | conditional | string | Required for each emitted child column. |
+| column.source.dataType | conditional | enum | Required for each emitted child column. Use one exact value from Metric Card Column Data Types. |
 | column.source.primaryKey | optional | boolean | Emit `true` only on the identity column when row identity matters. |
 | columns | conditional | list | Required in report mode. Generate one explicit child `column (...)` block for every delivered source projection. |
+
+# Metric Card Column Data Types
+
+Supported `column.source.dataType` values for Metric Card child columns:
+
+- `bfile`
+- `blob`
+- `boolean`
+- `clob`
+- `date`
+- `intervalDayToSecond`
+- `intervalYearToMonth`
+- `number`
+- `rowid`
+- `sdoGeometry`
+- `timestamp`
+- `timestampWithLocalTimeZone`
+- `timestampWithTimeZone`
+- `varchar2`
 
 # Output Template – Full
 
@@ -141,8 +162,8 @@ region {{regionStaticId}} (
 # Conditional Rendering Rules
 
 - Do not omit the region `appearance {}` block.
-- `@/standard` is a valid default template for Metric Card regions.
-- Prefer `appearance.template: @/blank-with-attributes` only when the page explicitly needs the blank-with-attributes container behavior.
+- For dashboard KPI strips, default to `appearance.template: @/blank-with-attributes` to avoid visible standard region chrome.
+- Use `appearance.template: @/standard` only when the design explicitly needs a titled or landmarked visible region wrapper.
 - Keep avatar or meta blocks only when the owning design requires them.
 - Keep metric-card-specific layout settings in the `settings` block.
 - Metric Card `settings` may include title/metric/meta bindings plus their CSS-class companions, layout tokens, and item-level CSS classes from `metric-card._template_options.md`.
@@ -163,6 +184,7 @@ region {{regionStaticId}} (
 - When any `rowSelection` mode is used, keep one child column marked with `source.primaryKey: true`.
 - In report mode, emit explicit child `column (...)` metadata for every delivered source projection before finals.
 - Do not stop after the first compiler-satisfying child column when the source projects multiple fields.
+- For child column `source.dataType`, emit only exact values from the Metric Card Column Data Types inventory; do not normalize them to uppercase SQL names or Interactive Report `STRING`/`NUMBER`/`DATE` tokens.
 - When the agent cannot rely on `column-metric-card` helper coverage, fall back to the explicit multiline child-column skeleton shown in this file.
 
 # Guardrails

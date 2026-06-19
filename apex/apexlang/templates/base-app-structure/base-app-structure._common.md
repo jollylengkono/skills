@@ -3,7 +3,7 @@ templateId: base-app-structure.common
 componentType: template
 version: 1.0
 imports:
-  - ../../../../memory-bank/10-global/apex.global.md
+  - references/policies/memory-bank/10-global/apex.global.md
 description: Canonical contract for whole-application base app structure runtime-artifact seeding.
 ---
 
@@ -20,7 +20,7 @@ shared-component customization begins. This family is the canonical
 
 # Generation Rules (MANDATORY)
 
-1. Load `memory-bank/10-global/apex.global.md` and this `_common` file before
+1. Load `references/policies/memory-bank/10-global/apex.global.md` and this `_common` file before
    materializing or validating whole-application output.
 2. Materialize only the named runtime artifacts from
    `templates/base-app-structure/scaffold-example/` into
@@ -179,6 +179,9 @@ shared-component customization begins. This family is the canonical
 
 ### Authentication boundary
 - The application root chooses the current authentication scheme.
+- Use `authentication.scheme` for the app-root scheme selection. SQLcl 26.1
+  accepts this live-compatible spelling even though the bundled compiler
+  metadata still reports the legacy `authenticationScheme` property name.
 - The shared `AUTHENTICATION` component definition owns plugin type,
   plugin attributes, remote-server settings, and scheme-specific processing.
 - App-level defaults such as deep linking, rejoin sessions, authorization

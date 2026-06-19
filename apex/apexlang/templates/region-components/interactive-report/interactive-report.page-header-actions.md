@@ -15,7 +15,7 @@ Optional page header, breadcrumb, and IR action button patterns used with intera
 
 # Generation Rules (MANDATORY)
 
-1. Load `interactive-report._common.md` and `memory-bank/30-pages/apex.page.md` before use.
+1. Load `interactive-report._common.md` and `references/policies/memory-bank/30-pages/apex.page.md` before use.
 2. Use only existing theme templates and breadcrumb aliases.
 3. Use action buttons with `slot: RIGHT_OF_IR_SEARCH_BAR` only when bound to a specific IR region.
 

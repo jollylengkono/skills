@@ -1,6 +1,6 @@
-# APEXLang Domain References
+# APEXlang Domain References
 
-Canonical packaged entrypoint for APEXLang domain guidance.
+Canonical packaged entrypoint for APEXlang domain guidance.
 
 ## Domain Index
 
@@ -49,7 +49,7 @@ Canonical packaged entrypoint for APEXLang domain guidance.
 - Single-domain request: load the matching nested reference package directly from the root APEXlang router.
 - Screenshot-driven page drafting: load `references/domains/page-components/screenshot-to-layout.md` before broader page-pattern or region packages.
 - Multi-domain page request: start here, split scope by component area, and load each slice from the correct nested reference package.
-- If policy prose and workflow prose conflict, policy files in memory-bank/governance win.
+- If policy prose and workflow prose conflict, policy files in references/policies/memory-bank/governance win.
 
 ## Business Logic
 
@@ -65,7 +65,7 @@ Canonical packaged entrypoint for APEXLang domain guidance.
 - `references/domains/business-logic/dynamic-actions/workflow-dynamic-actions-batch.md`
 - `references/domains/business-logic/dynamic-actions/workflow-dynamic-actions-plsql-batch.md`
 - `references/domains/business-logic/processes/workflow-page-processes-batch.md`
-- `references/validations/` (reserved for future validation workflow partitions)
+- `references/domains/business-logic/validations/` (reserved for future validation workflow partitions)
 
 ### When to Trigger
 - The user requests validation rules, computation setup, or complex dynamic actions that coordinate with page items and regions.
@@ -125,7 +125,7 @@ Use this package as the hub for business-rule configuration within APEX pages.
 - `references/domains/shared-components/workflow-translations.md`
 - `references/domains/shared-components/workflow-translations-batch.md`
 - `references/domains/shared-components/reusable-prompts/translations.md`
-- `references/ops/reusable-prompts/prompt-normalization.md`
+- `references/policies/governance/prompt-normalization.md`
 - `references/domains/universal-attr-config/workflow-page-sequencing.md`
 - `references/domains/universal-attr-config/workflow-server-side-conditions-batch.md`
 
@@ -184,7 +184,7 @@ Use this package as the hub for business-rule configuration within APEX pages.
 - If the prompt explicitly asks for a page control such as a `button`, `menu`, or `selector` together with translation/language wording, do not treat it as a pure translation request. Clarify runtime language switching versus localization first.
 - If the target language is missing, halt with Missing Inputs.
 - If scope is unclear, ask the configured simple-English follow-up instead of inventing scope.
-- Accept free-form prompts by default and normalize them with `references/ops/reusable-prompts/prompt-normalization.md` before shared-component workflow selection.
+- Accept free-form prompts by default and normalize intent directly according to `references/policies/governance/prompt-normalization.md` before shared-component workflow selection.
 - Allow only one clarification round for unresolved critical blockers; then stop with `Missing Inputs`.
 - Restrict changes to the shared-component scope explicitly requested by the user.
 
@@ -258,7 +258,7 @@ Use this package as the hub for business-rule configuration within APEX pages.
   - internal review checks PASS/CONFIDENCE and navigation/translation guardrails
   - publish happens only after the run clears required gates
 - For import-ready runs, execute `references/ops/runtime-gates/02-direct-sqlcl-validate-gate.md`.
-- After the live APEXLang check passes, offer the canonical GUI/clickable choice: keep check-only or import next.
+- After the live APEXlang check passes, offer the canonical GUI/clickable choice: keep check-only or import next.
 - Call `references/ops/runtime-gates/01-direct-sqlcl-import.md` only when the post-check import choice is explicit.
 
 ### Outputs & Acceptance
@@ -273,7 +273,7 @@ Use this package as the hub for business-rule configuration within APEX pages.
 2. Internal review records PASS/CONFIDENCE and guardrail results.
 3. Final shared components publish only after required gates pass.
 4. Runtime gate executes for import-ready runs.
-5. The import gate executes only when the explicit post-check choice is `Check and import APEXLang code`.
+5. The import gate executes only when the explicit post-check choice is `Check and import APEXlang code`.
 
 ### Examples
 - “Add new Administration category in Navigation Menu and breadcrumb for Page 30.”
@@ -447,7 +447,7 @@ Use this package alongside page-patterns, page-items, buttons, and business-logi
 
 ### Use When
 - A concrete failure or drift symptom has already been observed from local validators, `apex validate -input`, `apex import -input`, round-trip comparison, or Builder import UI that is surfacing an import-related failure.
-- A direct SQLcl fallback command returns APEXLang compiler errors such as `INVALID_PROPERTY`, `MINIMUM_COMPONENTS_ERROR`, or `MISSING_REQUIRED_PROPERTY`.
+- A direct SQLcl fallback command returns APEXlang compiler errors such as `INVALID_PROPERTY`, `MINIMUM_COMPONENTS_ERROR`, or `MISSING_REQUIRED_PROPERTY`.
 - A concrete runtime UI/UX symptom remains in the running app after validate/import succeeded, such as broken navigation expansion, missing current-state highlighting, incorrect focus behavior, or visible page composition drift.
 - The user provides an APEX/ORA runtime error message and a live DB connection is available, so the error can be correlated through `APEX_DEBUG_MESSAGES` to a `PAGE_VIEW_ID` execution log.
 - The user needs diagnosis plus fix-pattern guidance, not broad repo exploration.

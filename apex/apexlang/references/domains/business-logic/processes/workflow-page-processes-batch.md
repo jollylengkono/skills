@@ -16,9 +16,9 @@ Required inputs
 - Optional: success message, server-side condition, execution sequence overrides.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/20-data/apex.logic.md
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/20-data/apex.logic.md
 - Template: `templates/business-logic/processes/processes.invoke-api.md`
 
 Execution model

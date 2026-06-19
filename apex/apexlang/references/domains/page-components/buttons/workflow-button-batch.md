@@ -15,9 +15,9 @@ Required inputs
 - Optional: nested menu entries or triggerAction payloads (SQL/PLSQL bodies, itemsToSubmit/Return).
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/40-components/apex.buttons.md
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/40-components/apex.buttons.md
 - Templates:
   - `templates/buttons/buttons._common.md`
   - `templates/buttons/buttons._index.md`

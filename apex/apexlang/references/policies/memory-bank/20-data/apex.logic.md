@@ -356,13 +356,13 @@ best_practices:
 
 ### Pattern Matching
 - **Rule_001**: `settings { type: static }` must contain `value:` not `staticValue:`
-- **Rule_002**: `behavior { action: definedByDynamicAction }` must not contain `warnOnUnsavedChanges` (mirrors BTN_RULE_001 in `component-policies.json`)
+- **Rule_002**: `behavior { action: definedByDynamicAction }` must not contain `warnOnUnsavedChanges` (mirrors BTN_RULE_001 in `assets/component-policies.json`)
 - **Rule_003**: `apex.message.showPageSuccess` usage triggers correction to `showSuccessMessage`
 - **Rule_004**: `setValue` must not use `setType` or `type: sqlStatement`; use `type: sqlQuery`
 - **Rule_005**: JavaScript dynamic actions must use `action: executeJsCode` and `settings.jsCode`
 - **Rule_006**: For `selectionType: button`, `when.button` must use alias format `@button-static-id`
 - **Rule_007**: Dynamic action action execution must set `fireOnInit: false` by default unless explicitly requested
-- **Rule_008**: Use `redirectOtherApp` to redirect to a page that lives in another appication (mirrors BTN_RULE_002 in `component-policies.json`)
+- **Rule_008**: Use `redirectOtherApp` to redirect to a page that lives in another appication (mirrors BTN_RULE_002 in `assets/component-policies.json`)
 
 ### Error Prevention
 - **Pre_generation**: Check all setValue actions for correct type-specific properties
@@ -371,7 +371,7 @@ best_practices:
 
 ## Implementation Notes
 - **Parser**: Use this document to validate dynamic action syntax before generation
-- **Parser**: For button behavior compatibility, use `component-policies.json` as the machine-readable source of truth.
+- **Parser**: For button behavior compatibility, use `assets/component-policies.json` as the machine-readable source of truth.
 - **Correction**: Apply automatic fixes for known error patterns
 - **Templates**: Reference canonical templates for correct implementations
 - **Maintenance**: Update this document when new error patterns are discovered

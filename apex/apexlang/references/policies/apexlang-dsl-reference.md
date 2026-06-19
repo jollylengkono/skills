@@ -3,7 +3,7 @@
 ## Overview
 - **Purpose:** Provide a concise reference for composing APEXlang artifacts that both Codex and AI tooling can consume.
 - **Scope:** Pages, regions, items, shared components, validations, and shared templates located under `templates/**`.
-- **Usage:** Load the minimal rule set from `memory-bank/` and reference these templates for deterministic outputs.
+- **Usage:** Load the minimal rule set from `references/policies/memory-bank/` and reference these templates for deterministic outputs.
 
 
 ## When to Use This Guide
@@ -107,11 +107,11 @@
 - Replace button aliases (for example `@{submit-button}`) and authorization schemes with page-specific components before use.
 
 ## Governance References
-- `memory-bank/00-guard/ai.guard.md` — Non-negotiable guardrails.
-- `memory-bank/10-global/apex.global.md` — Global naming, navigation, and access standards.
-- `memory-bank/20-data/*` — SQL and logic policies (invoke API first, named notation).
-- `memory-bank/30-pages/*` — Page-type rules (forms, reports, dashboards, charts).
-- `memory-bank/40-components/*` — Component-specific guidance plus the shared composition contract for templates, template options, and grid/layout defaults.
+- `references/policies/memory-bank/00-guard/ai.guard.md` — Non-negotiable guardrails.
+- `references/policies/memory-bank/10-global/apex.global.md` — Global naming, navigation, and access standards.
+- `references/policies/memory-bank/20-data/*` — SQL and logic policies (invoke API first, named notation).
+- `references/policies/memory-bank/30-pages/*` — Page-type rules (forms, reports, dashboards, charts).
+- `references/policies/memory-bank/40-components/*` — Component-specific guidance plus the shared composition contract for templates, template options, and grid/layout defaults.
 
 ## Template Documentation Strategy
 - Each template includes inline comments describing purpose, variants, and usage notes.
@@ -119,10 +119,10 @@
 - For Codex automation, pair template paths with metadata (component name, required inputs) in manifests.
 
 ## Best Practices for Codex & AI tooling Execution
-- **Minimal Rule Loading:** Use `memory-bank/rules-mapping.json` to resolve required rules per artifact.
+- **Minimal Rule Loading:** Use `assets/rules-mapping.json` to resolve required rules per artifact.
 - **Critical Pages:** Ensure `p00000-*.apx`, `p00001-*.apx`, and `p09999-*.apx` exist or are generated from the base app structure templates.
 - **Shared Components:** Seed only the named runtime artifacts when creating new applications (see templates under `base-app-structure/scaffold-example`), and keep template-family docs and registries out of generated app roots.
-- **Logging:** Final published output goes to `applications/<target-app>/...` only after the resolved live runtime action succeeds. Durable runtime evidence is limited to compact reports and transcripts under `the temp-runtime logs directory under `APEXLANG_OUTPUT_ROOT/logs/``.
+- **Logging:** Final published output goes to `applications/<target-app>/...` only after the resolved live runtime action succeeds. Durable runtime evidence is limited to compact reports and transcripts under `the temp-runtime logs directory under `APEXLANG_OUTPUT_ROOT/logs/``, created only when a workflow writes them.
 - **Confidence Scores:** The internal review loop must retain a numeric confidence threshold of at least `0.95` before publish/completion wording.
 
 ## Integration Hooks

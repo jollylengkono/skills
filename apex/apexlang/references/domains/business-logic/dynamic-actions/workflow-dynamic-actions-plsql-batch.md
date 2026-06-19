@@ -14,9 +14,9 @@ Required inputs
 - Optional: confirmation text, success notification, refresh target region per page.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/20-data/apex.logic.md
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/20-data/apex.logic.md
 - references/domains/business-logic/dynamic-actions/workflow-dynamic-actions-batch.md
 - Template: `templates/business-logic/dynamic-actions/dynamic-actions.execute-server-side-code.md`
 

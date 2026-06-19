@@ -18,9 +18,9 @@ Clarify — progressive prompts
  - When invoked from a natural sentence, ask only for data that was not supplied (e.g., “Which region should be refreshed?”) and echo back assumptions for confirmation before drafting.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/20-data/apex.logic.md
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/20-data/apex.logic.md
 
 Templates
 - Primary catalog: `templates/business-logic/dynamic-actions/` (select archetype based on requested behavior).

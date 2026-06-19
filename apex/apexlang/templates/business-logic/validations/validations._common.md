@@ -13,7 +13,7 @@ Define the shared variable contract, guardrails, and skeleton used by all valida
 
 # Generation Rules (MANDATORY)
 
-1. Load `memory-bank/20-data/apex.logic.md` before drafting validations.
+1. Load `references/policies/memory-bank/20-data/apex.logic.md` before drafting validations.
 2. Populate required variables from this contract; scenario files may only specialize optional sections.
 3. Wrap SQL/PLSQL bodies in triple backticks and keep them idempotent.
 4. Treat validations as the default home for user-correctable submit errors; only leave a rule in page-process PL/SQL when it cannot be safely pre-validated before DML.
