@@ -22,6 +22,7 @@ Caseflow is the intake and memory workflow for Oracle Advanced Services engageme
 caseflow/
 ├── SKILL.md
 ├── references/
+│   ├── category-outputs.md
 │   └── decision-brief.md
 └── templates/
     ├── active-cases.md
@@ -29,9 +30,11 @@ caseflow/
     ├── closed-cases.md
     ├── customer.md
     ├── decision-brief.md
+    ├── findings-report.md
     ├── pattern.md
     ├── product.md
     ├── project.md
+    ├── task-blocker-log.md
     └── workspace-index.md
 ```
 
@@ -274,6 +277,29 @@ After intake and case creation, report:
 - First recommended engineer actions.
 - Open questions before risky operations.
 
+## Category Output Artifacts
+
+Each case produces a category-routed output artifact in the case `Output/` folder,
+linked from the case file. Choose the artifact by the case's task category.
+
+| Task category | Artifact |
+|---|---|
+| `troubleshooting`, `performance-tuning` | Findings Report |
+| `installation-configuration`, `patching`, `upgrade` | Task & Blocker Log |
+
+- Findings Report — email-ready, three parallel numbered sections (Findings,
+  Analysis, Recommendations) with aligned item numbers. Generate on demand as a
+  dated snapshot: `Output/<case_directory>_findings_<yyyymmdd>.md`. Populate from
+  `templates/findings-report.md`.
+- Task & Blocker Log — a single living file per case updated in place:
+  `Output/<case_directory>_tasks-blockers.md`. Tasks table tracks Status, Start,
+  and Done; Blocker Records table tracks owner, dates, status, and resolution.
+  Populate from `templates/task-blocker-log.md`.
+
+Sanitize before saving or sharing (secrets only). Link the artifact from the case
+file with a relative Markdown link. See `references/category-outputs.md` for the
+full workflow.
+
 ## Decision Brief
 
 When the engineer needs to make a decision during an active case (for example
@@ -312,6 +338,7 @@ optimization notes.
 - Similar prior work: use `Related Cases` and scan customer, project, product, and pattern memory.
 - Closure: use `Closed Case Lifecycle`, remove closed entries from `active-cases.md`, and update `closed-cases.md` plus reusable central memory.
 - Decision making: use `Decision Brief` to generate a NotebookLM-optimized brief in the case `Output/` folder and link it from the case file `## Decisions` section.
+- Category output: use `Category Output Artifacts` to produce a Findings Report (troubleshooting/performance-tuning) or Task & Blocker Log (installation-configuration/patching/upgrade) in the case `Output/` folder.
 
 ## Common Mistakes
 
