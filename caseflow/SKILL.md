@@ -21,11 +21,14 @@ Caseflow is the intake and memory workflow for Oracle Advanced Services engageme
 ```text
 caseflow/
 ├── SKILL.md
+├── references/
+│   └── decision-brief.md
 └── templates/
     ├── active-cases.md
     ├── case.md
     ├── closed-cases.md
     ├── customer.md
+    ├── decision-brief.md
     ├── pattern.md
     ├── product.md
     ├── project.md
@@ -271,6 +274,35 @@ After intake and case creation, report:
 - First recommended engineer actions.
 - Open questions before risky operations.
 
+## Decision Brief
+
+When the engineer needs to make a decision during an active case (for example
+patch vs upgrade, which fix to apply, or go/no-go before a change window),
+generate a decision brief on demand.
+
+A decision brief is a single, sanitized, NotebookLM-optimized Markdown document
+for one decision. Caseflow produces the source document; the engineer uploads it
+to NotebookLM, which renders the mind map. There is no API call to NotebookLM.
+
+Steps:
+
+1. Confirm the decision question and a short `<slug>` (1-3 words, kebab-case).
+2. Pull relevant Context, Findings, and Decisions from the case file.
+3. Copy `templates/decision-brief.md` and populate every branch (Context,
+   Options & Trade-offs, Diagnostic Decision Tree, Risk & Rollback Gates,
+   Recommendation & Rationale).
+4. Sanitize: strip secrets, credentials, wallets, keys, certificates, and
+   production connection strings; keep customer name, hostnames, and versions.
+5. Save to the case `Output/` folder as
+   `<case_directory>_decision_<slug>_<yyyymmdd>.md`. One decision per file.
+6. Link the brief from the case file `## Decisions` section with a relative
+   Markdown link and a short reason.
+7. Report the saved file path and remind the engineer to upload it to NotebookLM
+   (see the `## How to use in NotebookLM` section in the generated brief).
+
+See `references/decision-brief.md` for the full workflow and NotebookLM
+optimization notes.
+
 ## Key Starting Points
 
 - New case intake: start with `Required Inputs`, then `Directory Resolution`.
@@ -279,6 +311,7 @@ After intake and case creation, report:
 - Existing directory cleanup: use `Standardize Existing Directories`.
 - Similar prior work: use `Related Cases` and scan customer, project, product, and pattern memory.
 - Closure: use `Closed Case Lifecycle`, remove closed entries from `active-cases.md`, and update `closed-cases.md` plus reusable central memory.
+- Decision making: use `Decision Brief` to generate a NotebookLM-optimized brief in the case `Output/` folder and link it from the case file `## Decisions` section.
 
 ## Common Mistakes
 
