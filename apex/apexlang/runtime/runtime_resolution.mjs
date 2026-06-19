@@ -10,10 +10,10 @@ const UNDERSCORED_BUILD_SIGNATURE_PATTERN = /(?<major>\d+)_(?<minor>\d+)_(?<patc
 const EXECUTION_MODES = new Set(["auto", "path", "build-root"]);
 const RUNTIME_ACTIONS = new Set(["validate-only", "validate-and-import"]);
 /**
- * Direct CLI reminder for explicit import intent; agent UX defaults to check-only and offers GUI import choices after the live APEXLang check.
+ * Direct CLI reminder for explicit import intent; agent UX defaults to check-only and offers GUI import choices after the live APEXlang check.
  */
 export const IMPORT_INTENT_PROMPT =
-  "Direct runtime roundtrip calls require an import intent. Codex workflows default to checking APEXLang code and offer GUI import choices after the live APEXLang check.";
+  "Direct runtime roundtrip calls require an import intent. Codex workflows default to checking APEXlang code and offer GUI import choices after the live APEXlang check.";
 
 /**
  * Normalize runtime execution mode input to auto, build-root, or path.

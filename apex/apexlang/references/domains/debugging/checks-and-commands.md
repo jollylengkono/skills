@@ -43,7 +43,7 @@ Low signal when:
 Use this when validate/import behavior differs across execution paths or when SQLcl workspace context is suspected.
 
 Note:
-- The low-level `runtime roundtrip` command still blocks with `Missing Inputs` unless an import intent is supplied. Agent workflows should inject the check-only intent by default, then offer GUI import choices after the live APEXLang check passes.
+- The low-level `runtime roundtrip` command still blocks with `Missing Inputs` unless an import intent is supplied. Agent workflows should inject the check-only intent by default, then offer GUI import choices after the live APEXlang check passes.
 
 ```sh
 node tools/apexctl.mjs runtime preflight --db-connection-name <db_connection_name>

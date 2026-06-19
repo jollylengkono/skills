@@ -55,4 +55,4 @@
 - Start with `templates/shared-components/README.md` unless the prompt already names a specific family.
 - Open the narrowest family files needed for the request; do not load unrelated shared-component families.
 - For translations, keep the family templates and the workflow docs in sync; the workflow docs define process, while the template family defines artifact shape.
-- Use `rules-mapping.json` to load policy files only when the request needs them.
+- Use `assets/rules-mapping.json` to load policy files only when the request needs them.

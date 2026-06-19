@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate APEXLang snippets for deterministic governance checks."""
+"""Validate APEXlang snippets for deterministic governance checks."""
 
 from __future__ import annotations
 

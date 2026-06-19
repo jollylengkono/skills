@@ -14,7 +14,7 @@ Define canonical chart-region contract, required inputs, and guardrails for all 
 # Rules & Guardrails
 
 1. Load `chart._index.md`, `chart._common.md`, `chart._series._common.md`, and `chart._axis._common.md` before drafting chart scenarios.
-2. Load `memory-bank/30-pages/apex.chart-page.md`, `20-data/apex.sql.md`, and `40-components/apex.templates.md` for page/data/template guardrails.
+2. Load `references/policies/memory-bank/30-pages/apex.chart-page.md`, `20-data/apex.sql.md`, and `40-components/apex.templates.md` for page/data/template guardrails.
 3. Use the dedicated `region-chart` template variant.
 4. Treat the chart qualifier as mandatory design intent: `bar`, `line`, `pie`, `donut`, or `area`.
 5. Use variable-driven placeholders in executable output templates; keep static demonstrations in `config/` and `features/` references.
@@ -113,7 +113,7 @@ region {{chartRegion.staticId}} (
 
 - Metadata export lookup: search for `Chart`, the qualifier name, and the series label/value mapping properties.
 - Preferred query helpers for chart children:
-  - `node references/policies/apexlang/compiler-prop-map/query-valid-props.mjs --component chart.series`
-  - `node references/policies/apexlang/compiler-prop-map/query-valid-props.mjs --component chart.axis`
-  - `node references/policies/apexlang/compiler-prop-map/query-valid-props.mjs --component chart.series --group columnMapping`
+  - `node tools/query-valid-props.mjs --component chart.series`
+  - `node tools/query-valid-props.mjs --component chart.axis`
+  - `node tools/query-valid-props.mjs --component chart.series --group columnMapping`
 - Avoid `node ... --component series --parent region ...` for charts; that path is not how this runtime exposes chart child contracts.

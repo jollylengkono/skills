@@ -9,18 +9,18 @@ Required inputs
 Clarify — progressive prompts
 - Do any items or templates require a server-side condition? (Answer "none" to skip.)
 - If yes, identify the component scope (item, button, region, process, or dynamic action) and name.
-- Provide the desired condition type or business rule. Acceptable types are listed in memory-bank/20-data/apex.logic.md.
+- Provide the desired condition type or business rule. Acceptable types are listed in references/policies/memory-bank/20-data/apex.logic.md.
 - Collect the required attributes for that type (item reference, comparison value/list, request value, plsqlExpression, sqlQuery, etc.). Missing answers block the workflow.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/40-components/apex.items.md
-- memory-bank/40-components/apex.templates.md
-- memory-bank/20-data/apex.sql.md (for LOV SQL/format masks)
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/40-components/apex.items.md
+- references/policies/memory-bank/40-components/apex.templates.md
+- references/policies/memory-bank/20-data/apex.sql.md (for LOV SQL/format masks)
 
 Policy
-- Never invent attribute/value pairs; follow references/policies/apexlang/templates and rule examples.
+- Never invent attribute/value pairs; follow templates and rule examples.
 - For content-row page or region generation, use `content-row.report-minimal.md` as the default starting scenario.
 - Only layer `report-avatar-badge`, `report-link-positions`, `report-primary-actions-menu`, `report-grouping-selection`, or `report-appearance-variants` when those capabilities are explicitly requested.
 - For Content Row avatar rendering, use `settings.displayAvatar`; keep `plugin-avatar` for avatar configuration only, including `description` and `size` when needed.
@@ -30,7 +30,7 @@ Policy
 
 References
 - references/policies/governance/00-governance.md
-- memory-bank/rules-mapping.json
+- assets/rules-mapping.json
 
 Completion
 - After Revision, gather ``db_connection_name`, `app_path`, and `application_id` if missing, run `references/ops/runtime-gates/02-direct-sqlcl-validate-gate.md`, then route to `references/ops/runtime-gates/01-direct-sqlcl-import.md`.

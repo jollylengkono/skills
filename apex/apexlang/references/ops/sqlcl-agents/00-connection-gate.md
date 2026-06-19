@@ -23,8 +23,8 @@ Inputs
 - `environment`: optional environment label
 
 Rules
-- For DB-backed workflows, inspect `references/policies/db/index.json` and scan saved SQLcl connections before any prompt about DB mode or connection knowledge.
-- If `db_mode = offline`, inspect `references/policies/db/index.json`.
+- For DB-backed workflows, inspect `assets/workspace-intelligence.json` and scan saved SQLcl connections before any prompt about DB mode or connection knowledge.
+- If `db_mode = offline`, inspect `assets/workspace-intelligence.json`.
 - If exactly one eligible schema dictionary exists, set `prereq_source = schema_doc`, record `selected_schema_name` plus `selected_schema_doc_path`, and skip DB prompting unless later live work requires it.
 - If multiple eligible schema dictionaries exist, ask the user to choose one schema dictionary before continuing.
 - If exactly one saved SQLcl connection alias is discovered, present it as the default candidate but still require the user to specify or confirm `db_connection_name` and the corresponding APEX workspace name before live work.
@@ -42,7 +42,7 @@ Rules
   - PATH SQLcl runtime via `sql`
 - Record SQLcl version for reporting, but do not treat version alone as runtime readiness.
 - Run capability probing before live runtime work and treat build-root runtime plus PATH SQLcl runtime as candidate paths for the real enable/disable gate.
-- Prefer the resolved build-root runtime when it is available and runtime-capable; otherwise use the authenticated PATH SQLcl session that tries `sql <db_connection_name>` first and falls back to `sql /nolog` plus `connect <db_connection_name>` if needed.
+- Prefer the resolved build-root runtime when it is available and runtime-capable; otherwise use the authenticated PATH SQLcl session that tries `sql -name <db_connection_name>` first, then legacy `sql <db_connection_name>`, and falls back to `sql /nolog` plus `connect <db_connection_name>` if needed.
 - Use local APEX build-root resolution as part of the normal runtime selection flow, not diagnostics only.
 - Do not preemptively add workspace-id overrides to runtime commands once the alias, workspace name, and session are resolved. Workspace-id overrides are exception-only and require SQLcl to explicitly report multiple-workspace ambiguity first; once that happens, resolve the workspace id automatically for the active `db_connection_name` and rerun immediately.
 

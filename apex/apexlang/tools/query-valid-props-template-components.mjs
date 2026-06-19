@@ -255,7 +255,7 @@ function loadTemplateComponentProfileFromSourceRoot(sourceRoot, name) {
     theme: "universal-theme",
     requestedName: resolved.requestedName,
     resolvedName: resolved.resolvedName,
-    sourceDir: resolved.pluginDir,
+    sourceDir: path.basename(resolved.pluginDir),
     plugin: {
       identifier: pluginBlock.identifier,
       name: extractScalar(pluginBlock.block, "name"),

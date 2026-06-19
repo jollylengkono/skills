@@ -21,9 +21,9 @@ Clarify — progressive prompts
 - If any required identifier is missing for a page, record “Missing Inputs — Page <n>” and halt rather than guessing.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/20-data/apex.logic.md
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/20-data/apex.logic.md
 - Tier 1 child workflow for single-page dynamic actions: `references/domains/business-logic/dynamic-actions/workflow-dynamic-actions.md`
 
 Execution model

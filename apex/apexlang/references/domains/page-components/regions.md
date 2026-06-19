@@ -105,6 +105,7 @@ Use the component registry (`assets/apex-generation/components.registry.json`) t
 - Validate SQL via `20-data/apex.sql.md`; no inline `select` inside `plsqlExpression`.
 - Enforce invokeApi-default for page processes tied to regions, allow the thin-wrapper exception only for page-coupled loaders or branch-gated flows, and enforce executeCode-only for appProcess.
 - Dynamic actions should use declarative templates (e.g., `dynamic-action-refresh-report.apx`); avoid inline JS beyond approved locations.
+- Report regions that launch modal pages must include an `apexafterclosedialog` dynamic action that refreshes the originating report region.
 - Map regions should follow the attached canonical structure from the map family: `layout.slot: body` where the page pattern requires it, `initialPositionAndZoom`, layer `source { ... }`, and `columnMapping.geometryColumnDataType`.
 - For standard non-login pages, region `layout.slot` should default to `body`. Use `contentBody` only when the active login or modal page-template contract explicitly requires it.
 - Map-layer source modes are:
@@ -125,7 +126,7 @@ Use the component registry (`assets/apex-generation/components.registry.json`) t
   - `--component chart.series --group columnMapping`
 - Do not query chart `series` or `axis` with `--parent region`; in this runtime the compiler resolves those child contracts under chart `attributes`, so the `parent region` path is a dead end.
 - If compiler-backed prop lookup is uncertain for a chart subtype, do not bounce through directory listings or repeated token guesses. Use the chart router and qualifier files above as the canonical drafting path.
-- Calendar regions must follow compiler-truth-backed calendar guidance first, normalize the event-label mapping to `displayColumn`, require `settings.pkColumn` from the source table primary key column, keep `endDateColumn` optional even when drag/drop is enabled, restrict `settings.additionalCalendarViews` to `list` and `navigation`, preserve combined UT option values exactly as listed in the template or valid-value catalog, and treat calendar create/edit link targets as user-provided intent rather than something the agent can infer. Use `component-attributes.json` only as fallback/internal validator context.
+- Calendar regions must follow compiler-truth-backed calendar guidance first, normalize the event-label mapping to `displayColumn`, require `settings.pkColumn` from the source table primary key column, keep `endDateColumn` optional even when drag/drop is enabled, restrict `settings.additionalCalendarViews` to `list` and `navigation`, preserve combined UT option values exactly as listed in the template or valid-value catalog, and treat calendar create/edit link targets as user-provided intent rather than something the agent can infer. Use `assets/component-attributes.json` only as fallback/internal validator context.
 - Calendar `createLink` and `viewEditLink` requests must follow the explicit clarification workflow for existing-vs-new target pages. New `viewEditLink` report pages must have an explicit report type plus a PK item/filter contract.
 - Batch workflows require explicit page lists; stop if missing.
 - Record Missing Inputs for absent PKs, LOVs, or SSC attributes.

@@ -9,13 +9,13 @@ description: Shared canonical contract for dynamic action templates, including s
 
 # Purpose
 
-Standardize dynamic action generation with deterministic field contracts, action capability rules, and lifecycle-safe dialog patterns aligned with `memory-bank/20-data/apex.logic.md`.
+Standardize dynamic action generation with deterministic field contracts, action capability rules, and lifecycle-safe dialog patterns aligned with `references/policies/memory-bank/20-data/apex.logic.md`.
 
 ---
 
 # Generation Rules (MANDATORY)
 
-1. Load `memory-bank/20-data/apex.logic.md` before drafting dynamic actions.
+1. Load `references/policies/memory-bank/20-data/apex.logic.md` before drafting dynamic actions.
 2. Use only documented action names and properties. Do not invent aliases, keys, or ad-hoc settings.
 3. Use button aliases in DA triggers (`@button-static-id`) and component aliases for regions/actions.
 4. Default every action execution block to `fireOnInit: false` unless explicitly requested.
@@ -258,7 +258,7 @@ dynamicAction {{dynamicActionStaticId}} (
 - Do not emit action-level `execution.event`; the action inherits the parent dynamic action trigger.
 - Provide only the `affectedElements` fields relevant to the selection type.
 - Include action-specific settings required by the selected action (`type`, `value`, `itemsToSubmit`, etc.).
-- Condition `type` tokens are case-sensitive and must match the catalog in `memory-bank/20-data/apex.logic.md` exactly.
+- Condition `type` tokens are case-sensitive and must match the catalog in `references/policies/memory-bank/20-data/apex.logic.md` exactly.
 - Set `comparisonAttribute` to `list` for `itemIsInColonDelimitedList` / `itemIsNotInColonDelimitedList`; otherwise use `value`.
   - Valid: `item=value`, `item!=value`
   - Invalid: `item=Value`, `item!=Value`

@@ -13,10 +13,10 @@ Standardize the variable contract, guardrails, and template skeleton for interac
 
 # Generation Rules (MANDATORY)
 
-1. Load `memory-bank/30-pages/apex.interactive-report.md` before drafting interactive reports.
+1. Load `references/policies/memory-bank/30-pages/apex.interactive-report.md` before drafting interactive reports.
 2. Validate SQL against the target schema or mark Validation Pending.
 3. Ensure column definitions align with the SQL projection and include comments.
-4. For NL2IR configurations, follow `memory-bank/00-guard/ai.guard.md` and require annotation-scan metadata lookup with descriptive-annotation fallback before comments.
+4. For NL2IR configurations, follow `references/policies/memory-bank/00-guard/ai.guard.md` and require annotation-scan metadata lookup with descriptive-annotation fallback before comments.
 5. Use `interactive-report._columns._common.md` as the canonical column contract.
 6. Emit explicit `column (...)` definitions for every SQL projection before finals; hidden technical columns still need structural headings.
 7. If `source.sqlQuery` references same-page items such as `:P3_ORDER_ID`, list those items in `source.pageItemsToSubmit`.

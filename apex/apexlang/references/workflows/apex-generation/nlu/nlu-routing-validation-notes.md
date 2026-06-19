@@ -11,7 +11,7 @@ Prerequisites
 - Component Registry:
 -  - assets/apex-generation/components.registry.json
 - Rule routing:
-  - memory-bank/rules-mapping.json (updated with synonyms for calendar, map, cards, form/report region)
+  - assets/rules-mapping.json (updated with synonyms for calendar, map, cards, form/report region)
 - Skeletons and examples:
 -  - references/workflows/apex-generation.md (includes One-liner guidance and “J) Page — IR + Form”)
 
@@ -31,7 +31,7 @@ Validation Process
   - Message 2 synthesis
 
 2) Confirm Keyword → Rule Loading Mapping
-- Open memory-bank/rules-mapping.json
+- Open assets/rules-mapping.json
 - Ensure the following keywords appear in match clauses:
   - Page standards: ["calendar", "calendar region", "map", "map region", "new page", "breadcrumb", "page standard", "page naming"]
   - IR: ["interactive report", "report", "ir", "interactive report region", "report region"]
@@ -119,7 +119,7 @@ H) “Add an AI assistant/chatbot to the home page”
 - Expected components: [ai-chatbot]
 - target_type: page
 - Rules: page + buttons + logic (+ guard + global)
-- Templates: apexlang/templates/business-logic/dynamic-actions/dynamic-actions.show-ai-assistant.md
+- Templates: templates/business-logic/dynamic-actions/dynamic-actions.show-ai-assistant.md
 - Required inputs to ask/validate:
   - Target page number/alias and where to place the button (Breadcrumb/Title Bar)
   - AI agent reference: use an existing alias (for example `@home`); do not invent missing agent names

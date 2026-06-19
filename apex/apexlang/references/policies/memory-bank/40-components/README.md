@@ -6,9 +6,9 @@ Purpose
 - References canonical scaffolds in templates/** (do not duplicate them here).
 
 Authoritative sources
-- Guard: memory-bank/00-guard/ai.guard.md
-- Global: memory-bank/10-global/apex.global.md
-- Templates (positions and options): memory-bank/40-components/apex.templates.md
+- Guard: references/policies/memory-bank/00-guard/ai.guard.md
+- Global: references/policies/memory-bank/10-global/apex.global.md
+- Templates (positions and options): references/policies/memory-bank/40-components/apex.templates.md
 - Canonical component scaffolds: templates/**
 
 Files in this partition
@@ -35,11 +35,11 @@ Files in this partition
   - Content: Cards/List/Metric/Chart interaction constraints, filter namespaces, contextual info, parent-child layout, and comments.
 - apex.buttons.md
   - Scope: Button component behavior.
-  - Content: Attribute catalog (layout, appearance, behavior, confirmation, serverSideCondition, security). References the canonical `serverSideCondition.type` catalog in memory-bank/20-data/apex.logic.md for accepted values and syntax examples.
+  - Content: Attribute catalog (layout, appearance, behavior, confirmation, serverSideCondition, security). References the canonical `serverSideCondition.type` catalog in references/policies/memory-bank/20-data/apex.logic.md for accepted values and syntax examples.
   - Templates referenced: templates/buttons/buttons._common.md, templates/buttons/buttons._index.md, and action-specific files under templates/buttons/buttons.*.md
 
 Loading rules (auto-selection)
-- memory-bank/rules-mapping.json maps keywords to these files:
+- assets/rules-mapping.json maps keywords to these files:
   - "template", "region template", "button template", "universal theme template" → 40-components/apex.templates.md
   - "region contract", "region type", "qualifier" → 40-components/apex.region-contracts.md
   - "data source type", "schema hint", "format mask" → 40-components/apex.region-data-source.md
@@ -61,13 +61,13 @@ Add a new component rule file
    - Conditional logic (when to emit/omit blocks)
    - Placement and cross-template considerations
    - Minimal examples referencing templates/** paths
-3) Update memory-bank/rules-mapping.json with match keywords → apply path to the new file.
+3) Update assets/rules-mapping.json with match keywords → apply path to the new file.
 4) Avoid duplicating full templates; reference canonical templates/** instead.
 
 Cross-references
-- Page and region patterns: memory-bank/30-pages/*
-- Data and logic: memory-bank/20-data/*
-- Shared composition defaults: memory-bank/40-components/apex.templates.md
+- Page and region patterns: references/policies/memory-bank/30-pages/*
+- Data and logic: references/policies/memory-bank/20-data/*
+- Shared composition defaults: references/policies/memory-bank/40-components/apex.templates.md
 
 Notes
 - This index is intentionally concise to keep tokens low and to guide readers to the correct authoritative files.

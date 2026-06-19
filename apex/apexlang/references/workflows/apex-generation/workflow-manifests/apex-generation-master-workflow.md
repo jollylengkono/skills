@@ -19,20 +19,20 @@
   - Agent 2: Critique (`references/workflows/apex-generation/agents/30-agent-critique.md`)
   - Agent 3: Revision (`references/workflows/apex-generation/agents/40-agent-revision.md`)
   - Post-Agent 4: Direct SQLcl validate gate (`references/ops/runtime-gates/02-direct-sqlcl-validate-gate.md`)
-- **Rule Loading:** Determined via `memory-bank/rules-mapping.json`; always guard + global, optional 20/30/40/50 based on inputs.
+- **Rule Loading:** Determined via `assets/rules-mapping.json`; always guard + global, optional 20/30/40/50 based on inputs.
 - **Templates:** References under `templates/**` per component registry mapping.
 - **Outputs:**
   - Working copy: transient temp app updates outside the repo
-  - Durable runtime evidence: compact report + transcript under `the temp-runtime logs directory under `APEXLANG_OUTPUT_ROOT/logs/``
+  - Durable runtime evidence: `validation-report.json`, `validation-transcript.log`, `problems.json`, and `component-contracts/<build>.json`
   - Final artifacts: `applications/app_###/pages/` and `applications/app_###/shared-components/` (or app-root files for whole-application runs) after the resolved live runtime action succeeds
 - **Quality Gates:**
   - Critical pages (0, 1, 9999)
   - Base shared components for new applications
   - Confidence score ≥ 0.95 (two-pass cap)
   - InvokeAPI-first policy, named notation in PL/SQL
-  - Same-session SQLcl `apex validate` + `apex import` success for import-ready runs
-  - For live runs, the live APEXLang check and import continue automatically after the local first-pass check unless a prerequisite is missing
-  - Runtime/import repair loop: up to 2 additional live retries after the first failure (3 total live rounds), each with deterministic fixes and local DSL revalidation before rerun
+  - `runtime validate` pass for generated apps before publish/import eligibility
+  - Required validation source: live APEX validation evidence from the selected target build
+  - Repair loop: up to 2 additional live retries after the first failure (3 total live rounds), each patching only `problems.json` findings before rerun
 - **Codex Notes:**
   - Manifest provides minimal metadata for skill integration.
   - Codex should honor dry-run defaults and leverage component registry for structured inputs.

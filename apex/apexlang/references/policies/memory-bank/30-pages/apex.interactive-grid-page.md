@@ -10,7 +10,7 @@
 4. Every Interactive Grid `savedReport` must use `singleRowView.displayedColumns` and explicit `displayColumn` children. Cover every declared Interactive Grid column except `APEX$ROW_SELECTOR`, and include `APEX$ROW_ACTION` whenever the region declares it.
 5. Default pagination is `rowRangesXToY`; override with another catalog entry when inline editing or user requirements call for explicit pagination controls.
 6. Enable automatic row processing (`process type: interactiveGridAutomaticRowProcessing`) with named notation and matching primary key items.
-7. Define column metadata (dataType, heading alignment, editable properties) consistent with the active machine-readable schema in `component-attributes.json`; do not invent unsupported Interactive Grid column blocks even when older prose examples still mention them.
+7. Define column metadata (dataType, heading alignment, editable properties) consistent with the active machine-readable schema in `assets/component-attributes.json`; do not invent unsupported Interactive Grid column blocks even when older prose examples still mention them.
 8. When `source.orderByClause` is used, reference only declared Interactive Grid columns in the same region. Hidden columns are allowed; raw SQL expressions and undeclared columns are not.
 9. When Interactive Grid navigation is added or changed, ask every time which link mode is required: same application page, another application page, or URL redirect.
 10. For same-application navigation, prefer declarative page targets when the component DSL supports them; do not default to URL-style targets when they are unnecessary.

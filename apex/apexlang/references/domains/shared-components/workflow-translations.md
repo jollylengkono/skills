@@ -23,9 +23,9 @@ Required inputs
   - `apply_to`: optional list of component references (page, region, item, button, static region) where the message key should replace hard-coded text.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/30-pages/apex.page.md (ensures substitution usage standards)
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/30-pages/apex.page.md (ensures substitution usage standards)
 
 Assets
 - assets/domains/shared-components/translations/languages.json — authoritative runtime language list.

@@ -16,7 +16,7 @@ Secondary interactive report configuration for alternate defaults.
 
 # Generation Rules (MANDATORY)
 
-1. Load `interactive-report._common.md`, `interactive-report._columns._common.md`, and `memory-bank/30-pages/apex.interactive-report.md` before use.
+1. Load `interactive-report._common.md`, `interactive-report._columns._common.md`, and `references/policies/memory-bank/30-pages/apex.interactive-report.md` before use.
 2. Validate SQL against the target schema or mark Validation Pending.
 3. Remove optional blocks not required by the target implementation.
 

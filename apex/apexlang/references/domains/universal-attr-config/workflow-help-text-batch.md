@@ -16,11 +16,11 @@ Required inputs
 - `localization`: languages requesting translation (ISO codes) or `none`.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/30-pages/apex.page.md (page/regional help)
-- memory-bank/30-pages/apex.form.md (form items)
-- memory-bank/40-components/apex.items.md
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/30-pages/apex.page.md (page/regional help)
+- references/policies/memory-bank/30-pages/apex.form.md (form items)
+- references/policies/memory-bank/40-components/apex.items.md
 - references/domains/universal-attr-config/reusable-prompts/help_text.md
 
 Execution model

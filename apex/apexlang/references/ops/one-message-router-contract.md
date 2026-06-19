@@ -46,22 +46,22 @@ Defaults (safe)
 - environment: dev
 - dry_run: true
 - Merge rule: user overrides in the same one‑liner message replace Default values; do not invent missing fields.
-- Routers should prefer permissive prompt-normalization defaults such as `prompt_normalization: enabled` and keep clarification behavior explicit instead of rejecting informal prompts.
+- Routers should follow `references/policies/governance/prompt-normalization.md`, prefer permissive defaults such as `prompt_normalization: enabled`, and keep clarification behavior explicit instead of rejecting informal prompts.
 
 Safeguards and gates
 - Secrets hygiene: never log secrets or full connect strings.
 - dry_run must remain true unless BOTH dry_run: false AND environment: dev are provided.
-- For DB-backed domains, prefer the schema-first prerequisite gate: inspect `references/policies/db/index.json`, use an eligible offline schema dictionary when available, then traverse saved SQLcl connections before the final clarification prompt.
+- For DB-backed domains, prefer the schema-first prerequisite gate: inspect `assets/workspace-intelligence.json`, use an eligible offline schema dictionary when available, then traverse saved SQLcl connections before the final clarification prompt.
 - If DB work is requested and live DB context is still required after the prerequisite gate, allow the TargetWorkflow’s Pre‑Agent 0 to halt with Missing Inputs rather than fabricating a connection.
 - For interactive DB-backed runs, inspect offline schema metadata and scan saved SQLcl connections before asking the user anything about DB mode.
 - Use deterministic saved SQLcl connection discovery to suggest aliases before asking; require the user to specify `db_connection_name` and the corresponding APEX workspace name before live DB work. Use `Provide db_connection_name and the corresponding APEX workspace name for this workflow.` as the last clarification fallback after discovery leaves live DB context unresolved.
-- No changes to references/policies/apexlang/ content in plan-only runs; write artifacts to the temp-runtime logs directory under `APEXLANG_OUTPUT_ROOT/logs/`**.
+- No changes to templates/ content in plan-only runs; write artifacts to the temp-runtime logs directory under `APEXLANG_OUTPUT_ROOT/logs/`**.
 
 File naming and structure
 - One router contract section per domain skill:
 -   - `SKILL.md`
--   - `not-bundled/plsql`
--   - `not-bundled/schema-modeling`
+-   - `external:oracle-db/plsql`
+-   - `external:oracle-db/schema-modeling`
 - Keep router contracts small and declarative; avoid copying workflow logic or artifacts lists (the workflow owns those).
 
 Keyword design (Match)
@@ -85,7 +85,7 @@ Consistency checklist (for any new “master” workflow)
 - [ ] Set Router:true, Kind:one-message, TargetWorkflow:<path>
 - [ ] Define specific Match keywords for the domain
 - [ ] Provide safe Defaults appropriate for plan-only execution
-- [ ] Declare or inherit the prompt-normalization contract (`prompt_normalization`, one clarification round, simple-English follow-up, ask-then-stop ambiguity policy)
+- [ ] Declare or inherit the governance prompt-normalization contract (`prompt_normalization`, one clarification round, simple-English follow-up, ask-then-stop ambiguity policy)
 - [ ] For DB-backed domains, declare `prereq_source`, schema-first prerequisite routing, and the canonical connection/offline prompt as the final fallback
 - [ ] Add Safeguards mirroring governance (00-governance.md)
 - [ ] Include concise Examples to illustrate one-liner usage
@@ -93,4 +93,4 @@ Consistency checklist (for any new “master” workflow)
 Notes
 - Routers are independent of the constitutional master unless they explicitly target it (as with APEX generation).
 - Keep token usage minimal: routers should reference, not duplicate, workflow content and artifacts.
-- See `SKILL.md`, `references/workflows/apex-generation.md`, and `not-bundled/plsql` for concrete implementations.
+- See `SKILL.md`, `references/workflows/apex-generation.md`, and `external:oracle-db/plsql` for concrete implementations.

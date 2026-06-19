@@ -165,7 +165,7 @@ export function resolveOracleRuntime(explicitOracleHome) {
   const details = candidates.map((candidate) => `- ${candidate.source}: ${candidate.path}`).join("\n");
   throw new Error(
     [
-      "Could not find an Oracle APEXLang runtime for query-valid-props.",
+      "Could not find an Oracle APEXlang runtime for query-valid-props.",
       "Expected an installed Oracle VS Code extension, dbtools home, SQLcl home, or direct compiler jar path.",
       "Checked:",
       details || "- none"

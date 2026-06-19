@@ -1,13 +1,13 @@
 # Agent: Direct SQLcl Import
 
 Purpose
-- Provide the import continuation after the live APEXLang check succeeds for APEXlang artifact workflows after the user explicitly chose import in the post-check GUI flow.
+- Provide the import continuation after the live APEXlang check succeeds for APEXlang artifact workflows after the user explicitly chose import in the post-check GUI flow.
 - Import validated APEXlang artifacts through direct SQLcl commands.
 - Preserve the same-session guarantee between validate and import.
 
 When to invoke
 - Any APEXlang artifact workflow that reaches import-ready state after a post-check GUI choice resolves to import.
-- Standalone import of previously generated artifacts when the live APEXLang check is also available for the same run.
+- Standalone import of previously generated artifacts when the live APEXlang check is also available for the same run.
 
 Preconditions
 - `db_connection_name` is resolved.
@@ -21,7 +21,7 @@ Preconditions
 - The same `resolved_app_path` has already passed SQLcl `apex validate` in the active authenticated SQLcl user session.
 
 Canonical flow
-1. Open one authenticated SQLcl user session with `db_connection_name`, trying `sql <db_connection_name>` first and falling back to `sql /nolog` plus `connect <db_connection_name>` inside that same session when needed.
+1. Open one authenticated SQLcl user session with `db_connection_name`, trying `sql -name <db_connection_name>` first, then legacy `sql <db_connection_name>`, and falling back to `sql /nolog` plus `connect <db_connection_name>` inside that same session when needed.
 2. Prefer the resolved build-root runtime via `apex sql`; otherwise use the PATH SQLcl session.
 3. Run `apex validate -input <resolved_app_path>` in that session if a valid same-session runtime status is not already active.
 4. If the active runtime session reports multiple-workspace ambiguity, resolve the workspace id automatically for the active `db_connection_name` and restart the same real-SQLcl sequence immediately with an explicit run-scoped `-workspaceid`.

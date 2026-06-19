@@ -38,7 +38,7 @@
 3. Load `references/policies/context-overview.md`.
 4. Load `assets/rules-mapping.json`.
 5. For DB-backed work, resolve the prerequisite metadata source before routing further:
-   - read `references/policies/db/index.json` and apply the schema-dictionary selection rules for offline metadata reasoning
+   - read `assets/workspace-intelligence.json` and apply the schema-dictionary selection rules for offline metadata reasoning
    - scan saved SQLcl connections before any user prompt about DB mode or connection knowledge
    - use discovered saved connections as candidates, not as automatic approval for live DB work
    - ask the user to choose only when multiple eligible schema dictionaries or multiple saved connections exist
@@ -56,6 +56,8 @@
 - Prefer one short simple-English clarification round over broad discovery when critical routing or safety inputs are missing.
 - For app-scoped APEX work, limit application inspection to the resolved target app under `applications/<target-app>/`.
 - `applications/<target-app>/` is the standard repo convention, not a license to guess. If `applications/` is missing, empty, or does not identify the requested app, ask for the exact app directory or a bounded scan root and stop with `Missing Inputs` until resolved. Nonstandard app paths are allowed only after explicit user confirmation.
+- Treat `artifacts/` as optional output only. Never require it to exist before generation starts, never scan `artifacts/**` for app candidates, schema metadata, examples, or pattern sources, and create output subdirectories only when a workflow writes logs, reports, or backups.
+- Treat any `apex-exports` path segment as backup/export material only. Ignore those trees during app resolution, metadata discovery, bounded scans, and generation unless the user explicitly asks to inspect an export backup.
 - Use `templates/**` as the only pattern-selection source for APEXlang generation. Do not use `applications/**` as an example corpus, scaffold source, or DSL-shape reference.
 - Reads from the resolved target app are integration-only: concrete wiring facts such as existing shared-component ids, page targets, aliases, list entries, breadcrumb entries, and output paths.
 - Do not use runtime logs as syntax truth.
@@ -67,7 +69,7 @@
 
 ## Database policy
 - Use `references/policies/memory-bank/20-data/db.connection.md` for connection details.
-- Use `references/policies/db/index.json` as the authoritative machine-readable registry for offline schema dictionaries.
+- Use `assets/workspace-intelligence.json` as the authoritative machine-readable registry for offline schema dictionaries.
 - For DB-backed work, require resolved `prereq_source` first:
   - `schema_doc`
   - `saved_connection`
@@ -131,11 +133,18 @@
 
 ## Runtime policy
 - Direct SQLcl roundtrips are the canonical live runtime path.
-- For every APEX artifact workflow, default to checking APEXLang code and run the live APEXLang check through `apex validate -input` when live runtime prerequisites are resolved.
-- After the live APEXLang check passes, offer GUI/clickable choices with a short purpose summary using plain language: `Check APEXLang code` (recommended) or `Check and import APEXLang code`; if GUI choices are unavailable, stop after checking the code and report import as a follow-up.
+- For agent-facing generated-app validation, use `node tools/apexctl.mjs runtime validate --app-path <absolute_app_path> --db-connection-name <db_connection_name> --apex-root <resolved_build_root> [--compiler-oracle-home <compiler_metadata_home>]` as the single public validate-only gate. It may call preflight/roundtrip internally, but generation agents must consume its structured outputs.
+- Treat `--apex-root` as the APEX/SQLcl runtime selector only. Use `--compiler-oracle-home` only when overriding compiler-truth metadata discovery; otherwise let compiler truth auto-discover the VS Code SQLcl/APEXlang runtime.
+- Runtime validation must emit and preserve `validation-report.json`, `validation-transcript.log`, `problems.json`, and `component-contracts/<build>.json` for the selected target build.
+- Live APEX validation from the selected target build is required and authoritative. Missing required runtime inputs or missing live runtime evidence records `LIVE_RUNTIME_VALIDATION_REQUIRED_001` and blocks completion.
+- `problems.json` is the compact live-validation repair interface derived from `validation-report.json`. Patch only reported live validation problems, then rerun `runtime validate` until `live_check_status = pass`; warnings are treated as errors when the runtime does.
+- Local lint, compiler-truth, and VS Code Problems snapshots remain diagnostics unless live validation cannot run. Broad memory-bank, policy, and template prose must not override live validation or the build contract pack.
+- For every APEX artifact workflow, default to checking APEXlang code and run the live APEXlang check through `apex validate -input` when live runtime prerequisites are resolved.
+- After the live APEXlang check passes, offer GUI/clickable choices with a short purpose summary using plain language: `Check APEXlang code` (recommended) or `Check and import APEXlang code`; if GUI choices are unavailable, stop after checking the code and report import as a follow-up.
 - `apex validate -input` is mandatory for live check completion.
 - Existing-app `validate-and-import` runs must resolve and preserve one canonical live numeric application id before import.
 - Import-authorized runtime resolution must stay bounded to one intended workspace and produce one terminal outcome: `resolved_existing_app`, `not_found_in_workspace`, `ambiguous_candidates`, or `identity_uncertain`.
+- Target-resolution timeout or failure is terminal for import. Do not use live validate success as permission to run direct SQLcl import or bypass the wrapper.
 - `update-existing` remains the default import-authorized mode. If the outcome is `not_found_in_workspace`, stop the update path and require an explicit `create-new` confirmation before any import that could create a live app.
 - Once that canonical application id is known, use it as the session authority for workspace and import targeting; do not fall back to alias-only targeting.
 - If staged deployment metadata does not match the canonical live application id, reconcile the staged deployment app id before import-authorized runtime steps.

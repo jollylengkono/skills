@@ -137,10 +137,10 @@ Policy
 # APEX Artifact PL/SQL Call Notation — Named Parameters Only (Non‑Negotiable)
 
 Purpose
-- Keep generated APEX artifact PL/SQL calls explicit when APEXLang must emit PL/SQL text.
+- Keep generated APEX artifact PL/SQL calls explicit when APEXlang must emit PL/SQL text.
 
 Scope
-- Applies to PL/SQL text generated or revised inside Oracle APEX artifacts: processes, dynamic actions, validations, page/item computations, and generated APEXLang fenced PL/SQL blocks.
+- Applies to PL/SQL text generated or revised inside Oracle APEX artifacts: processes, dynamic actions, validations, page/item computations, and generated APEXlang fenced PL/SQL blocks.
 - Applies to APEX_* calls and custom application package calls inside generated APEX artifact PL/SQL text.
 - Does not define generic PL/SQL coding standards for standalone packages, SQL scripts, or SQL Workshop scripts; use upstream Oracle DB skills for that guidance.
 - Parameterless routines may be called without arguments.

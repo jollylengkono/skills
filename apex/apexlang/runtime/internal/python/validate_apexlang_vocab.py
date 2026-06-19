@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and optionally normalize APEXLang scaffold vocabulary."""
+"""Validate and optionally normalize APEXlang scaffold vocabulary."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ SUPPORTED_MMD_VERSION = "26.1.0+3102"
 
 @dataclass(frozen=True)
 class AliasRule:
-    """Mapping rule for replacing legacy vocabulary with canonical APEXLang terms."""
+    """Mapping rule for replacing legacy vocabulary with canonical APEXlang terms."""
     old: str
     new: str
     kind: str  # "block" or "property"
@@ -56,7 +56,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
 
 
 def resolve_mmd_version(app_path: Path) -> str:
-    """Read the APEXLang MMD version from application metadata when available."""
+    """Read the APEXlang MMD version from application metadata when available."""
     apexlang_path = app_path / ".apex/apexlang.json"
     if not apexlang_path.exists():
         return ""
@@ -71,7 +71,7 @@ def resolve_mmd_version(app_path: Path) -> str:
 
 
 def is_supported_mmd_version(mmd_version: str) -> bool:
-    """Return whether an MMD version matches the active APEXLang baseline."""
+    """Return whether an MMD version matches the active APEXlang baseline."""
     return mmd_version.strip() == SUPPORTED_MMD_VERSION
 
 

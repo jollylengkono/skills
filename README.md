@@ -10,10 +10,34 @@ Install a domain by appending the root-level domain directory to the repository 
 
 ```bash
 npx skills add oracle/skills/db
+npx skills add oracle/skills/oci
 npx skills add oracle/skills/graal
 npx skills add oracle/skills/caseflow
 ...
 ```
+
+### Install in Claude Code
+
+This repository also ships as a Claude Code plugin marketplace (`.claude-plugin/marketplace.json`), where each domain folder (`apex`, `db`, `fusion`, `graal`, `oci`) is published as its own plugin.
+
+Register the marketplace, then install the domain plugins you need:
+
+```bash
+# Register this repo as a marketplace
+/plugin marketplace add oracle/skills
+
+# Install one or more domain plugins
+/plugin install db@oracle-skills
+/plugin install graal@oracle-skills
+```
+
+Already cloned the repo locally? Point the marketplace at the local path instead:
+
+```bash
+/plugin marketplace add ./
+```
+
+Browse and toggle installed plugins anytime with `/plugin`. Enabled plugins are tracked in `.claude/settings.json` under `enabledPlugins`.
 
 ## Repository Goals
 
@@ -25,7 +49,7 @@ npx skills add oracle/skills/caseflow
 ## Domains
 
 - `db/` is the active Oracle Database domain and includes database, ORDS, SQLcl, framework, container, and agent workflow skills.
-- `oci/` contains Oracle Cloud Infrastructure skills for landing-zone architecture, IAM/security guardrails, and networking operations.
+- `oci/` contains Oracle Cloud Infrastructure skills for landing-zone architecture, IAM/security guardrails, and networking operations, plus OCI Kubernetes Engine (OKE) cluster design and troubleshooting and Enterprise AI guidance for OCI Generative AI, agents, RAG, governance, model endpoints, and integrations.
 - `fusion/` contains Oracle Fusion Middleware skills — WebLogic, GoldenGate, SOA, Java, and Oracle HTTP Server (OHS) — each sub-domain has installation, patching/upgrade, troubleshooting, and performance tuning files.
 - `apex/` contains Oracle APEX skills, including the APEXLang sub-domain for structured APEX application generation.
 - `oem/` contains Oracle Enterprise Manager 13c skills covering installation, patching and upgrade, troubleshooting, performance tuning, and certification matrix.
@@ -124,6 +148,25 @@ npx skills add oracle/skills/caseflow
 │       └── workspace-index.md
 ├── oci/
 │   ├── SKILL.md
+│   ├── enterprise-ai/
+│   │   ├── SKILL.md
+│   │   ├── models/
+│   │   ├── agent-workflows/
+│   │   ├── governance/
+│   │   ├── data/
+│   │   ├── cost/
+│   │   └── integrations/
+│   ├── oke/
+│   │   ├── cluster-design.md
+│   │   ├── troubleshooting.md
+│   │   ├── gva-node-pools.md
+│   │   ├── multus-multihome.md
+│   │   ├── skills/
+│   │   ├── scripts/
+│   │   ├── agents/
+│   │   ├── shared/
+│   │   ├── examples/
+│   │   └── tests/
 │   └── references/
 │       ├── landing-zone-core.md
 │       ├── iam-security-guardrails.md
@@ -155,3 +198,8 @@ For stub domains, keep `SKILL.md` minimal and point users back to this `README.m
 - Skills that include version-specific behavior must include a section named `## Oracle Version Notes (19c vs 26ai)`.
 - Use Oracle Database 19c as the baseline compatibility target unless stated otherwise.
 - Explicitly call out features that require newer releases and provide 19c-compatible alternatives where practical.
+
+## Sources
+
+- https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
+- https://www.graalvm.org/latest/reference-manual/native-image/

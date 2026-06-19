@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "notes": "Maps natural-language keywords to canonical APEX components, required rule files, templates, and required inputs. Used by the root APEXLang router while loading references/workflows/apex-generation.md to build structured Message 2 without inventing attributes or UT classes.",
+  "notes": "Maps natural-language keywords to canonical APEX components, required rule files, templates, and required inputs. Used by the root APEXlang router while loading references/workflows/apex-generation.md to build structured Message 2 without inventing attributes or UT classes.",
   "defaults": {
     "multiComponentTargetType": "page",
     "alwaysRules": [
@@ -1666,7 +1666,7 @@
         "00-guard/ai.guard.md",
         "10-global/apex.global.md"
       ],
-      "workflow": "not-bundled/plsql",
+      "workflow": "external:oracle-db/plsql",
       "requires": [
         "apex_export_path"
       ],
@@ -1960,7 +1960,7 @@
         "00-guard/ai.guard.md",
         "10-global/apex.global.md"
       ],
-      "workflow": "not-bundled/schema-modeling",
+      "workflow": "external:oracle-db/schema-modeling",
       "requires": [
         "model_name",
         "topic_prefix"
@@ -1983,7 +1983,7 @@
         "00-guard/ai.guard.md",
         "10-global/apex.global.md"
       ],
-      "workflow": "not-bundled/plsql",
+      "workflow": "external:oracle-db/plsql",
       "requires": [
         "suite_path",
         "db_connection_name"
@@ -2078,7 +2078,7 @@
           "plsql"
         ],
         "target_type": "workflow",
-        "workflow": "not-bundled/plsql",
+        "workflow": "external:oracle-db/plsql",
         "defaults": {
           "apex_export_path": "applications/",
           "dry_run": true,

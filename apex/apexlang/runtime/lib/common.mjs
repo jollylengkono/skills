@@ -1,5 +1,5 @@
 /**
- * Shared filesystem, process, and serialization helpers for APEXLang tooling.
+ * Shared filesystem, process, and serialization helpers for APEXlang tooling.
  */
 import { execFile } from "node:child_process";
 import { existsSync, promises as fs } from "node:fs";
@@ -133,7 +133,7 @@ export function repoPath(...parts) {
 }
 
 /**
- * Resolve a path inside the APEXLang skill root in either source or packaged layouts.
+ * Resolve a path inside the APEXlang skill root in either source or packaged layouts.
  */
 export function apexlangPath(...parts) {
   return path.join(SKILL_ROOT, ...parts);

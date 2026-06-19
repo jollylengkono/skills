@@ -1,22 +1,24 @@
-# APEXLang Skill for Oracle APEX
+# APEXlang Skill for Oracle APEX
 
-This package is the public Oracle APEXLang skill for Oracle APEX generation work. Consume it like an Oracle skills domain: install or load the domain folder, then start from its root entrypoint.
+This package is the public Oracle APEXlang skill for Oracle APEX generation work. Consume it like an Oracle skills domain: install or load the domain folder, then start from its root entrypoint.
 
 Start with SKILL.md. It is the main root entry for routing, local context discovery, generation policy, validation behavior, and import approval rules.
 
 ## Requirements
 
-- Oracle APEX with APEXLang support, using the latest available 26.1 build.
-- SQLcl for real APEXLang validation and import workflows, version 26.1.2 or newer.
+- Oracle APEX with APEXlang support, using the latest available 26.1 build.
+- SQLcl for real APEXlang validation and import workflows, version 26.1.2 or newer.
 - Java 17 or Java 21 for current SQLcl.
 - A saved SQLcl connection name and the corresponding APEX workspace name for Live DB validation, import, runtime diagnostics, or new-app materialization.
 - A local Oracle APEX app directory or enough authoritative context for the skill to help create one.
 
-You can read the guidance without SQLcl. Any workflow that validates against Oracle APEX or imports into a workspace requires SQLcl, a usable `db_connection_name`, and the matching APEX workspace name.
+You can read the guidance and draft APEXlang artifacts without SQLcl. Any workflow that validates against Oracle APEX or imports into a workspace requires SQLcl, a usable `db_connection_name`, and the matching APEX workspace name.
+
+New workspaces do not need a pre-existing `artifacts/` directory. Runtime outputs are created lazily under `APEXLANG_OUTPUT_ROOT` only when a command writes logs, reports, or export backups. Existing `apex-exports/` folders are backup/export material and are ignored for app resolution and generation unless the user explicitly asks to inspect an export backup.
 
 ## Use with Oracle DB Skills
 
-Generic Oracle Database, PL/SQL, SQLcl, and utPLSQL guidance is owned by Oracle upstream DB skills at `https://github.com/oracle/skills/tree/main/db`. This package does not replace or duplicate those domains. It bundles only the APEXLang-specific SQLcl runtime adapter needed for app context discovery, APEXLang validation, explicit import, and runtime diagnostics.
+Generic Oracle Database, PL/SQL, SQLcl, and utPLSQL guidance is owned by Oracle upstream DB skills at `https://github.com/oracle/skills/tree/main/db`. This package does not replace or duplicate those domains. It bundles only the APEXlang-specific SQLcl runtime adapter needed for app context discovery, APEXlang validation, explicit import, and runtime diagnostics.
 
 ## Package Map
 
@@ -25,7 +27,7 @@ Generic Oracle Database, PL/SQL, SQLcl, and utPLSQL guidance is owned by Oracle 
 | `SKILL.md` | Main root entry and routing contract |
 | `assets/` | Routing, workspace-intelligence, metadata, and compiler catalogs |
 | `references/` | Workflow, domain, policy, and runtime support guidance |
-| `templates/` | APEXLang examples and templates |
+| `templates/` | APEXlang examples and templates |
 | `tools/` | Packaged command entrypoints |
 | `runtime/` | Runtime helpers used by packaged commands |
 
@@ -36,7 +38,7 @@ Good prompts name the app, page, component, data evidence, desired behavior, whe
 ### Whole app from beginning to end
 
 ```text
-Create a new service operations app from my table metadata for APEX workspace SERVICE_OPS_DEV. Include a home page, ticket dashboard, ticket report, ticket edit form, navigation, breadcrumbs, and default security. Check the APEXLang code before any import.
+Create a new service operations app from my table metadata for APEX workspace SERVICE_OPS_DEV. Include a home page, ticket dashboard, ticket report, ticket edit form, navigation, breadcrumbs, and default security. Check the APEXlang code before any import.
 ```
 
 ### Generate a page
@@ -72,15 +74,15 @@ Localize and translate my APEX application to Spanish using text messages, creat
 ### Validation and debugging
 
 ```text
-Check the APEXLang code for my app using db_connection_name apex_dev and APEX workspace SERVICE_OPS_DEV. If validation fails, explain the owning layer and suggest the smallest fix.
+Check the APEXlang code for my app using db_connection_name apex_dev and APEX workspace SERVICE_OPS_DEV. If validation fails, explain the owning layer and suggest the smallest fix.
 ```
 
 ## Basic Workflow
 
 1. Load `SKILL.md`.
-2. Resolve the app, data context, `db_connection_name`, and corresponding APEX workspace name.
-3. Generate APEXLang artifacts.
-4. Check APEXLang code.
+2. Resolve the app path and data context; collect `db_connection_name` plus the corresponding APEX workspace name only for Live DB work.
+3. Generate APEXlang artifacts.
+4. Check APEXlang code.
 5. Import only after explicit approval.
 
 ## Key Packaged Entrypoints
@@ -91,12 +93,13 @@ Check the APEXLang code for my app using db_connection_name apex_dev and APEX wo
 - `references/ops/sqlcl.md` covers the packaged SQLcl runtime adapter.
 - `references/policies/compiler-prop-map.md` explains the compiler-backed property policy.
 - `tools/query-valid-props.mjs` is the packaged compiler-truth query tool.
-- `tools/compiler-truth-audit.mjs` records compiler-truth evidence for generated or revised APEXLang artifacts.
-- `tools/compiler-truth-audit.mjs` records compiler-truth evidence for generated or revised APEXLang artifacts.
+- `tools/compiler-truth-audit.mjs` records compiler-truth evidence for generated or revised APEXlang artifacts.
+- `tools/apexctl.mjs runtime validate` is the live-validator-first check-only gate. It emits `validation-report.json`, `validation-transcript.log`, `problems.json`, and `component-contracts/<build>.json`.
 
 ## Notes
 
-- This README is for Oracle APEXLang skill consumers.
+- This README is for Oracle APEXlang skill consumers.
 - Do not treat this README as the router. `SKILL.md` owns routing and safety behavior.
 - The skill must not invent database objects. Provide table metadata, a data model, a live connection, or exact object details when a request depends on schema facts.
 - Live DB workflows are incomplete until the user specifies both `db_connection_name` and the corresponding APEX workspace name.
+- `artifacts/` is output only, not startup context. `apex-exports/` is backup/export material, not generated source.

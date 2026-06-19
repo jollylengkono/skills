@@ -1,3 +1,5 @@
+> All `node tools/apexctl.mjs ...` commands are package-root relative: run them from the packaged skill root, or invoke that script by explicit path.
+
 # AI tooling Guard — Precedence and Conflict Handling
 
 AI tooling must always prefer `.md` files over inferred behavior.
@@ -37,23 +39,23 @@ Error Code
 ## Oracle DB Skills Delegation Boundary (NON-NEGOTIABLE)
 
 Scope
-- Applies whenever APEXLang work touches Oracle Database, PL/SQL, SQLcl, or utPLSQL topics.
+- Applies whenever APEXlang work touches Oracle Database, PL/SQL, SQLcl, or utPLSQL topics.
 - Applies to both this source repo and the public `dist/apexlang` skill bundle.
 
 Rules (Hard Requirements)
 - MUST treat Oracle upstream DB skills at `https://github.com/oracle/skills/tree/main/db` as the source of truth for generic Oracle Database, PL/SQL, SQLcl, and utPLSQL best practices.
-- MUST keep APEXLang ownership limited to APEX artifact safety and APEXLang workflow integration:
+- MUST keep APEXlang ownership limited to APEX artifact safety and APEXlang workflow integration:
   - DB object evidence before APEX artifact generation
   - APEX page process and application process shape
   - inline SQL/PLSQL size gates inside APEX artifacts
   - `invokeApi` versus `executeCode` routing for APEX processes
   - extracted APEX artifact logic package naming
-  - SQLcl adapter behavior needed for APEXLang validate/import/export roundtrips
+  - SQLcl adapter behavior needed for APEXlang validate/import/export roundtrips
 - MUST route standalone or generic Oracle Database, PL/SQL, SQLcl, and utPLSQL authoring, tuning, style, installation, execution, reporting, and testing requests to the upstream DB skills when those skills are installed.
-- MUST NOT recreate upstream DB skill guidance inside APEXLang when upstream DB skills are absent.
-- MUST continue APEXLang-specific generation and runtime-safety workflows without requiring a locally installed copy of the upstream DB skills.
+- MUST NOT recreate upstream DB skill guidance inside APEXlang when upstream DB skills are absent.
+- MUST continue APEXlang-specific generation and runtime-safety workflows without requiring a locally installed copy of the upstream DB skills.
 - MUST stop with `Missing Inputs` or a short `Oracle DB skills required` notice for standalone generic Oracle Database, PL/SQL, SQLcl, or utPLSQL requests when the upstream DB skills are not available.
-- MUST NOT bundle generic PL/SQL tutorials, SQLcl tutorials, utPLSQL install/run/reporting guidance, or DB administration guidance in the public APEXLang package.
+- MUST NOT bundle generic PL/SQL tutorials, SQLcl tutorials, utPLSQL install/run/reporting guidance, or DB administration guidance in the public APEXlang package.
 
 Error Code
 - `ORACLE_DB_SKILLS_DELEGATION_REQUIRED_001`
@@ -81,7 +83,7 @@ Rules (Hard Requirements)
 - MUST make validator behavior ownership-aware: if a hidden item is detected in dynamic-action `itemsToReturn` or as a `setValue` target, treat it as post-render client-owned state and require `sessionStateProtection: unrestricted` plus the comments rationale.
 - MUST keep report/grid column escaping enabled by default. Do not disable escaping except for reviewed declarative `columnFormatting.htmlExpression` patterns that use escaped substitutions.
 - MUST reject arbitrary URLs, `javascript:`, `data:`, inline event handlers, and unallowlisted icon/enum/identifier/format-mask values when parsing blueprint input.
-- MUST NOT invent unsupported APEXlang attributes for secure cookies. If secure-cookie DSL support cannot be proven by the live APEXLang check, emit a blocking validation finding instead of generating speculative syntax.
+- MUST NOT invent unsupported APEXlang attributes for secure cookies. If secure-cookie DSL support cannot be proven by the live APEXlang check, emit a blocking validation finding instead of generating speculative syntax.
 
 Error Codes
 - `SECURITY_BASELINE_REQUIRED_001`
@@ -93,8 +95,14 @@ Error Codes
 - MUST: When the user requests specific regions/items/buttons, source the implementation from templates/** (region-components, template-components, etc.) and cite the exact template used.
 - MUST: Treat `templates/**` as the only active pattern and scaffold source for APEXlang generation.
 - MUST: When generation uses any template under `templates/**`, emit the final DSL from that template's declared output structure exactly.
-- MUST: Run and preserve a passing compiler-truth audit for every generated or revised `.apx` artifact before publish, live validate, or import eligibility.
-- MUST: Treat a missing or failing compiler-truth report as a hard blocker, not as advisory context.
+- MUST: Run and preserve compiler-truth diagnostics for every generated or revised `.apx` artifact before publish, live validate, or import eligibility.
+- MUST: Treat compiler-truth diagnostics as component-contract evidence, but do not let them override a live APEX validation pass.
+- MUST: Treat live APEX validate output from the selected target build as the primary validation gate for generated applications.
+- MUST: Record `LIVE_RUNTIME_VALIDATION_REQUIRED_001` and block completion when required runtime inputs or live APEX validation evidence are missing.
+- MUST: Record VS Code Problems snapshots as diagnostics when provided; missing snapshots are `not_provided` and do not block a live pass.
+- MUST: Use `problems.json` as the compact review interface for live validation findings. Sort findings by file, line, severity, compiler type, and message.
+- MUST: Treat local lint and broad policy/template prose as syntax hygiene or fallback guidance only when they cannot contradict the selected target build.
+- MUST NOT: Mark validation complete, publish, or offer import based only on local validators, template prose, memory-bank policy, VS Code Problems snapshots, or terminal transcript inspection when live runtime validation evidence is unresolved.
 - MUST: Preserve the template's emitted DSL tokens exactly, including component `type` values, block names, property names, nesting, and variant-specific syntax.
 - MUST NOT: infer or normalize emitted DSL from folder names, `templateId`, `canonicalDslType`, headings, registry labels, or prose when they conflict with the template's output structure.
 - MUST: If a selected template does not contain an explicit output block, use the nearest concrete emitted example in the same template family; do not invent syntax from metadata alone.
@@ -102,11 +110,15 @@ Error Codes
 - MUST NOT: Use `applications/**` as an example library, scaffold source, syntax source, pattern corpus, or fallback reference when selecting templates, page patterns, region structures, or DSL shape.
 - MUST: Restrict reads of the resolved target app under `applications/<target-app>/` to integration facts only, such as existing artifact paths, shared-component identifiers, page ids, aliases, navigation entries, breadcrumb entries, and other concrete wiring details.
 - MUST NOT: Infer layout, composition, naming conventions, DSL blocks, or reusable patterns from the resolved target app. Those decisions must come from `templates/**` plus the loaded memory-bank guidance.
+- MUST: Treat `artifacts/` as optional output only. Create it lazily only when a workflow writes logs, reports, validation evidence, or export backups.
+- MUST NOT: Read or scan `artifacts/**` as app source, schema evidence, template source, example corpus, or startup context.
+- MUST: Treat every `apex-exports` path segment as backup/export material and ignore it for app resolution, metadata discovery, bounded scans, template/source selection, and generation.
+- MUST NOT: Use `apex-exports/**` as generated source unless the user explicitly requests read-only export inspection, migration, or recovery analysis.
 - MUST: For brand new applications, materialize only named runtime artifacts into `applications/<app>/`: `.apex/`, `application.apx`, `deployments/`, `page-groups.apx`, `pages/`, `shared-components/`, and `supporting-objects/`.
 - MUST NOT: Copy the whole `templates/base-app-structure/` directory into a generated app root.
 - MUST NOT: Publish template-only root docs or metadata from `base-app-structure/` into `applications/<app>/`, including `README.md`, `base-app-structure._common.md`, `base-app-structure._index.md`, `base-app-structure.registry.json`, and `base-app-runtime-seed.manifest.json`.
 - MUST NOT: Publish the `base-app-structure/scaffold-example/` directory itself into `applications/<app>/`.
-- MUST: When applying `serverSideCondition {}` to any component, select the `type` from the canonical catalog defined in memory-bank/20-data/apex.logic.md and include only the attributes required for that type. Use the embedded examples in that file for syntax; never invent new condition types.
+- MUST: When applying `serverSideCondition {}` to any component, select the `type` from the canonical catalog defined in references/policies/memory-bank/20-data/apex.logic.md and include only the attributes required for that type. Use the embedded examples in that file for syntax; never invent new condition types.
 - MUST: Treat user-correctable submit failures as validation problems first, not page-process errors.
 - MUST: Before adding `raise_application_error` or other user-facing failure logic to a page process, first try native APEX validations in this order:
   - declarative item validation
@@ -119,6 +131,19 @@ Error Codes
 
 Error Code
 - `APP_TEMPLATE_ARTIFACT_LEAK_001`
+
+## APEXlang Line Ending Gate (NON-NEGOTIABLE)
+
+Scope
+- Applies to every generated or revised `.apx` artifact.
+
+Rules (Hard Requirements)
+- MUST write `.apx` artifacts with LF line endings only.
+- MUST NOT publish or validate `.apx` files that contain CRLF line endings.
+- MUST treat Windows default CRLF conversion as a source-control/tooling defect for `.apx` files and normalize those files to LF before validation or handoff.
+
+Error Code
+- `APEXLANG_LF_LINE_ENDINGS_REQUIRED_001`
 
 ## Calendar Link Target Resolution Gate (NON-NEGOTIABLE)
 
@@ -174,7 +199,7 @@ Scope
 
 Rules (Hard Requirements)
 - MUST: Resolve prerequisite metadata source before any DB-backed generation, review, revision, or validation routing.
-- MUST: Read `references/policies/db/index.json` and scan saved SQLcl connections before asking the user anything about DB mode or connection knowledge for interactive DB-backed workflows.
+- MUST: Read `assets/workspace-intelligence.json` and scan saved SQLcl connections before asking the user anything about DB mode or connection knowledge for interactive DB-backed workflows.
 - MUST: Before drafting or revising object-specific SQL or any DB-object reference, resolve one machine-readable evidence state for each referenced object:
   - `object_evidence_source: schema_doc`
   - `object_evidence_source: live_db`
@@ -186,12 +211,12 @@ Rules (Hard Requirements)
 - MUST: Treat explicit user-provided object names as `object_evidence_source: user_asserted` only for the objects the user actually named.
 - MUST: Use this simple-English prompt as the final object-evidence clarification fallback when object-specific SQL is still unresolved after deterministic discovery: `I need schema evidence before writing object-specific SQL. Provide db_connection_name and the corresponding APEX workspace name for live DB confirmation, or provide the exact object names to use.`
 - MUST: Treat a schema dictionary as eligible only when:
-  - it is registered in `references/policies/db/index.json`
-  - the referenced `references/policies/db/*.md` file exists
+  - it is registered in `assets/workspace-intelligence.json`
+  - the referenced `workspace schema dictionaries discovered by `node tools/apexctl.mjs workspace probe`` file exists
   - its frontmatter declares `status: active`
   - its frontmatter declares `metadata_mode: offline_dictionary`
   - its frontmatter declares `covers_columns: true`
-- MUST: If `db_mode: offline` is selected, read `references/policies/db/index.json` before selecting any schema dictionary for offline metadata reasoning.
+- MUST: If `db_mode: offline` is selected, read `assets/workspace-intelligence.json` before selecting any schema dictionary for offline metadata reasoning.
 - MUST: If exactly one eligible schema dictionary exists, auto-select it and continue with `prereq_source: schema_doc`.
 - MUST: If multiple eligible schema dictionaries exist, present the choices to the user and require a schema selection before continuing.
 - MUST: Use authoritative schema dictionaries as the preferred metadata evidence source when they exist, even if a live DB connection is also resolved.
@@ -224,14 +249,15 @@ Rules (Hard Requirements)
 - MUST: For APEX runtime work in online mode, require runtime capability probing before any same-session validate/import execution.
 - MUST: Probe both supported runtime paths when possible: resolved build-root runtime first, then PATH SQLcl fallback.
 - MUST: Ask for an explicit local APEX build path only when the user explicitly wants a local-build diagnostic or override and PATH SQLcl capability probing is not sufficient for the runtime task.
-- MUST: Default interactive APEX artifact workflows to checking APEXLang code; run the local first-pass check and the live APEXLang check through `apex validate -input` when `db_connection_name` and the app path are resolved.
-- MUST: After the live APEXLang check passes, offer GUI/clickable choices for the next action using plain language: `Check APEXLang code` (recommended) or `Check and import APEXLang code`. Include a short purpose summary and do not ask users to type import intent.
+- MUST: Default interactive APEX artifact workflows to checking APEXlang code; run the local first-pass check and the live APEXlang check through `apex validate -input` when `db_connection_name` and the app path are resolved.
+- MUST: After the live APEXlang check passes, offer GUI/clickable choices for the next action using plain language: `Check APEXlang code` (recommended) or `Check and import APEXlang code`. Include a short purpose summary and do not ask users to type import intent.
 - MUST: If GUI/clickable choices are unavailable, stop after validate-only and report that import can be requested as a separate follow-up.
 - MUST: Treat an explicit post-check GUI import choice as the only interactive authority for import; do not infer it from initial prompt wording or public runtime CLI flags.
 - MUST: For any existing-app `validate-and-import` run, resolve the intended live application before import and preserve its numeric application id as the canonical session authority.
 - MUST: Bound every import-authorized target-resolution run to one intended workspace before deciding whether the run is `update-existing` or `create-new`.
 - MUST: Produce exactly one bounded target-resolution outcome for import-authorized work: `resolved_existing_app`, `not_found_in_workspace`, `ambiguous_candidates`, or `identity_uncertain`.
 - MUST: Reuse that preserved canonical application id for every later workspace-resolution and import step in the same session.
+- MUST NOT: Treat a target-resolution timeout or failure as permission to bypass the wrapper with direct SQLcl import; live validate success is not target-identity evidence.
 - MUST NOT: Treat alias similarity alone as proof of target identity after the canonical live application id is known.
 - MUST: When staged deployment metadata does not match the preserved canonical live application id, reconcile the staged deployment app id to the canonical target before import.
 - MUST: If an import-authorized run later resolves or reports a different application id than the preserved canonical target, block the run, record the mismatch, and treat the reported target as an accidental duplicate or wrong target.
@@ -249,7 +275,7 @@ Scope
 
 Rules (Hard Requirements)
 - MUST NOT: Leave live validation as a deferred note, TODO, or optional follow-up step when `db_connection_name` is resolved and `resolved_app_path` is available.
-- MUST: Treat the default check-only path plus `apex validate -input` as the mandatory in-workflow step in the canonical sequence: plan → implement → review → local first-pass check → live APEXLang check → offer GUI import choice.
+- MUST: Treat the default check-only path plus `apex validate -input` as the mandatory in-workflow step in the canonical sequence: plan → implement → review → local first-pass check → live APEXlang check → offer GUI import choice.
 - MUST: Immediately route to checks upon completing implementation and review; import remains a separate post-check GUI choice.
 - MUST: Treat the resolved build-root runtime path as the preferred same-session runtime path when available, with PATH SQLcl as the supported fallback.
 - MUST: Record SQLcl version for reporting, but MUST NOT treat version alone as proof that runtime commands are available.
@@ -272,7 +298,7 @@ Scope
 Rules (Hard Requirements)
 - MUST NOT: Mark the run complete or present completion wording unless the same `resolved_app_path` passed direct SQLcl `apex validate`.
 - MUST: Treat completion as allowed when:
-  - the default runtime action is check-only and the live APEXLang check succeeded for that app path
+  - the default runtime action is check-only and the live APEXlang check succeeded for that app path
   - the post-check GUI choice resolved to import and live check/import both succeeded for that app path in the same authenticated SQLcl user session
 - MUST: Treat validate/import session continuity as part of runtime eligibility only when the resolved runtime action includes import.
 - MUST NOT: Treat bridge or wrapper execution as completion evidence when it disagrees with the equivalent real PATH SQLcl session for the same connection and app path.
@@ -785,7 +811,7 @@ Scope
   - computation `sqlQuery`
   - fenced ```sql``` blocks in generated APEXlang artifacts
 - Applies to any request that creates or updates database objects (for example packages, procedures, functions, tables, views, triggers, types).
-- Does not define generic SQL or PL/SQL best practices; it only bounds APEX artifact payloads and DB-object safety for APEXLang workflows.
+- Does not define generic SQL or PL/SQL best practices; it only bounds APEX artifact payloads and DB-object safety for APEXlang workflows.
 
 Rules (Hard Requirements)
 - Character-count method is the raw body text inside the SQL/PLSQL block, including whitespace, blank lines, and comments.
@@ -831,10 +857,10 @@ Enforcement (Agents & Workflows)
 # APEX Artifact PL/SQL Call Safety — Non‑Negotiable
 
 Purpose
-- Keep generated APEX artifact PL/SQL calls explicit when APEXLang must emit PL/SQL text.
+- Keep generated APEX artifact PL/SQL calls explicit when APEXlang must emit PL/SQL text.
 
 Scope
-- Applies to PL/SQL text emitted in Oracle APEX artifacts: processes, dynamic actions, validations, page/item computations, and generated APEXLang fenced PL/SQL blocks.
+- Applies to PL/SQL text emitted in Oracle APEX artifacts: processes, dynamic actions, validations, page/item computations, and generated APEXlang fenced PL/SQL blocks.
 - Applies to APEX_* calls and custom application package calls inside generated APEX artifact PL/SQL text.
 - Does not define generic PL/SQL coding standards for standalone packages or SQL Workshop scripts; use upstream DB skills for that guidance.
 - Parameterless routines may be called without arguments.
@@ -884,7 +910,7 @@ Purpose
 - Keep extracted APEX artifact logic deterministic and avoid page-scoped package proliferation.
 
 Scope
-- Applies only when APEXLang extracts oversized or reusable PL/SQL out of APEX artifacts.
+- Applies only when APEXlang extracts oversized or reusable PL/SQL out of APEX artifacts.
 - Does not define generic PL/SQL package architecture; route generic package-design decisions to upstream DB skills.
 
 Rules (Hard Requirements)
@@ -900,8 +926,8 @@ Enforcement (Agents & Workflows)
 # utPLSQL Boundary for Extracted APEX Artifact Logic
 
 Policy
-- APEXLang may identify extracted `app_process_api` procedures as candidates for tests when a workflow extracts APEX artifact logic.
-- APEXLang must not define generic utPLSQL authoring, installation, execution, reporting, suite selection, or CI policy.
+- APEXlang may identify extracted `app_process_api` procedures as candidates for tests when a workflow extracts APEX artifact logic.
+- APEXlang must not define generic utPLSQL authoring, installation, execution, reporting, suite selection, or CI policy.
 - Generic utPLSQL rules and execution details belong to the upstream Oracle DB skills.
 
 # Login Process Boundary Guardrail — Non‑Negotiable

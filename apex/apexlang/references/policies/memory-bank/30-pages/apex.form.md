@@ -7,7 +7,7 @@ Form targets may be modal dialogs, drawers, or normal embedded/detail pages base
 
 ## General
 - Always start from page form examples in `templates/page-examples/` (for example, `form-page.md`) and pair with `templates/region-components/form/form.basic.md`.
-- Default single-row create/edit form pages to modal dialogs; use drawer or normal embedded/detail pages only when the routed workflow or page design requires that page mode.
+- Default single-row create/edit form pages launched from reports to drawer end/right; use standard modal dialog, alternate drawer positions, or normal embedded/detail pages only when the routed workflow or page design requires that page mode.
 - Refer to `apex.page.md` for page creation steps
 - Maintain naming consistency and follow the form generation flow defined in global standards
 
@@ -111,8 +111,10 @@ Form targets may be modal dialogs, drawers, or normal embedded/detail pages base
   - If the parent region is an Interactive Grid already configured as editable (edit.enabled), prefer inline IG CRUD with interactiveGridAutoRowProcessing instead of generating a separate form.
 
 - Modal vs Standard target:
-  - Default to a modal dialog form for single-row edit/create flows initiated from a report row link or an “Add/Create …” button.
+  - Default to a drawer end/right form for single-row edit/create flows initiated from a report row link or an “Add/Create …” button.
   - Use a non-modal “detail” page with an embedded form region only when the design requires composite layouts with additional IG subregions (e.g., drill-down detail pages). Such pages still use the same ARP (Auto Row DML) for the form region.
+  - Use standard modal dialog only when the requirements or completed application spec explicitly request centered dialog behavior; drawer forms must explicitly set the end/right drawer option, and require explicit evidence for start/left, top, or bottom positions.
+  - Treat "popout" as a standard modal-dialog presentation unless the requirements define a specific drawer or wizard behavior.
 
 - Required form scaffolding (normal, modal, or drawer):
   - Start from `templates/page-examples/form-page/form-page._index.md`; use `appearance.pageMode: modalDialog` for modal dialogs and the drawer template/page-mode contract when the target is a drawer.
@@ -121,7 +123,8 @@ Form targets may be modal dialogs, drawers, or normal embedded/detail pages base
   - For a single-column primary key, generate one hidden PK item with `source.formRegion`, `source.column`, `source.dataType`, and `primaryKey: true`.
   - For composite primary keys, generate one hidden item for each PK column and set `primaryKey: true` on each PK source mapping.
   - Do not emit `primaryKey: false` placeholders on non-PK form items; omit the property unless the item is a true primary-key mapping.
-  - edit.add: true, edit.update: true, edit.delete: true (delete is naturally guarded by PK not null).
+  - Keep the form region edit block minimal: `edit { enabled: true }`.
+  - Do not emit `edit.add`, `edit.update`, or `edit.delete` on form regions; those operation flags belong to interactive grid edit contracts, not regular forms.
 - Buttons:
     - CANCEL (definedByDynamicAction)
     - CREATE (`serverSideCondition.type: itemIsNull` on the PK item; databaseAction: insert)
@@ -143,7 +146,7 @@ Form targets may be modal dialogs, drawers, or normal embedded/detail pages base
   - Do not emit aliases such as `dialogClosed`; the event token must match the approved dynamic-action event contract exactly.
   - Use the standard template: templates/business-logic/dynamic-actions/dynamic-actions.refresh-region-after-dialog.md.
   - Bind to the specific region(s) affected (e.g., classic report, IR, or IG) as shown in examples.
-  - If you need additional runtime checks, use a `serverSideCondition` from the catalog (memory-bank/20-data/apex.logic.md) and follow the syntax examples documented there when combining DA and component conditions.
+  - If you need additional runtime checks, use a `serverSideCondition` from the catalog (references/policies/memory-bank/20-data/apex.logic.md) and follow the syntax examples documented there when combining DA and component conditions.
 
 - Security and protection:
   - Set pageAccessProtection: argumentsMustHaveChecksum on both parent and form pages.

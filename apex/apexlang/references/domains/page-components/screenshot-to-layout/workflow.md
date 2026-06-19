@@ -49,14 +49,15 @@ Before drafting the page, inspect the target app's shared navigation and breadcr
    - multi-row pages may reuse the same outer lanes while only some parent lanes contain nested child columns
 6. Freeze the structural scaffold and region layout tree once the structure is clear.
 7. Map each preserved region to the nearest native APEX primitive region family first.
-8. When a preserved region is a cluster of nearby metrics or cards, emit one grouped `cards` region with one SQL query returning multiple rows as the first mapping choice.
-9. Split that cluster into separate peer regions only when the screenshot clearly shows distinct containers, headings, or spacing that make each metric its own region.
-10. When a preserved region is clearly a vertical task or navigation panel, create a shared list with the visible entries and emit a `list` region that references it.
-11. When a preserved region is clearly a search or filter form, emit real page items for the visible controls and real buttons for the visible actions inside one shared form/layout container.
-12. If no primitive region matches safely, keep it in the same layout position as a `staticContent` region with short descriptive placeholder text only.
-13. Do not use `source.htmlCode`, custom markup, or decorative static content to mimic cards, reports, charts, forms, or other screenshot regions.
-14. If the target app already uses shared navigation or breadcrumbs, add one navigation-menu entry and one breadcrumb entry for the new page by reusing the existing shared-component ids, entry containers, and target format already present in the app.
-15. Emit the page draft and any required shared-component updates so the new page matches the screenshot layout and integrates cleanly with the target app.
+8. When a preserved region is a cluster of nearby aggregate metrics, emit one grouped `themeTemplateComponent/metricCard` region with one normalized SQL query returning multiple rows as the first mapping choice.
+9. When a preserved region is a cluster of nearby entity, media, or navigation cards, emit one grouped native `cards` region with one SQL query returning multiple rows as the first mapping choice.
+10. Split that cluster into separate peer regions only when the screenshot clearly shows distinct containers, headings, or spacing that make each metric or card its own region.
+11. When a preserved region is clearly a vertical task or navigation panel, create a shared list with the visible entries and emit a `list` region that references it.
+12. When a preserved region is clearly a search or filter form, emit real page items for the visible controls and real buttons for the visible actions inside one shared form/layout container.
+13. If no primitive region matches safely, keep it in the same layout position as a `staticContent` region with short descriptive placeholder text only.
+14. Do not use `source.htmlCode`, custom markup, or decorative static content to mimic cards, reports, charts, forms, or other screenshot regions.
+15. If the target app already uses shared navigation or breadcrumbs, add one navigation-menu entry and one breadcrumb entry for the new page by reusing the existing shared-component ids, entry containers, and target format already present in the app.
+16. Emit the page draft and any required shared-component updates so the new page matches the screenshot layout and integrates cleanly with the target app.
 
 ## Layout Priorities
 1. Preserve exact region structure.
@@ -85,8 +86,8 @@ Before drafting the page, inspect the target app's shared navigation and breadcr
 - Do not assume the layout can only be expressed with `LEFT` and `RIGHT`; add as many structural placeholder regions as the screenshot topology requires.
 - Use structural placeholder regions to preserve stable outer and inner column boundaries, not as an afterthought once component mapping has already started.
 - Do not silently drop, merge, or reorder visible sections after the layout tree is derived.
-- Do not split one visually grouped metric/cards strip into multiple cards regions or one static region per metric unless the screenshot clearly shows separate region containers.
-- For KPI strips, grouped `cards` is the expected default mapping whenever native APEX cards is plausible.
+- Do not split one visually grouped KPI strip into multiple regions or one static region per metric unless the screenshot clearly shows separate region containers.
+- For KPI strips, grouped `themeTemplateComponent/metricCard` is the expected default mapping. Use native Cards only when the user explicitly asks for Cards/native cards or when the visible content is an entity/media/navigation card grid.
 - Do not render obvious `Actions`, `Links`, `Resources`, or `Quick Links` panels as static text when native shared lists plus list regions are a safe mapping.
 - Do not render obvious form controls or action buttons as static text when real page items and real buttons are a safe native mapping.
 - Placeholder static regions must include short descriptive placeholder text only in the region body.

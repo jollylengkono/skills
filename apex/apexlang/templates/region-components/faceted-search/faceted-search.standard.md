@@ -36,4 +36,4 @@ region {{searchRegionStaticId}} (
   - Order Date: `type: range`
   - Order Status: `type: selectList`, `checkboxGroup`, or `radioGroup` with `lov { type: distinctValues }`
   - Store: `type: selectList`, `checkboxGroup`, or `radioGroup` with `lov { type: distinctValues }`
-- Do not emit `settings.currentFacetsSelector`; the live importer rejects that property in this runtime.
+- Do not document or emit `settings.currentFacetsSelector`; the live importer rejects that property in this runtime.

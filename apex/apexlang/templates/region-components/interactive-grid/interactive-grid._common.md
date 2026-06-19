@@ -13,7 +13,7 @@ Standardize variable contracts and guardrails for interactive grid regions.
 
 # Generation Rules (MANDATORY)
 
-1. Load `memory-bank/30-pages/apex.page.md` and `memory-bank/20-data/apex.sql.md` before emitting grid SQL or table-backed grid source definitions.
+1. Load `references/policies/memory-bank/30-pages/apex.page.md` and `references/policies/memory-bank/20-data/apex.sql.md` before emitting grid SQL or table-backed grid source definitions.
 2. Use `interactive-grid._columns._common.md` for canonical grid column definitions.
 3. Use `interactive-grid._saved-report._common.md` for shared saved report structure.
 4. Use exactly one Interactive Grid source mode: query-backed (`source.type: sqlQuery` + `source.sqlQuery`) or table-backed (`source.tableName`).

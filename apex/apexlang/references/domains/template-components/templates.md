@@ -26,4 +26,4 @@
 
 For content-row page or region creation, load `content-row._common.md` first, then `content-row._index.md`, and default to `content-row.report-minimal.md` unless the prompt explicitly requests richer features. When badge iconography or placement is requested, use `plugin-badge.icon` and `plugin-badge.position` from the Content Row contract.
 
-Consult `rules-mapping.json` to load only the listed rules per request.
+Consult `assets/rules-mapping.json` to load only the listed rules per request.

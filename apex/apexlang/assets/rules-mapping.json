@@ -1,7 +1,7 @@
 {
   "rules": [
     {
-      "apply": "../apexlang/templates/region-components/calendar/calendar._common.md",
+      "apply": "templates/region-components/calendar/calendar._common.md",
       "match": [
         "calendar region",
         "createLink",
@@ -11,44 +11,44 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/cards/cards._common.md",
+      "apply": "templates/region-components/cards/cards._common.md",
       "match": [
         "cards",
         "cards region"
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/chart/chart._common.md",
+      "apply": "templates/region-components/chart/chart._common.md",
       "match": [
         "chart region"
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/classic-report/classic-report._common.md",
+      "apply": "templates/region-components/classic-report/classic-report._common.md",
       "match": [
         "report"
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/faceted-search/faceted-search._common.md",
+      "apply": "templates/region-components/faceted-search/faceted-search._common.md",
       "match": [
         "faceted search region"
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/interactive-grid/interactive-grid._common.md",
+      "apply": "templates/region-components/interactive-grid/interactive-grid._common.md",
       "match": [
         "interactive grid region"
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/interactive-report/interactive-report._common.md",
+      "apply": "templates/region-components/interactive-report/interactive-report._common.md",
       "match": [
         "interactive report region"
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/list/list._common.md",
+      "apply": "templates/region-components/list/list._common.md",
       "match": [
         "list region",
         "list",
@@ -57,7 +57,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/template-components/metric-card/metric-card._common.md",
+      "apply": "templates/template-components/metric-card/metric-card._common.md",
       "match": [
         "metric card",
         "metric-card",
@@ -67,35 +67,38 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/smart-filter-search/smart-filter-search._common.md",
+      "apply": "templates/region-components/smart-filter-search/smart-filter-search._common.md",
       "match": [
         "smart filters"
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/static-content/static-content._common.md",
+      "apply": "templates/region-components/static-content/static-content._common.md",
       "match": [
         "hero"
       ]
     },
     {
-      "apply": "../apexlang/templates/region-components/static-content/static-content._common.md",
+      "apply": "templates/region-components/static-content/static-content._common.md",
       "match": [
         "static content",
         "static region"
       ]
     },
     {
-      "apply": "../../references/domains/shared-components/workflow-translations.md",
+      "apply": "references/domains/shared-components/workflow-translations.md",
       "match": [
         "translate my app",
         "translate this app",
         "translate one page",
         "translate page",
         "translate this page",
-        "make my app japanese",
-        "make this app japanese",
-        "make this page japanese",
+        "make my app available in another language",
+        "make this app available in another language",
+        "make this page available in another language",
+        "make this app multilingual",
+        "add locale support",
+        "configure text messages",
         "localize this app",
         "localize my app",
         "add another language to this app",
@@ -104,7 +107,7 @@
       ]
     },
     {
-      "apply": "../../SKILL.md",
+      "apply": "SKILL.md",
       "match": [
         ".apx",
         "/10-workflow-apexdev.md",
@@ -123,7 +126,7 @@
       ]
     },
     {
-      "apply": "../../references/domains/business-logic/computations/workflow-computations-batch.md",
+      "apply": "references/domains/business-logic/computations/workflow-computations-batch.md",
       "match": [
         "computation",
         "batch computation",
@@ -133,7 +136,7 @@
       ]
     },
     {
-      "apply": "../../references/domains/business-logic/dynamic-actions/workflow-dynamic-actions-batch.md",
+      "apply": "references/domains/business-logic/dynamic-actions/workflow-dynamic-actions-batch.md",
       "match": [
         "batch dynamic action",
         "apply dynamic action across pages",
@@ -142,7 +145,7 @@
       ]
     },
     {
-      "apply": "../../references/domains/business-logic/dynamic-actions/workflow-dynamic-actions-plsql-batch.md",
+      "apply": "references/domains/business-logic/dynamic-actions/workflow-dynamic-actions-plsql-batch.md",
       "match": [
         "batch execute server code",
         "execute api dynamic action across pages",
@@ -150,7 +153,7 @@
       ]
     },
     {
-      "apply": "../../references/domains/business-logic/processes/workflow-page-processes-batch.md",
+      "apply": "references/domains/business-logic/processes/workflow-page-processes-batch.md",
       "match": [
         "batch page process",
         "invoke api process across pages",
@@ -158,7 +161,7 @@
       ]
     },
     {
-      "apply": "../../references/domains/shared-components/workflow-translations-batch.md",
+      "apply": "references/domains/shared-components/workflow-translations-batch.md",
       "match": [
         "batch translation",
         "translation bundle",
@@ -167,7 +170,7 @@
       ]
     },
     {
-      "apply": "../../references/domains/universal-attr-config/workflow-server-side-conditions-batch.md",
+      "apply": "references/domains/universal-attr-config/workflow-server-side-conditions-batch.md",
       "match": [
         "server side condition batch",
         "apply ssc token",
@@ -175,7 +178,7 @@
       ]
     },
     {
-      "apply": "../../references/domains/universal-attr-config/workflow-help-text-batch.md",
+      "apply": "references/domains/universal-attr-config/workflow-help-text-batch.md",
       "match": [
         "batch help text",
         "apply help text",
@@ -183,7 +186,7 @@
       ]
     },
     {
-      "apply": "../../not-bundled/schema-modeling",
+      "apply": "external:oracle-db/schema-modeling",
       "match": [
         "boolean",
         "boolean column",
@@ -205,7 +208,7 @@
       ]
     },
     {
-      "apply": "../../not-bundled/plsql",
+      "apply": "external:oracle-db/plsql",
       "match": [
         "plsql",
         "pl/sql",
@@ -219,7 +222,7 @@
       ]
     },
     {
-      "apply": "00-guard/ai.guard.md",
+      "apply": "references/policies/memory-bank/00-guard/ai.guard.md",
       "match": [
         "apex",
         "apexlang",
@@ -245,7 +248,7 @@
       ]
     },
     {
-      "apply": "10-global/apex.acronyms.md",
+      "apply": "references/policies/memory-bank/10-global/apex.acronyms.md",
       "match": [
         "acronyms",
         "glossary",
@@ -254,7 +257,7 @@
       ]
     },
     {
-      "apply": "10-global/apex.global.md",
+      "apply": "references/policies/memory-bank/10-global/apex.global.md",
       "match": [
         "apex",
         "apexlang",
@@ -264,7 +267,7 @@
       ]
     },
     {
-      "apply": "20-data/apex.logic.md",
+      "apply": "references/policies/memory-bank/20-data/apex.logic.md",
       "match": [
         "ai config",
         "ai configuration",
@@ -313,7 +316,7 @@
       ]
     },
     {
-      "apply": "20-data/apex.schema-modeling.md",
+      "apply": "references/policies/memory-bank/20-data/apex.schema-modeling.md",
       "match": [
         "boolean",
         "boolean column",
@@ -334,7 +337,7 @@
       ]
     },
     {
-      "apply": "20-data/apex.sql.md",
+      "apply": "references/policies/memory-bank/20-data/apex.sql.md",
       "match": [
         "classic report",
         "interactive report",
@@ -348,7 +351,7 @@
       ]
     },
     {
-      "apply": "20-data/db.connection.md",
+      "apply": "references/policies/memory-bank/20-data/db.connection.md",
       "match": [
         "classic report",
         "connection",
@@ -364,13 +367,13 @@
       ]
     },
     {
-      "apply": "30-pages/apex.blank-page.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.blank-page.md",
       "match": [
         "blank page"
       ]
     },
     {
-      "apply": "30-pages/apex.calendar.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.calendar.md",
       "match": [
         "calendar",
         "calendar region",
@@ -383,7 +386,7 @@
       ]
     },
     {
-      "apply": "30-pages/apex.chart-page.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.chart-page.md",
       "match": [
         "chart",
         "graph",
@@ -391,7 +394,7 @@
       ]
     },
     {
-      "apply": "30-pages/apex.classic-report.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.classic-report.md",
       "match": [
         "classic report",
         "classic-report",
@@ -402,7 +405,7 @@
       ]
     },
     {
-      "apply": "30-pages/apex.report-column-rendering.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.report-column-rendering.md",
       "match": [
         "classic report",
         "interactive report",
@@ -418,7 +421,7 @@
       ]
     },
     {
-      "apply": "30-pages/apex.dashboard.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.dashboard.md",
       "match": [
         "dashboard",
         "kpi",
@@ -427,7 +430,7 @@
       ]
     },
     {
-      "apply": "30-pages/apex.layout.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.layout.md",
       "match": [
         "column span",
         "layout row",
@@ -439,7 +442,7 @@
       ]
     },
     {
-      "apply": "30-pages/apex.faceted-search.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.faceted-search.md",
       "match": [
         "faceted region",
         "faceted report",
@@ -448,7 +451,7 @@
       ]
     },
     {
-      "apply": "30-pages/apex.form.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.form.md",
       "match": [
         "crud form",
         "edit page",
@@ -462,14 +465,14 @@
       ]
     },
     {
-      "apply": "30-pages/apex.interactive-grid-page.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.interactive-grid-page.md",
       "match": [
         "interactive grid",
         "interactive-grid"
       ]
     },
     {
-      "apply": "30-pages/apex.interactive-report.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.interactive-report.md",
       "match": [
         "interactive report",
         "interactive-report",
@@ -480,14 +483,14 @@
       ]
     },
     {
-      "apply": "30-pages/apex.login-page.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.login-page.md",
       "match": [
         "login",
         "login page"
       ]
     },
     {
-      "apply": "30-pages/apex.map-page.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.map-page.md",
       "match": [
         "map",
         "map page",
@@ -495,7 +498,7 @@
       ]
     },
     {
-      "apply": "30-pages/apex.page.md",
+      "apply": "references/policies/memory-bank/30-pages/apex.page.md",
       "match": [
         "breadcrumb",
         "link syntax",
@@ -507,14 +510,14 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons._common.md",
+      "apply": "templates/buttons/buttons._common.md",
       "match": [
         "button",
         "buttons"
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons._index.md",
+      "apply": "templates/buttons/buttons._index.md",
       "match": [
         "button",
         "buttons",
@@ -523,7 +526,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons.submit.md",
+      "apply": "templates/buttons/buttons.submit.md",
       "match": [
         "submitPage",
         "submit button",
@@ -534,7 +537,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons.redirect-this-app.md",
+      "apply": "templates/buttons/buttons.redirect-this-app.md",
       "match": [
         "redirectThisApp",
         "redirect this app",
@@ -542,7 +545,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons.redirect-other-app.md",
+      "apply": "templates/buttons/buttons.redirect-other-app.md",
       "match": [
         "redirectOtherApp",
         "redirectAnotherApp",
@@ -552,7 +555,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons.defined-by-da.md",
+      "apply": "templates/buttons/buttons.defined-by-da.md",
       "match": [
         "definedByDynamicAction",
         "button defined by dynamic action",
@@ -560,7 +563,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons.trigger-action.md",
+      "apply": "templates/buttons/buttons.trigger-action.md",
       "match": [
         "triggerAction",
         "button with trigger action",
@@ -568,7 +571,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons.menu.md",
+      "apply": "templates/buttons/buttons.menu.md",
       "match": [
         "button menu",
         "menu button",
@@ -576,7 +579,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons.confirmation.md",
+      "apply": "templates/buttons/buttons.confirmation.md",
       "match": [
         "button confirmation",
         "requiresConfirmation",
@@ -584,7 +587,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons.server-side-condition.md",
+      "apply": "templates/buttons/buttons.server-side-condition.md",
       "match": [
         "button server side condition",
         "button condition",
@@ -592,7 +595,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/buttons/buttons.appearance-icon.md",
+      "apply": "templates/buttons/buttons.appearance-icon.md",
       "match": [
         "button icon",
         "icon button",
@@ -604,7 +607,7 @@
       ]
     },
     {
-      "apply": "40-components/apex.buttons.md",
+      "apply": "references/policies/memory-bank/40-components/apex.buttons.md",
       "match": [
         "ai assistant button",
         "button",
@@ -628,7 +631,7 @@
       ]
     },
     {
-      "apply": "40-components/apex.items.md",
+      "apply": "references/policies/memory-bank/40-components/apex.items.md",
       "match": [
         "autocomplete",
         "checkbox",
@@ -680,7 +683,7 @@
       ]
     },
     {
-      "apply": "40-components/apex.templates.md",
+      "apply": "references/policies/memory-bank/40-components/apex.templates.md",
       "match": [
         "button template",
         "column grid",
@@ -696,7 +699,7 @@
       ]
     },
     {
-      "apply": "../../references/domains/page-components/buttons/workflow-button-batch.md",
+      "apply": "references/domains/page-components/buttons/workflow-button-batch.md",
       "match": [
         "remove button",
         "delete button component",
@@ -708,7 +711,7 @@
       ]
     },
     {
-      "apply": "../apexlang/templates/shared-components/build-options.md",
+      "apply": "templates/shared-components/build-options.md",
       "match": [
         "build option",
         "build options",
@@ -717,7 +720,7 @@
       ]
     },
     {
-      "apply": "40-components/apex.region-contracts.md",
+      "apply": "references/policies/memory-bank/40-components/apex.region-contracts.md",
       "match": [
         "region contract",
         "region contracts",
@@ -728,7 +731,7 @@
       ]
     },
     {
-      "apply": "40-components/apex.region-data-source.md",
+      "apply": "references/policies/memory-bank/40-components/apex.region-data-source.md",
       "match": [
         "region data source",
         "data source type",
@@ -743,7 +746,7 @@
       ]
     },
     {
-      "apply": "40-components/apex.region-media.md",
+      "apply": "references/policies/memory-bank/40-components/apex.region-media.md",
       "match": [
         "blob display",
         "blob column",
@@ -756,7 +759,7 @@
       ]
     },
     {
-      "apply": "40-components/apex.region-interactions.md",
+      "apply": "references/policies/memory-bank/40-components/apex.region-interactions.md",
       "match": [
         "region interaction",
         "cards action",

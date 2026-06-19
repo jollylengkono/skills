@@ -15,9 +15,9 @@ Required inputs
 - When `condition_type` = plsqlExpression, require the generator to apply the guardrails in 20-data/apex.logic.md section 8 (bind syntax, null safety, no DML/dynamic SQL) and capture the intent + expression in the preview.
 
 Load
-- memory-bank/00-guard/ai.guard.md
-- memory-bank/10-global/apex.global.md
-- memory-bank/20-data/apex.logic.md
+- references/policies/memory-bank/00-guard/ai.guard.md
+- references/policies/memory-bank/10-global/apex.global.md
+- references/policies/memory-bank/20-data/apex.logic.md
 - Component/page rules resolved per target component type (e.g., `30-pages/apex.form.md`, `40-components/apex.items.md`).
 
 Execution model

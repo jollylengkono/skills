@@ -16,7 +16,7 @@ Interactive report configured for Natural Language to Interactive Report (NL2IR)
 
 # Generation Rules (MANDATORY)
 
-1. Load `interactive-report._common.md`, `interactive-report._columns._common.md`, `memory-bank/30-pages/apex.interactive-report.md`, and `memory-bank/00-guard/ai.guard.md` before use.
+1. Load `interactive-report._common.md`, `interactive-report._columns._common.md`, `references/policies/memory-bank/30-pages/apex.interactive-report.md`, and `references/policies/memory-bank/00-guard/ai.guard.md` before use.
 2. NL2IR report and column context must scan annotations first, use descriptive annotations before comments, and never infer missing context.
 3. If no DB connection is available, request `db_connection_name` and stop.
 

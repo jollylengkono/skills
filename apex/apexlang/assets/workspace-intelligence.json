@@ -66,7 +66,9 @@
       "build",
       "coverage",
       ".next",
-      ".turbo"
+      ".turbo",
+      "artifacts",
+      "apex-exports"
     ],
     "allowed_extensions": [
       ".json",
@@ -122,6 +124,7 @@
   "hard_stop_conditions": [
     "do not infer schema or api shape from prose alone",
     "do not scan outside current session directory",
+    "do not use artifacts or apex-exports directories as source context",
     "when app-scoped work is requested and no app root is resolved, ask for the exact app directory or bounded scan root",
     "when only nonstandard app roots are found, ask the user to confirm the target app before reads or edits",
     "stop when same-rank authoritative sources conflict",

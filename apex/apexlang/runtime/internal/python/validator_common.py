@@ -1,4 +1,4 @@
-"""Shared helpers for APEXLang validator scripts.
+"""Shared helpers for APEXlang validator scripts.
 
 The validators are intentionally small command-line programs with stable JSON
 report shapes. This module centralizes the repeated filesystem and issue parsing

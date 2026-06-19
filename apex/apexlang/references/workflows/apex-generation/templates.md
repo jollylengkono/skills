@@ -42,8 +42,8 @@ Calendar note:
   - Navigation lists, breadcrumbs, shared LOVs, translations.
 
 ## Guardrails & Loading
-- Always load `memory-bank/00-guard/ai.guard.md` and `memory-bank/10-global/apex.global.md`.
-- Use `memory-bank/rules-mapping.json` to fetch additional rules per component keyword.
+- Always load `references/policies/memory-bank/00-guard/ai.guard.md` and `references/policies/memory-bank/10-global/apex.global.md`.
+- Use `assets/rules-mapping.json` to fetch additional rules per component keyword.
 - Treat default help text, report-column guidance, and developer comments as baseline generation concerns; load the matching form/report rule files even when the prompt does not explicitly ask for annotations.
 - Treat `simple`, `basic`, `starter`, or similar prompt wording as a request for concise output, not as permission to skip the default guidance layer.
 - Skill-local agents live in `references/workflows/apex-generation/agents/*.md` (Draft, Critique, Revision).

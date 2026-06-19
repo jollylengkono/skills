@@ -225,7 +225,7 @@
   - 40-components/apex.buttons.md
   - 20-data/apex.logic.md
 - Templates:
-  - apexlang/templates/business-logic/dynamic-actions/dynamic-actions.show-ai-assistant.md
+  - templates/business-logic/dynamic-actions/dynamic-actions.show-ai-assistant.md
 - Required inputs:
   - Target page number/alias
   - Button placement (Breadcrumb/Title Bar) + button identifier

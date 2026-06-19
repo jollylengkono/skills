@@ -1,6 +1,6 @@
-# APEXLang Prompt Contracts
+# APEXlang Prompt Contracts
 
-Canonical contract for APEXLang agent prompting. Use this file as the shared rule source for the router and the Draft, Critique, and Revision agents.
+Canonical contract for APEXlang agent prompting. Use this file as the shared rule source for the router and the Draft, Critique, and Revision agents.
 
 ## Purpose
 
@@ -53,7 +53,7 @@ Each entry must include:
 
 ### Generation Plan
 
-Required for non-trivial page, component, or application generation before emitting APEXLang.
+Required for non-trivial page, component, or application generation before emitting APEXlang.
 
 Minimum required fields:
 
@@ -68,7 +68,21 @@ Required response order for non-trivial structural generation:
 
 1. `Compiler Truth Evidence` when required
 2. `Generation Plan`
-3. generated APEXLang
+3. generated APEXlang
+
+### Application Spec
+
+Required before complete application generation from functional requirements plus model/schema metadata.
+
+The spec must use `references/workflows/apexlang/application-spec.template.md` and include:
+
+- source evidence and conflict status
+- full page inventory
+- application composition plan
+- rich UI pattern plan using native APEX components
+- LOVs, validation behavior, modal/report-to-form behavior, and test plan
+- missing inputs and generation/runtime blockers
+- project-root `.apexlang/app-ux-contract.json` with non-empty `sourceEvidence`, `pageInventory`, `compositionPlan`, `richUiPatternPlan`, `lovPlan`, `behaviorPlan`, and `testPlan`
 
 ## Workflow Precedence
 
@@ -86,6 +100,20 @@ Do not:
 - skip to “best judgment” because a template seems close enough
 - invent target pages, target item names, enum values, slots, or block shapes when the workflow cannot prove them
 - treat local validator success as permission to infer missing structure
+
+## Validator Feedback Contract
+
+When local validation, live validation, VSCode Problems, `problems.json`, or `validation-report.json` emits rule IDs, feed those findings back into critique and revision using `assets/validator-fix-recipes.json`.
+
+For each reported issue, the critique/revision loop must preserve:
+
+- `rule_id`
+- cause
+- deterministic fix
+- owning guidance or template
+- verification result after rerun
+
+If a rule ID has no deterministic recipe and the owning guidance does not prove a fix, keep the run blocked with Required Revisions or Missing Inputs instead of guessing.
 
 ## Rule IDs
 
@@ -157,7 +185,7 @@ Valid:
 
 ```text
 Compiler Truth Evidence
-1. Command: node references/policies/apexlang/compiler-prop-map/query-valid-props.mjs --component button --group behavior
+1. Command: node tools/query-valid-props.mjs --component button --group behavior
    Scope: button behavior.target
    Conclusion: same-app redirect target must be `target: { ... }`
    Emitted decision: used declarative target object syntax
@@ -223,10 +251,34 @@ Ownership:
 - Draft prompt
 - Critique prompt
 
+### APPLICATION_SPEC_REQUIRED_001
+
+Statement:
+- Complete app generation from FR/model sources must produce an implementation-ready application spec from `application-spec.template.md` before drafting non-trivial `.apx` artifacts.
+
+Why:
+- Rich application generation needs page inventory, composition, shared components, UI pattern choices, data evidence, and tests locked before page-by-page APEXlang drafting starts.
+
+Valid:
+
+```text
+I completed the application spec, including the Application Composition Plan and Rich UI Pattern Plan, then generated page artifacts from that spec.
+```
+
+Invalid:
+
+```text
+I skipped the spec and started drafting pages directly from the requirements.
+```
+
+Ownership:
+- Draft prompt
+- Critique prompt
+
 ### GENERATION_PLAN_REQUIRED_001
 
 Statement:
-- Non-trivial page, component, and application generation must emit a compact Generation Plan before APEXLang.
+- Non-trivial page, component, and application generation must emit a compact Generation Plan before APEXlang.
 
 Why:
 - A frozen plan reduces plan/output drift and accidental re-decisions during emission.
@@ -308,7 +360,7 @@ Ownership:
 - Validator
 - Draft prompt
 - Critique prompt
-- `tools/apexctl.test.mjs`
+- `the source package regression tests`
 
 ### DECLARATIVE_BUTTON_TARGET_REQUIRED
 
@@ -342,7 +394,7 @@ behavior {
 Ownership:
 - Validator
 - Draft prompt
-- `tools/apexctl.test.mjs`
+- `the source package regression tests`
 
 ### TEMPLATE_OPTIONS_MULTILINE_REQUIRED_001
 
@@ -398,10 +450,11 @@ Ownership:
 ### CLASSIC_REPORT_DEFAULT_TEMPLATE_REQUIRED_001
 
 Statement:
-- Classic Report regions must use the canonical shared default template block unless a documented variant explicitly overrides it.
+- Classic Report regions must use the canonical shared `appearance` block and the canonical report-template `componentAppearance` block.
+- Canonical Classic Report component options are `#DEFAULT#`, `t-Report--stretch`, and `t-Report--horizontalBorders`; do not emit alternating-row or row-highlight options by default.
 
 Why:
-- This is a high-drift area where template and import behavior must stay aligned.
+- This is a high-drift area where template and import behavior must stay aligned. Live APEXlang validation on 26.1 maps the Classic Report report template to property `411` and reports missing values as `componentAppearance - template (string)`.
 
 Valid:
 
@@ -415,8 +468,7 @@ componentAppearance {
   templateOptions: [
     #DEFAULT#
     t-Report--stretch
-    t-Report--altRowsDefault
-    t-Report--rowHighlight
+    t-Report--horizontalBorders
   ]
 }
 ```
@@ -426,6 +478,39 @@ Invalid:
 ```apx
 appearance {
   templateOptions: t-Report--stretch
+}
+```
+
+Ownership:
+- Validator
+- Draft prompt
+
+### CLASSIC_REPORT_COMPONENT_APPEARANCE_REQUIRED_001
+
+Statement:
+- Classic Report regions must emit `componentAppearance.template: @/standard`.
+
+Why:
+- The 26.1 compiler requires property `411` for the Classic Report report-template surface and reports the missing property as `componentAppearance - template (string)`.
+
+Valid:
+
+```apx
+componentAppearance {
+  template: @/standard
+  templateOptions: [
+    #DEFAULT#
+    t-Report--stretch
+    t-Report--horizontalBorders
+  ]
+}
+```
+
+Invalid:
+
+```apx
+componentAppearance {
+  templateOptions: #DEFAULT#
 }
 ```
 
@@ -459,7 +544,7 @@ layout {
 
 Ownership:
 - Validator
-- `tools/apexctl.test.mjs`
+- `the source package regression tests`
 
 ## Stop Conditions
 

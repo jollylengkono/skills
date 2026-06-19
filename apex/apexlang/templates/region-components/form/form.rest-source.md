@@ -66,9 +66,6 @@ region {{regionStaticId}} (
   }
   edit {
     enabled: {{edit.enabled}}
-    add: {{edit.add}}
-    update: {{edit.update}}
-    delete: {{edit.delete}}
   }
   security {
     authorizationScheme: @{{security.authorizationScheme}}

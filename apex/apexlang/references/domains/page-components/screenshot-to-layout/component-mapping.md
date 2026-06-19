@@ -9,10 +9,11 @@ Map screenshot regions to the narrowest safe native APEX primitive region only a
 - Component mapping must not collapse, merge, reorder, resize, or omit regions that were already derived from the screenshot.
 - Component mapping must not change the top-level row plan or replace a same-row sibling relationship with a vertical stack.
 - Component mapping must not bypass established outer or nested lane placeholders once the structural scaffold has been chosen.
-- Native primitive regions are the required first-choice targets, including cards, interactive reports, classic reports, charts, lists, form regions, page items, and buttons.
+- Native primitive regions are the required first-choice targets, including Metric Card template components for KPI strips, cards, interactive reports, classic reports, charts, lists, form regions, page items, and buttons.
 - When mapping confidence is low, preserve the same region position and size intent and use a `staticContent` region instead.
-- When one preserved region contains several nearby metrics or cards, map it to one grouped `cards` region with one SQL query that returns multiple rows as the default choice.
-- Do not create one cards region per metric, or one staticContent region per metric, unless the screenshot clearly shows distinct card containers separated into different regions.
+- When one preserved region contains several nearby aggregate metrics, map it to one grouped `themeTemplateComponent/metricCard` region with one normalized SQL query that returns multiple rows as the default choice.
+- When one preserved region contains several nearby entity, media, or navigation cards, map it to one grouped native `cards` region with one SQL query that returns multiple rows as the default choice.
+- Do not create one region per metric, one cards region per entity card, or one staticContent region per metric unless the screenshot clearly shows distinct containers separated into different regions.
 
 ## Common Mappings
 - Page title + top-right actions:
@@ -23,7 +24,7 @@ Map screenshot regions to the narrowest safe native APEX primitive region only a
   - Prefer interactive report.
   - Use interactive grid only when the screenshot clearly suggests inline editing.
 - KPI tiles or summary counts:
-  - First try one grouped `cards` region or one equal-width cards strip backed by one SQL query when the metrics sit close together in the same region.
+  - First try one grouped `themeTemplateComponent/metricCard` region backed by one normalized SQL query when the metrics sit close together in the same region.
   - Fall back to one region per metric only when the screenshot clearly gives each metric its own container.
 - Detailed record editor:
   - Use a form region.
@@ -109,8 +110,10 @@ Map screenshot regions to the narrowest safe native APEX primitive region only a
 - Dense page with clear visual sections:
   - preserve the section order and region boundaries even if some areas must become placeholders
 - Metric or KPI strips:
-  - treat one visually grouped strip as one region first, then use one `cards` region with multiple rows inside it
-  - do not remap a grouped strip into one static region per metric when cards is still a safe native mapping
+  - treat one visually grouped strip as one region first, then use one `themeTemplateComponent/metricCard` region with one normalized source row per metric
+  - do not remap a grouped strip into one static region per metric when Metric Card is still a safe native mapping
+- Entity, media, or navigation card groups:
+  - treat one visually grouped block as one region first, then use one native `cards` region with multiple rows inside it
 - Actions or links panels:
   - if the content reads as a vertical list of navigation or task options, model it as a shared list and render it with a `list` region
   - reserve `staticContent` for utility panels whose internal widget type is still unclear after inspection
