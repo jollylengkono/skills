@@ -149,6 +149,31 @@ over time, with closure knowledge preserved for reuse.
           +-----> Follow-up Created (new related scope)
 ```
 
+### 8. Category Output Artifacts
+
+**How it works:** Each case produces a deliverable chosen by its task category.
+Troubleshooting and performance-tuning cases get an email-ready Findings Report
+(numbered Findings, Analysis, Recommendations); installation, patching, and
+upgrade cases get a living Task & Blocker Log. Both save to the case `Output/`
+folder and are sanitized before sharing.
+
+**How it helps:** You hand the customer a clean, consistent deliverable straight
+from the case — a report you can paste into email, or a live task/blocker tracker
+— without re-formatting case notes by hand.
+
+```text
+  Task category
+     |
+     +-- troubleshooting / performance-tuning --> Findings Report
+     |        (Findings / Analysis / Recommendations, email-ready)
+     |
+     +-- installation / patching / upgrade -----> Task & Blocker Log
+              (Tasks table + Blocker Records, living file)
+                          |
+                          v
+                 Output/ + linked from case file
+```
+
 ## Directory Structure
 
 Caseflow creates two trees under the root workspace: per-case folders and a
